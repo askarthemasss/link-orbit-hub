@@ -31,9 +31,9 @@ export function LinkFormDialog({
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  initial?: LinkFormValue;
+  initial?: LinkFormValue | undefined;
   onSubmit: (value: LinkFormValue) => void;
-  pending?: boolean;
+  pending?: boolean | undefined;
 }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
