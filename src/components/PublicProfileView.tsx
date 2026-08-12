@@ -1,0 +1,147 @@
+import { ArrowUpRight, MapPin } from "lucide-react";
+import { avatarSrc } from "@/lib/avatar";
+import { platformIcon } from "@/lib/platforms";
+import { prettyUrl } from "@/lib/validation";
+
+export type ProfileViewData = {
+  username: string;
+  display_name: string;
+  bio: string;
+  avatar_url: string | null;
+  location?: string | null;
+  website_url?: string | null;
+};
+
+export type LinkViewData = {
+  id: string;
+  title: string;
+  url: string;
+  platform: string;
+};
+
+function initials(name: string, username: string) {
+  const source = name.trim() || username;
+  return source
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
+export function PublicProfileView({
+  profile,
+  links,
+  compact = false,
+}: {
+  profile: ProfileViewData;
+  links: LinkViewData[];
+  compact?: boolean;
+}) {
+  const src = avatarSrc(profile.avatar_url);
+
+  return (
+    <div className={compact ? "px-5 py-8" : "px-5 py-14 sm:py-20"}>
+      <div className="mx-auto w-full max-w-[30rem]">
+        <header className="flex flex-col items-center text-center">
+          <div
+            className={`relative grid place-items-center overflow-hidden rounded-full glass-strong glow-ring ${
+              compact ? "size-20" : "size-28"
+            }`}
+          >
+            {src ? (
+              <img
+                src={src}
+                alt={`${profile.display_name || profile.username} profile picture`}
+                loading="lazy"
+                className="size-full object-cover"
+              />
+            ) : (
+              <span className={`font-display font-semibold ${compact ? "text-xl" : "text-3xl"}`}>
+                {initials(profile.display_name, profile.username) || "★"}
+              </span>
+            )}
+          </div>
+
+          <h1
+            className={`mt-5 font-semibold ${compact ? "text-lg" : "text-2xl sm:text-3xl"}`}
+          >
+            {profile.display_name || `@${profile.username}`}
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">@{profile.username}</p>
+
+          {profile.bio ? (
+            <p className={`mt-4 text-balance leading-relaxed text-muted-foreground ${compact ? "text-xs" : "text-sm sm:text-base"}`}>
+              {profile.bio}
+            </p>
+          ) : null}
+
+          {profile.location ? (
+            <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+              <MapPin className="size-3.5" aria-hidden="true" />
+              {profile.location}
+            </p>
+          ) : null}
+
+          {profile.website_url ? (
+            <a
+              href={profile.website_url}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="mt-3 text-xs font-medium text-primary underline-offset-4 hover:underline"
+            >
+              {prettyUrl(profile.website_url)}
+            </a>
+          ) : null}
+        </header>
+
+        <nav aria-label="Links" className={compact ? "mt-6 space-y-2.5" : "mt-9 space-y-3"}>
+          {links.length === 0 ? (
+            <p className="rounded-2xl glass px-5 py-8 text-center text-sm text-muted-foreground">
+              Links are coming soon.
+            </p>
+          ) : (
+            links.map((link) => {
+              const Icon = platformIcon(link.platform);
+              return (
+                <a
+                  key={link.id}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className={`group flex items-center gap-3 rounded-2xl glass transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:glow-ring active:translate-y-0 ${
+                    compact ? "px-3.5 py-3" : "px-4 py-4"
+                  }`}
+                >
+                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-secondary/70 text-primary">
+                    <Icon className="size-4" aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className={`block truncate font-medium ${compact ? "text-sm" : "text-[0.95rem]"}`}>
+                      {link.title}
+                    </span>
+                    <span className="block truncate text-xs text-muted-foreground">{prettyUrl(link.url)}</span>
+                  </span>
+                  <ArrowUpRight
+                    className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary"
+                    aria-hidden="true"
+                  />
+                </a>
+              );
+            })
+          )}
+        </nav>
+
+        {!compact ? (
+          <footer className="mt-12 text-center">
+            <a
+              href="/"
+              className="text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+            >
+              Create your LinkOrbit
+            </a>
+          </footer>
+        ) : null}
+      </div>
+    </div>
+  );
+}
