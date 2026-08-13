@@ -3,6 +3,8 @@ import { avatarSrc } from "@/lib/avatar";
 import { platformIcon } from "@/lib/platforms";
 import { prettyUrl } from "@/lib/validation";
 
+const isSafeHttpUrl = (u: string) => /^https?:\/\//i.test(u.trim());
+
 export type ProfileViewData = {
   username: string;
   display_name: string;
@@ -32,12 +34,14 @@ export function PublicProfileView({
   profile,
   links,
   compact = false,
+  avatarOverride,
 }: {
   profile: ProfileViewData;
   links: LinkViewData[];
   compact?: boolean;
+  avatarOverride?: string | null;
 }) {
-  const src = avatarSrc(profile.avatar_url);
+  const src = avatarOverride ?? avatarSrc(profile.avatar_url);
 
   return (
     <div className={compact ? "px-5 py-8" : "px-5 py-14 sm:py-20"}>
@@ -82,7 +86,7 @@ export function PublicProfileView({
             </p>
           ) : null}
 
-          {profile.website_url ? (
+          {profile.website_url && isSafeHttpUrl(profile.website_url) ? (
             <a
               href={profile.website_url}
               target="_blank"

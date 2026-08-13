@@ -3,7 +3,7 @@ import { Loader2, Trash2, Upload } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { avatarSrc } from "@/lib/avatar";
+import { useOwnerAvatarUrl } from "@/hooks/useOwnerAvatarUrl";
 
 const MAX_BYTES = 3 * 1024 * 1024;
 
@@ -32,7 +32,7 @@ export function AvatarUploader({
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
-  const src = avatarSrc(avatarUrl);
+  const src = useOwnerAvatarUrl(avatarUrl);
 
   async function handleFile(file: File) {
     if (!file.type.startsWith("image/")) {
