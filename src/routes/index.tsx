@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Link2, Pencil, Share2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PublicProfileView } from "@/components/PublicProfileView";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -62,6 +63,7 @@ function Landing() {
           LinkOrbit
         </Link>
         <nav className="flex items-center gap-2">
+          <ThemeToggle />
           <Button asChild variant="ghost" size="sm">
             <Link to="/auth">Log in</Link>
           </Button>

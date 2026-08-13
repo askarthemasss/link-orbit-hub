@@ -1,3 +1,4 @@
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
@@ -99,10 +100,11 @@ function AuthPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="mx-auto w-full max-w-6xl px-5 py-6">
+      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-6">
         <Link to="/" className="font-display text-lg font-semibold">
           LinkOrbit
         </Link>
+        <ThemeToggle />
       </header>
       <main className="flex flex-1 items-center justify-center px-5 pb-16">
         <div className="w-full max-w-sm rounded-2xl glass p-6 sm:p-8">
