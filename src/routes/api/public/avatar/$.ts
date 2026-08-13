@@ -10,6 +10,16 @@ export const Route = createFileRoute("/api/public/avatar/$")({
           return new Response("Not found", { status: 404 });
         }
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+        // Only serve avatars that belong to a published profile referencing this exact file.
+        const ownerId = path.split("/")[0];
+        const { data: profile } = await supabaseAdmin
+          .from("profiles")
+          .select("avatar_url, is_published")
+          .eq("user_id", ownerId)
+          .maybeSingle();
+        if (!profile || !profile.is_published || !profile.avatar_url?.includes(path)) {
+          return new Response("Not found", { status: 404 });
+        }
         const { data, error } = await supabaseAdmin.storage.from("avatars").download(path);
         if (error || !data) return new Response("Not found", { status: 404 });
         return new Response(await data.arrayBuffer(), {

@@ -126,13 +126,19 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
 
   async function save(next: ProfileDraft) {
     setSaveState("saving");
+    const website = next.website_url.trim() ? normalizeUrl(next.website_url) : null;
+    if (next.website_url.trim() && !website) {
+      setSaveState("idle");
+      toast.error("Enter a valid website address starting with http:// or https://");
+      return;
+    }
     try {
       await updateProfile.mutateAsync({
         id: profile.id,
         display_name: next.display_name,
         bio: next.bio,
         location: next.location || null,
-        website_url: next.website_url || null,
+        website_url: website,
         avatar_url: next.avatar_url,
       });
       setSaveState("saved");
