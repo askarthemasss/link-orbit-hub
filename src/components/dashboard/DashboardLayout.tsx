@@ -2,6 +2,7 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
@@ -42,6 +43,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 {item.label}
               </Link>
             ))}
+            <ThemeToggle />
             <Button variant="ghost" size="sm" onClick={() => void signOut()}>
               <LogOut className="size-4" aria-hidden="true" />
               <span className="sr-only sm:not-sr-only">Log out</span>

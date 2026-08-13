@@ -31,7 +31,7 @@ export function StarBackground({ density = 70 }: { density?: number }) {
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       <div className="absolute inset-0 nebula-bg" />
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 star-field">
         {stars.map((star, i) => (
           <span
             key={i}
