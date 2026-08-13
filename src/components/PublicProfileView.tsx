@@ -32,12 +32,14 @@ export function PublicProfileView({
   profile,
   links,
   compact = false,
+  avatarOverride,
 }: {
   profile: ProfileViewData;
   links: LinkViewData[];
   compact?: boolean;
+  avatarOverride?: string | null;
 }) {
-  const src = avatarSrc(profile.avatar_url);
+  const src = avatarOverride ?? avatarSrc(profile.avatar_url);
 
   return (
     <div className={compact ? "px-5 py-8" : "px-5 py-14 sm:py-20"}>
