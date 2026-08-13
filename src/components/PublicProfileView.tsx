@@ -3,6 +3,8 @@ import { avatarSrc } from "@/lib/avatar";
 import { platformIcon } from "@/lib/platforms";
 import { prettyUrl } from "@/lib/validation";
 
+const isSafeHttpUrl = (u: string) => /^https?:\/\//i.test(u.trim());
+
 export type ProfileViewData = {
   username: string;
   display_name: string;
@@ -84,7 +86,7 @@ export function PublicProfileView({
             </p>
           ) : null}
 
-          {profile.website_url ? (
+          {profile.website_url && isSafeHttpUrl(profile.website_url) ? (
             <a
               href={profile.website_url}
               target="_blank"
