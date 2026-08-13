@@ -134,7 +134,7 @@ export function useLinkMutations(profileId: string | undefined) {
 }
 
 export async function checkUsernameAvailable(username: string): Promise<boolean> {
-  const { data, error } = await supabase.rpc("is_username_available", { _username: username });
-  if (error) throw error;
-  return Boolean(data);
+  const { checkUsernameAvailability } = await import("@/lib/username.functions");
+  const result = await checkUsernameAvailability({ data: { username } });
+  return Boolean(result.available);
 }
