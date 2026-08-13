@@ -11,7 +11,7 @@ export const Route = createFileRoute("/api/public/avatar/$")({
         }
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         // Only serve avatars that belong to a published profile referencing this exact file.
-        const ownerId = path.split("/")[0];
+        const ownerId = path.split("/")[0] ?? "";
         const { data: profile } = await supabaseAdmin
           .from("profiles")
           .select("avatar_url, is_published")
