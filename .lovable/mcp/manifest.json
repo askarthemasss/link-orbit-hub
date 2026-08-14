@@ -1,0 +1,216 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.2",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://geibtaxoyqixcjczpsyr.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "link-orbit-hub",
+      "version": "0.1.0",
+      "title": "Link Orbit Hub"
+    },
+    "tools": [
+      {
+        "name": "get_profile",
+        "title": "Get my LinkOrbit profile",
+        "description": "Return the signed-in user's LinkOrbit profile: username, display name, bio, location, website and publish state.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "update_profile",
+        "title": "Update my LinkOrbit profile",
+        "description": "Update the signed-in user's display name, bio, location, website URL or published state. Only provided fields change.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "display_name": {
+              "description": "Public display name.",
+              "type": "string",
+              "maxLength": 60
+            },
+            "bio": {
+              "description": "Short bio shown under the name.",
+              "type": "string",
+              "maxLength": 280
+            },
+            "location": {
+              "description": "Location text, or null to clear.",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 80
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "website_url": {
+              "description": "Website URL (http/https), or null to clear.",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^http.*"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "is_published": {
+              "description": "Whether the public page is live.",
+              "type": "boolean"
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_links",
+        "title": "List my links",
+        "description": "List all links on the signed-in user's LinkOrbit page, in display order.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "create_link",
+        "title": "Add a link",
+        "description": "Add a new link to the signed-in user's LinkOrbit page. The platform icon is detected from the URL.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 60,
+              "description": "Label shown on the button."
+            },
+            "url": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Destination URL (http/https)."
+            }
+          },
+          "required": [
+            "title",
+            "url"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "update_link",
+        "title": "Update a link",
+        "description": "Change the title, URL, visibility or position of one of the signed-in user's links.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "description": "Link id from list_links."
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 60
+            },
+            "url": {
+              "description": "New destination URL (http/https).",
+              "type": "string",
+              "minLength": 1
+            },
+            "is_active": {
+              "description": "Whether the link is visible on the public page.",
+              "type": "boolean"
+            },
+            "display_order": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "id"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "delete_link",
+        "title": "Delete a link",
+        "description": "Permanently remove one of the signed-in user's links from their LinkOrbit page.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "description": "Link id from list_links."
+            }
+          },
+          "required": [
+            "id"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
