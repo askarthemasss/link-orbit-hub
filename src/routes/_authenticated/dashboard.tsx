@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Check, Copy, ExternalLink, Loader2 } from "lucide-react";
 import { normalizeUrl } from "@/lib/validation";
+import { profileUrl, profileUrlDisplay } from "@/lib/site-url";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -120,10 +121,7 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
     return () => clearTimeout(timer);
   }, [copied]);
 
-  const publicUrl = useMemo(
-    () => (typeof window === "undefined" ? `/${profile.username}` : `${window.location.origin}/${profile.username}`),
-    [profile.username],
-  );
+  const publicUrl = profileUrl(profile.username);
 
   async function save(next: ProfileDraft) {
     setSaveState("saving");
@@ -166,7 +164,7 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
         <section className="flex flex-col gap-4 rounded-2xl glass p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
           <div className="min-w-0">
             <h1 className="font-display text-lg font-semibold">Your page</h1>
-            <p className="mt-1 truncate text-sm text-muted-foreground">{publicUrl}</p>
+            <p className="mt-1 truncate text-sm text-muted-foreground">{profileUrlDisplay(profile.username)}</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <Button

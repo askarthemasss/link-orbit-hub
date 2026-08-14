@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { checkUsernameAvailable } from "@/hooks/useLinkOrbit";
 import { normalizeUsername, usernameError } from "@/lib/validation";
+import { PUBLIC_SITE_HOST } from "@/lib/site-url";
 
 export type UsernameStatus = "idle" | "checking" | "available" | "taken" | "invalid";
 
@@ -54,13 +55,13 @@ export function UsernameInput({
       <Label htmlFor="username">{label}</Label>
       <div className="relative">
         <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-          linkorbit.app/
+          {PUBLIC_SITE_HOST}/
         </span>
         <Input
           id="username"
           value={value}
           onChange={(e) => onChange(normalizeUsername(e.target.value))}
-          className="pl-[6.6rem] pr-9"
+          className="pl-[10.5rem] pr-9"
           autoCapitalize="none"
           autoCorrect="off"
           spellCheck={false}
