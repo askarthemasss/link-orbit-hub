@@ -12,6 +12,7 @@ import { lovable } from "@/integrations/lovable/index";
 
 const searchSchema = z.object({
   mode: z.enum(["login", "signup", "reset"]).optional(),
+  next: z.string().optional(),
 });
 
 export const Route = createFileRoute("/auth")({
