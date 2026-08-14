@@ -1,5 +1,5 @@
 /** The clean, shareable domain for published LinkOrbit pages. */
-export const PUBLIC_SITE_HOST = "link-orbit.lovable.app";
+export const PUBLIC_SITE_HOST = "linkorbit-app.lovable.app";
 export const PUBLIC_SITE_ORIGIN = `https://${PUBLIC_SITE_HOST}`;
 
 /** Absolute, shareable URL for a username. */
