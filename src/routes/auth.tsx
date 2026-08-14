@@ -32,7 +32,7 @@ export const Route = createFileRoute("/auth")({
 type Mode = "login" | "signup" | "reset";
 
 function AuthPage() {
-  const { mode: initialMode } = Route.useSearch();
+  const { mode: initialMode, next } = Route.useSearch();
   const navigate = useNavigate();
   const [mode, setMode] = useState<Mode>(initialMode ?? "login");
   const [email, setEmail] = useState("");
@@ -40,11 +40,24 @@ function AuthPage() {
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
 
+  // Only same-origin relative paths may be used as a post-login destination.
+  const safeNext = next && /^\/(?!\/)/.test(next) ? next : null;
+
+  function goNext() {
+    if (safeNext) {
+      window.location.replace(safeNext);
+      return;
+    }
+    void navigate({ to: "/dashboard", replace: true });
+  }
+
   useEffect(() => {
     void supabase.auth.getUser().then(({ data }) => {
-      if (data.user) void navigate({ to: "/dashboard", replace: true });
+      if (!data.user) return;
+      if (safeNext) window.location.replace(safeNext);
+      else void navigate({ to: "/dashboard", replace: true });
     });
-  }, [navigate]);
+  }, [navigate, safeNext]);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -61,18 +74,18 @@ function AuthPage() {
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: `${window.location.origin}/dashboard` },
+          options: { emailRedirectTo: `${window.location.origin}${safeNext ?? "/dashboard"}` },
         });
         if (error) throw error;
         if (data.session) {
-          void navigate({ to: "/dashboard", replace: true });
+          goNext();
         } else {
           setNotice("Almost there — confirm your email address to activate your account.");
         }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        void navigate({ to: "/dashboard", replace: true });
+        goNext();
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "Something went wrong.";
@@ -85,7 +98,7 @@ function AuthPage() {
   async function handleGoogle() {
     setBusy(true);
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
+      redirect_uri: `${window.location.origin}${safeNext ?? ""}`,
     });
     if (result.error) {
       setBusy(false);
@@ -93,7 +106,7 @@ function AuthPage() {
       return;
     }
     if (result.redirected) return;
-    void navigate({ to: "/dashboard", replace: true });
+    goNext();
   }
 
   const title =
