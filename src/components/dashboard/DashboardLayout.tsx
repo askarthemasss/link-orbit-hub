@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 const NAV = [
   { to: "/dashboard", label: "Editor" },
   { to: "/settings", label: "Settings" },
+  { to: "/connect", label: "AI assistant" },
 ] as const;
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
