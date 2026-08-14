@@ -18,7 +18,18 @@ export default defineTool({
     if (!ctx.isAuthenticated()) return notAuthed;
     const { supabase, profile } = await currentProfile(ctx);
     if (!profile) return errorResult("No profile yet — claim a username in the LinkOrbit dashboard first.");
-    const patch = Object.fromEntries(Object.entries(input).filter(([, v]) => v !== undefined));
+    const patch: {
+      display_name?: string;
+      bio?: string;
+      location?: string | null;
+      website_url?: string | null;
+      is_published?: boolean;
+    } = {};
+    if (input.display_name !== undefined) patch.display_name = input.display_name;
+    if (input.bio !== undefined) patch.bio = input.bio;
+    if (input.location !== undefined) patch.location = input.location;
+    if (input.website_url !== undefined) patch.website_url = input.website_url;
+    if (input.is_published !== undefined) patch.is_published = input.is_published;
     if (Object.keys(patch).length === 0) return errorResult("Provide at least one field to update.");
     const { data, error } = await supabase.from("profiles").update(patch).eq("id", profile.id).select().single();
     if (error) return errorResult(error.message);

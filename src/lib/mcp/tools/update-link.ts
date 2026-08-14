@@ -20,9 +20,16 @@ export default defineTool({
     if (!ctx.isAuthenticated()) return notAuthed;
     const { supabase, profile } = await currentProfile(ctx);
     if (!profile) return errorResult("No profile yet — claim a username in the LinkOrbit dashboard first.");
-    const patch: Record<string, unknown> = Object.fromEntries(
-      Object.entries(rest).filter(([, v]) => v !== undefined),
-    );
+    const patch: {
+      title?: string;
+      is_active?: boolean;
+      display_order?: number;
+      url?: string;
+      platform?: string;
+    } = {};
+    if (rest.title !== undefined) patch.title = rest.title;
+    if (rest.is_active !== undefined) patch.is_active = rest.is_active;
+    if (rest.display_order !== undefined) patch.display_order = rest.display_order;
     if (url !== undefined) {
       const normalized = normalizeUrl(url);
       if (!normalized) return errorResult("Enter a valid http:// or https:// URL.");
