@@ -189,7 +189,12 @@ function Landing() {
 
       <footer className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-8 text-xs text-muted-foreground">
         <p>© {new Date().getFullYear()} LinkOrbit</p>
-        <p>One link. Everything around you.</p>
+        <div className="flex items-center gap-4">
+          <Link to="/connect" className="hover:text-foreground">
+            Connect an AI assistant
+          </Link>
+          <span className="hidden sm:inline">One link. Everything around you.</span>
+        </div>
       </footer>
     </div>
   );
