@@ -47,14 +47,22 @@ function ProfileMissing() {
       <div className="max-w-sm">
         <h1 className="font-display text-2xl font-semibold">Nothing in this orbit yet</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          This page doesn't exist or hasn't been published.
+          This profile isn't published yet. If it's yours, publish it from your dashboard to make it public.
         </p>
-        <Link
-          to="/"
-          className="mt-6 inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
-        >
-          Create your LinkOrbit
-        </Link>
+        <div className="mt-6 flex flex-col gap-3">
+          <Link
+            to="/dashboard"
+            className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
+          >
+            Publish settings
+          </Link>
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary"
+          >
+            Create your LinkOrbit
+          </Link>
+        </div>
       </div>
     </main>
   );
