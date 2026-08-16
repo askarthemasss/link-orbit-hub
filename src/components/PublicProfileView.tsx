@@ -104,7 +104,9 @@ export function PublicProfileView({
               Links are coming soon.
             </p>
           ) : (
-            links.map((link) => {
+            links
+              .filter((link) => isSafeHttpUrl(link.url))
+              .map((link) => {
               const Icon = platformIcon(link.platform);
               return (
                 <a
