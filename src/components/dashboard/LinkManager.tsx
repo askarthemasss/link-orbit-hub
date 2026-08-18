@@ -156,6 +156,18 @@ export function LinkManager({
                   <Button
                     size="icon"
                     variant="ghost"
+                    aria-label={copiedId === link.id ? "Copied" : `Copy ${link.title} link`}
+                    onClick={() => void copyLink(link.url, link.id)}
+                  >
+                    {copiedId === link.id ? (
+                      <Check className="size-4 text-green-500" aria-hidden="true" />
+                    ) : (
+                      <Copy className="size-4" aria-hidden="true" />
+                    )}
+                  </Button>
+                  <Button
+                    size="icon"
+                    variant="ghost"
                     aria-label={`Edit ${link.title}`}
                     onClick={() => {
                       setEditing(link);
