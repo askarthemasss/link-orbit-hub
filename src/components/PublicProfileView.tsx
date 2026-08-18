@@ -32,6 +32,37 @@ function initials(name: string, username: string) {
     .join("");
 }
 
+function CopyLinkButton({ url }: { url: string }) {
+  const [copied, setCopied] = useState(false);
+
+  return (
+    <Button
+      type="button"
+      size="icon"
+      variant="ghost"
+      className="size-7 opacity-0 transition-opacity group-hover:opacity-100"
+      aria-label={copied ? "Copied" : "Copy link"}
+      onClick={async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        try {
+          await navigator.clipboard.writeText(url);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        } catch {
+          // Ignore unsupported environments
+        }
+      }}
+    >
+      {copied ? (
+        <Check className="size-3.5 text-green-500" aria-hidden="true" />
+      ) : (
+        <Copy className="size-3.5" aria-hidden="true" />
+      )}
+    </Button>
+  );
+}
+
 export function PublicProfileView({
   profile,
   links,
