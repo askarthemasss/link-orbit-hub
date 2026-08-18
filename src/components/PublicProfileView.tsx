@@ -40,7 +40,7 @@ function CopyLinkButton({ url }: { url: string }) {
       type="button"
       size="icon"
       variant="ghost"
-      className="size-7 opacity-0 transition-opacity group-hover:opacity-100"
+      className="size-7 opacity-60 transition-opacity hover:opacity-100 group-hover:opacity-100"
       aria-label={copied ? "Copied" : "Copy link"}
       onClick={async (e) => {
         e.preventDefault();
