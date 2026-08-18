@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowDown, ArrowUp, GripVertical, Pencil, Plus, Trash2 } from "lucide-react";
+import { ArrowDown, ArrowUp, Check, Copy, GripVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -17,6 +17,7 @@ import { LinkFormDialog, type LinkFormValue } from "./LinkFormDialog";
 import { platformIcon } from "@/lib/platforms";
 import { prettyUrl } from "@/lib/validation";
 import type { LinkRow } from "@/hooks/useLinkOrbit";
+
 
 export function LinkManager({
   links,
