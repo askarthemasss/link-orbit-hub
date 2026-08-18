@@ -38,6 +38,7 @@ export function LinkManager({
   const [editing, setEditing] = useState<LinkRow | null>(null);
   const [deleting, setDeleting] = useState<LinkRow | null>(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   function move(from: number, to: number) {
     if (to < 0 || to >= links.length) return;
@@ -46,6 +47,17 @@ export function LinkManager({
     if (!item) return;
     next.splice(to, 0, item);
     onReorder(next);
+  }
+
+  async function copyLink(url: string, id: string) {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedId(id);
+      toast.success("Link copied");
+      setTimeout(() => setCopiedId((current) => (current === id ? null : current)), 2000);
+    } catch {
+      toast.error("Could not copy link");
+    }
   }
 
   return (
