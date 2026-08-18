@@ -1,7 +1,9 @@
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, Check, Copy, MapPin } from "lucide-react";
 import { avatarSrc } from "@/lib/avatar";
 import { platformIcon } from "@/lib/platforms";
 import { prettyUrl } from "@/lib/validation";
+import { Button } from "@/components/ui/button";
 
 const isSafeHttpUrl = (u: string) => /^https?:\/\//i.test(u.trim());
 
