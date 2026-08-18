@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowDown, ArrowUp, GripVertical, Pencil, Plus, Trash2 } from "lucide-react";
+import { ArrowDown, ArrowUp, Check, Copy, GripVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -17,6 +17,7 @@ import { LinkFormDialog, type LinkFormValue } from "./LinkFormDialog";
 import { platformIcon } from "@/lib/platforms";
 import { prettyUrl } from "@/lib/validation";
 import type { LinkRow } from "@/hooks/useLinkOrbit";
+
 
 export function LinkManager({
   links,
@@ -37,6 +38,7 @@ export function LinkManager({
   const [editing, setEditing] = useState<LinkRow | null>(null);
   const [deleting, setDeleting] = useState<LinkRow | null>(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   function move(from: number, to: number) {
     if (to < 0 || to >= links.length) return;
@@ -45,6 +47,17 @@ export function LinkManager({
     if (!item) return;
     next.splice(to, 0, item);
     onReorder(next);
+  }
+
+  async function copyLink(url: string, id: string) {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedId(id);
+      toast.success("Link copied");
+      setTimeout(() => setCopiedId((current) => (current === id ? null : current)), 2000);
+    } catch {
+      toast.error("Could not copy link");
+    }
   }
 
   return (
@@ -140,6 +153,18 @@ export function LinkManager({
                     aria-label={`${link.is_active ? "Hide" : "Show"} ${link.title} on your profile`}
                     onCheckedChange={(checked) => void onUpdate(link.id, { is_active: checked })}
                   />
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    aria-label={copiedId === link.id ? "Copied" : `Copy ${link.title} link`}
+                    onClick={() => void copyLink(link.url, link.id)}
+                  >
+                    {copiedId === link.id ? (
+                      <Check className="size-4 text-green-500" aria-hidden="true" />
+                    ) : (
+                      <Copy className="size-4" aria-hidden="true" />
+                    )}
+                  </Button>
                   <Button
                     size="icon"
                     variant="ghost"

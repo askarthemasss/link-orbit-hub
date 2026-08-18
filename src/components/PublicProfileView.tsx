@@ -1,7 +1,9 @@
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, Check, Copy, MapPin } from "lucide-react";
 import { avatarSrc } from "@/lib/avatar";
 import { platformIcon } from "@/lib/platforms";
 import { prettyUrl } from "@/lib/validation";
+import { Button } from "@/components/ui/button";
 
 const isSafeHttpUrl = (u: string) => /^https?:\/\//i.test(u.trim());
 
@@ -28,6 +30,37 @@ function initials(name: string, username: string) {
     .slice(0, 2)
     .map((w) => w[0]?.toUpperCase() ?? "")
     .join("");
+}
+
+function CopyLinkButton({ url }: { url: string }) {
+  const [copied, setCopied] = useState(false);
+
+  return (
+    <Button
+      type="button"
+      size="icon"
+      variant="ghost"
+      className="size-7 text-muted-foreground transition-colors hover:text-primary hover:opacity-100 group-hover:opacity-100"
+      aria-label={copied ? "Copied" : "Copy link"}
+      onClick={async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        try {
+          await navigator.clipboard.writeText(url);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        } catch {
+          // Ignore unsupported environments
+        }
+      }}
+    >
+      {copied ? (
+        <Check className="size-3.5 text-green-500" aria-hidden="true" />
+      ) : (
+        <Copy className="size-3.5" aria-hidden="true" />
+      )}
+    </Button>
+  );
 }
 
 export function PublicProfileView({
@@ -127,10 +160,13 @@ export function PublicProfileView({
                     </span>
                     <span className="block truncate text-xs text-muted-foreground">{prettyUrl(link.url)}</span>
                   </span>
-                  <ArrowUpRight
-                    className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary"
-                    aria-hidden="true"
-                  />
+                  <span className="flex shrink-0 items-center gap-0.5">
+                    <CopyLinkButton url={link.url} />
+                    <ArrowUpRight
+                      className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary"
+                      aria-hidden="true"
+                    />
+                  </span>
                 </a>
               );
             })
