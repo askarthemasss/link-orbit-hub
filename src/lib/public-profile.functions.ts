@@ -11,6 +11,8 @@ export type PublicLink = {
 };
 
 export type PublicProfile = {
+  id: string;
+  user_id: string;
   username: string;
   display_name: string;
   bio: string;
@@ -40,7 +42,7 @@ export const getPublicProfile = createServerFn({ method: "GET" })
 
     const { data: profile } = await supabase
       .from("profiles")
-      .select("id, username, display_name, bio, avatar_url, location, website_url")
+      .select("id, user_id, username, display_name, bio, avatar_url, location, website_url")
       .eq("username", data.username)
       .eq("is_published", true)
       .maybeSingle();
@@ -55,6 +57,8 @@ export const getPublicProfile = createServerFn({ method: "GET" })
       .order("display_order", { ascending: true });
 
     return {
+      id: profile.id,
+      user_id: profile.user_id,
       username: profile.username,
       display_name: profile.display_name,
       bio: profile.bio,
