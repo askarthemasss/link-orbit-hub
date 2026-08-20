@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { UsernameInput, type UsernameStatus } from "@/components/dashboard/UsernameInput";
+import { EmptyOrbitIcon } from "@/components/EmptyOrbitIcon";
 import { useProfile, useSession, useUpdateProfile } from "@/hooks/useLinkOrbit";
 
 export const Route = createFileRoute("/_authenticated/settings")({
@@ -78,7 +79,16 @@ function SettingsPage() {
               </Button>
             </div>
           ) : (
-            <p className="text-sm text-muted-foreground">Create your profile first from the editor.</p>
+            <div className="rounded-xl border border-dashed border-border px-5 py-8 text-center">
+              <EmptyOrbitIcon className="mx-auto size-12" />
+              <p className="mt-4 font-display text-lg font-semibold">Finish setting up your LinkOrbit</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Create your profile first, then you can customize your username and share your link.
+              </p>
+              <Button asChild className="mt-5">
+                <Link to="/dashboard">Create your profile</Link>
+              </Button>
+            </div>
           )}
         </section>
       </div>

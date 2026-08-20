@@ -3,6 +3,7 @@ import { ArrowDown, ArrowUp, Check, Copy, GripVertical, Pencil, Plus, Trash2 } f
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { EmptyOrbitIcon } from "@/components/EmptyOrbitIcon";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -86,9 +87,10 @@ export function LinkManager({
         </div>
       ) : links.length === 0 ? (
         <div className="rounded-xl border border-dashed border-border px-5 py-10 text-center">
-          <p className="font-display text-lg font-semibold">Your Orbit is empty.</p>
+          <EmptyOrbitIcon className="mx-auto size-12" />
+          <p className="mt-4 font-display text-lg font-semibold">Add your first link</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Add your first link and start building your profile.
+            Your public page will show links here once you add them.
           </p>
           <Button
             className="mt-5"
