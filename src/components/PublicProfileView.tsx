@@ -146,11 +146,24 @@ export function PublicProfileView({
         </header>
 
         <nav aria-label="Links" className={compact ? "mt-6 space-y-2.5" : "mt-9 space-y-3"}>
-          {links.length === 0 ? (
-            <p className="rounded-2xl glass px-5 py-8 text-center text-sm text-muted-foreground">
-              Links are coming soon.
+        {links.length === 0 ? (
+          <div className="rounded-2xl glass px-5 py-8 text-center">
+            <EmptyOrbitIcon className="mx-auto size-12" />
+            <p className="mt-4 text-sm font-medium">
+              {isOwner ? "Your orbit is empty" : "No links here yet"}
             </p>
-          ) : (
+            <p className="mt-1 text-xs text-muted-foreground">
+              {isOwner
+                ? "Add your first link from the dashboard and it will appear here."
+                : "Check back later to see what they share."}
+            </p>
+            {isOwner ? (
+              <Button asChild size="sm" className="mt-4">
+                <Link to="/dashboard">Add a link</Link>
+              </Button>
+            ) : null}
+          </div>
+        ) : (
             links
               .filter((link) => isSafeHttpUrl(link.url))
               .map((link) => {
