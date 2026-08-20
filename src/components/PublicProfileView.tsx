@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, Check, Copy, MapPin } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { avatarSrc } from "@/lib/avatar";
 import { platformIcon } from "@/lib/platforms";
 import { prettyUrl } from "@/lib/validation";
 import { Button } from "@/components/ui/button";
+import { EmptyOrbitIcon } from "@/components/EmptyOrbitIcon";
+import { supabase } from "@/integrations/supabase/client";
 
 const isSafeHttpUrl = (u: string) => /^https?:\/\//i.test(u.trim());
 
 export type ProfileViewData = {
+  id?: string;
+  user_id?: string;
   username: string;
   display_name: string;
   bio: string;
@@ -75,6 +80,15 @@ export function PublicProfileView({
   avatarOverride?: string | null;
 }) {
   const src = avatarOverride ?? avatarSrc(profile.avatar_url);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    void supabase.auth.getUser().then(({ data }) => {
+      setCurrentUserId(data.user?.id ?? null);
+    });
+  }, []);
+
+  const isOwner = Boolean(profile.user_id && currentUserId && profile.user_id === currentUserId);
 
   return (
     <div className={compact ? "px-5 py-8" : "px-5 py-14 sm:py-20"}>
