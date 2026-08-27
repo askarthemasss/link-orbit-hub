@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Link2, Pencil, Share2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PhoneFrame } from "@/components/PhoneFrame";
 import { PublicProfileView } from "@/components/PublicProfileView";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -190,6 +191,9 @@ function Landing() {
       <footer className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-8 text-xs text-muted-foreground">
         <p>© {new Date().getFullYear()} LinkOrbit</p>
         <div className="flex items-center gap-4">
+          <Link to="/examples" className="hover:text-foreground">
+            Link in bio examples
+          </Link>
           <Link to="/connect" className="hover:text-foreground">
             Connect an AI assistant
           </Link>
@@ -200,10 +204,3 @@ function Landing() {
   );
 }
 
-function PhoneFrame({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="w-[19rem] rounded-[2.2rem] border border-border bg-card/50 p-2 shadow-2xl backdrop-blur sm:w-[21rem]">
-      <div className="overflow-hidden rounded-[1.7rem] bg-background/80">{children}</div>
-    </div>
-  );
-}
