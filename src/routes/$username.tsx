@@ -20,6 +20,8 @@ export const Route = createFileRoute("/$username")({
     const { profile } = loaderData;
     const name = profile.display_name || `@${profile.username}`;
     const description = profile.bio || `All of ${name}'s links in one place, on LinkOrbit.`;
+    const url = profileUrl(profile.username);
+    const sameAs = (profile.links ?? []).map((link) => link.url).filter(Boolean);
     return {
       meta: [
         { title: `${name} — LinkOrbit` },
@@ -27,7 +29,27 @@ export const Route = createFileRoute("/$username")({
         { property: "og:title", content: `${name} — LinkOrbit` },
         { property: "og:description", content: description },
         { property: "og:type", content: "profile" },
+        { property: "og:url", content: url },
         { name: "twitter:card", content: "summary" },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            url,
+            mainEntity: {
+              "@type": "Person",
+              name,
+              alternateName: `@${profile.username}`,
+              ...(profile.bio ? { description: profile.bio } : {}),
+              ...(profile.location ? { address: profile.location } : {}),
+              ...(sameAs.length ? { sameAs } : {}),
+            },
+          }),
+        },
       ],
     };
   },
