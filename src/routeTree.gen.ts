@@ -16,6 +16,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ConnectRouteImport } from './routes/connect'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -56,6 +57,11 @@ const McpRoute = McpRouteImport.update({
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91DotmcpChar93ListToolsRoute =
@@ -104,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/connect': typeof ConnectRoute
   '/mcp': typeof McpRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/connect': typeof ConnectRoute
   '/mcp': typeof McpRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/connect': typeof ConnectRoute
   '/mcp': typeof McpRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -153,6 +162,7 @@ export interface FileRouteTypes {
     | '/connect'
     | '/mcp'
     | '/reset-password'
+    | '/sitemap.xml'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/dashboard'
@@ -168,6 +178,7 @@ export interface FileRouteTypes {
     | '/connect'
     | '/mcp'
     | '/reset-password'
+    | '/sitemap.xml'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/dashboard'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/connect'
     | '/mcp'
     | '/reset-password'
+    | '/sitemap.xml'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/_authenticated/dashboard'
@@ -201,6 +213,7 @@ export interface RootRouteChildren {
   ConnectRoute: typeof ConnectRoute
   McpRoute: typeof McpRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
@@ -257,6 +270,13 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/list-tools': {
@@ -332,6 +352,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConnectRoute: ConnectRoute,
   McpRoute: McpRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
