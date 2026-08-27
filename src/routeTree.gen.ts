@@ -14,6 +14,7 @@ import { Route as UsernameRouteImport } from './routes/$username'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ConnectRouteImport } from './routes/connect'
+import { Route as ExamplesRouteImport } from './routes/examples'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -47,6 +48,11 @@ const AuthRoute = AuthRouteImport.update({
 const ConnectRoute = ConnectRouteImport.update({
   id: '/connect',
   path: '/connect',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExamplesRoute = ExamplesRouteImport.update({
+  id: '/examples',
+  path: '/examples',
   getParentRoute: () => rootRouteImport,
 } as any)
 const McpRoute = McpRouteImport.update({
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/$username': typeof UsernameRoute
   '/auth': typeof AuthRoute
   '/connect': typeof ConnectRoute
+  '/examples': typeof ExamplesRoute
   '/mcp': typeof McpRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -124,6 +131,7 @@ export interface FileRoutesByTo {
   '/$username': typeof UsernameRoute
   '/auth': typeof AuthRoute
   '/connect': typeof ConnectRoute
+  '/examples': typeof ExamplesRoute
   '/mcp': typeof McpRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -142,6 +150,7 @@ export interface FileRoutesById {
   '/$username': typeof UsernameRoute
   '/auth': typeof AuthRoute
   '/connect': typeof ConnectRoute
+  '/examples': typeof ExamplesRoute
   '/mcp': typeof McpRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -160,6 +169,7 @@ export interface FileRouteTypes {
     | '/$username'
     | '/auth'
     | '/connect'
+    | '/examples'
     | '/mcp'
     | '/reset-password'
     | '/sitemap.xml'
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/$username'
     | '/auth'
     | '/connect'
+    | '/examples'
     | '/mcp'
     | '/reset-password'
     | '/sitemap.xml'
@@ -193,6 +204,7 @@ export interface FileRouteTypes {
     | '/$username'
     | '/auth'
     | '/connect'
+    | '/examples'
     | '/mcp'
     | '/reset-password'
     | '/sitemap.xml'
@@ -211,6 +223,7 @@ export interface RootRouteChildren {
   UsernameRoute: typeof UsernameRoute
   AuthRoute: typeof AuthRoute
   ConnectRoute: typeof ConnectRoute
+  ExamplesRoute: typeof ExamplesRoute
   McpRoute: typeof McpRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -256,6 +269,13 @@ declare module '@tanstack/react-router' {
       path: '/connect'
       fullPath: '/connect'
       preLoaderRoute: typeof ConnectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/examples': {
+      id: '/examples'
+      path: '/examples'
+      fullPath: '/examples'
+      preLoaderRoute: typeof ExamplesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mcp': {
@@ -350,6 +370,7 @@ const rootRouteChildren: RootRouteChildren = {
   UsernameRoute: UsernameRoute,
   AuthRoute: AuthRoute,
   ConnectRoute: ConnectRoute,
+  ExamplesRoute: ExamplesRoute,
   McpRoute: McpRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
