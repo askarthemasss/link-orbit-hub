@@ -78,12 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "LinkOrbit — One link. Everything around you." },
-      {
-        name: "description",
-        content:
-          "LinkOrbit gives you one simple link for your portfolio, socials and projects. Create your profile in two minutes.",
-      },
+      { property: "og:site_name", content: "LinkOrbit" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#0b1020" },
