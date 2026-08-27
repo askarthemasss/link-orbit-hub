@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PublicProfileView } from "@/components/PublicProfileView";
 import { getPublicProfile } from "@/lib/public-profile.functions";
+import { profileUrl } from "@/lib/site-url";
 
 export const Route = createFileRoute("/$username")({
   loader: async ({ params }) => {
