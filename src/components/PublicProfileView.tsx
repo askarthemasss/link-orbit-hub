@@ -90,6 +90,9 @@ export function PublicProfileView({
 
   const isOwner = Boolean(profile.user_id && currentUserId && profile.user_id === currentUserId);
 
+  // Compact previews are embedded inside other pages, so they must not emit an <h1>.
+  const NameHeading = compact ? "h2" : "h1";
+
   return (
     <div className={compact ? "px-5 py-8" : "px-5 py-14 sm:py-20"}>
       <div className="mx-auto w-full max-w-[30rem]">
