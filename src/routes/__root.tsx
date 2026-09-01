@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -126,12 +127,33 @@ function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
+    let cancelled = false;
+
+    async function redirectAfterOAuth() {
+      if (window.location.pathname !== "/") return;
+
+      const destination = sessionStorage.getItem("linkorbit-auth-redirect");
+      if (!destination || !/^\/(?!\/)/.test(destination)) return;
+
+      const { data } = await supabase.auth.getUser();
+      if (cancelled || !data.user) return;
+
+      sessionStorage.removeItem("linkorbit-auth-redirect");
+      void router.navigate({ href: destination, replace: true });
+    }
+
     const { data } = supabase.auth.onAuthStateChange((event) => {
       if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
       router.invalidate();
       if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
+      if (event === "SIGNED_IN") void redirectAfterOAuth();
     });
-    return () => data.subscription.unsubscribe();
+
+    void redirectAfterOAuth();
+    return () => {
+      cancelled = true;
+      data.subscription.unsubscribe();
+    };
   }, [router, queryClient]);
 
   return (

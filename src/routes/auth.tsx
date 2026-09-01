@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 
+const AUTH_REDIRECT_KEY = "linkorbit-auth-redirect";
+
 const searchSchema = z.object({
   mode: z.enum(["login", "signup", "reset"]).optional(),
   next: z.string().optional(),
@@ -45,18 +47,23 @@ function AuthPage() {
 
   function goNext() {
     if (safeNext) {
-      window.location.replace(safeNext);
+      void navigate({ href: safeNext, replace: true });
       return;
     }
     void navigate({ to: "/dashboard", replace: true });
   }
 
   useEffect(() => {
+    let cancelled = false;
     void supabase.auth.getUser().then(({ data }) => {
-      if (!data.user) return;
-      if (safeNext) window.location.replace(safeNext);
+      if (cancelled || !data.user) return;
+      if (safeNext) void navigate({ href: safeNext, replace: true });
       else void navigate({ to: "/dashboard", replace: true });
     });
+
+    return () => {
+      cancelled = true;
+    };
   }, [navigate, safeNext]);
 
   async function handleSubmit(event: React.FormEvent) {
@@ -83,8 +90,9 @@ function AuthPage() {
           setNotice("Almost there — confirm your email address to activate your account.");
         }
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        if (!data.user) throw new Error("We couldn't confirm your sign-in. Please try again.");
         goNext();
       }
     } catch (error) {
@@ -97,16 +105,32 @@ function AuthPage() {
 
   async function handleGoogle() {
     setBusy(true);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: `${window.location.origin}${safeNext ?? ""}`,
-    });
-    if (result.error) {
+    const destination = safeNext ?? "/dashboard";
+    sessionStorage.setItem(AUTH_REDIRECT_KEY, destination);
+
+    try {
+      // Always return to this public route. The root auth listener consumes the
+      // pending destination after the OAuth session has been established.
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) {
+        sessionStorage.removeItem(AUTH_REDIRECT_KEY);
+        toast.error("Google sign-in failed. Please try again.");
+        return;
+      }
+      if (result.redirected) return;
+
+      sessionStorage.removeItem(AUTH_REDIRECT_KEY);
+      const { data } = await supabase.auth.getUser();
+      if (!data.user) throw new Error("We couldn't confirm your Google sign-in. Please try again.");
+      goNext();
+    } catch (error) {
+      sessionStorage.removeItem(AUTH_REDIRECT_KEY);
+      toast.error(error instanceof Error ? error.message : "Google sign-in failed. Please try again.");
+    } finally {
       setBusy(false);
-      toast.error("Google sign-in failed. Please try again.");
-      return;
     }
-    if (result.redirected) return;
-    goNext();
   }
 
   const title =
