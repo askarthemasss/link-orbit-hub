@@ -126,12 +126,35 @@ function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
+    let cancelled = false;
+    let redirecting = false;
+
+    async function redirectAfterOAuth() {
+      if (cancelled || redirecting || window.location.pathname !== "/") return;
+
+      const destination = sessionStorage.getItem("linkorbit-auth-redirect");
+      if (!destination || !/^\/(?!\/)/.test(destination)) return;
+
+      const { data } = await supabase.auth.getUser();
+      if (cancelled || redirecting || !data.user) return;
+
+      redirecting = true;
+      sessionStorage.removeItem("linkorbit-auth-redirect");
+      void router.navigate({ href: destination, replace: true });
+    }
+
     const { data } = supabase.auth.onAuthStateChange((event) => {
       if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
       router.invalidate();
       if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
+      if (event === "SIGNED_IN") void redirectAfterOAuth();
     });
-    return () => data.subscription.unsubscribe();
+
+    void redirectAfterOAuth();
+    return () => {
+      cancelled = true;
+      data.subscription.unsubscribe();
+    };
   }, [router, queryClient]);
 
   return (
