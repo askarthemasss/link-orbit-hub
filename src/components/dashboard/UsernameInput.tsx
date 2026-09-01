@@ -53,7 +53,7 @@ export function UsernameInput({
   return (
     <div className="space-y-2">
       <Label htmlFor="username">{label}</Label>
-      <div className="relative flex h-9 items-center rounded-md border border-input bg-transparent px-3 focus-within:ring-1 focus-within:ring-ring">
+      <div className="relative flex h-9 items-center rounded-md border border-input bg-transparent pl-2 pr-3 focus-within:ring-1 focus-within:ring-ring">
         <span className="pointer-events-none shrink-0 select-none text-sm text-muted-foreground">
           {PUBLIC_SITE_HOST}/
         </span>
