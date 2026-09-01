@@ -127,16 +127,18 @@ function RootComponent() {
 
   useEffect(() => {
     let cancelled = false;
+    let redirecting = false;
 
     async function redirectAfterOAuth() {
-      if (window.location.pathname !== "/") return;
+      if (cancelled || redirecting || window.location.pathname !== "/") return;
 
       const destination = sessionStorage.getItem("linkorbit-auth-redirect");
       if (!destination || !/^\/(?!\/)/.test(destination)) return;
 
       const { data } = await supabase.auth.getUser();
-      if (cancelled || !data.user) return;
+      if (cancelled || redirecting || !data.user) return;
 
+      redirecting = true;
       sessionStorage.removeItem("linkorbit-auth-redirect");
       void router.navigate({ href: destination, replace: true });
     }
