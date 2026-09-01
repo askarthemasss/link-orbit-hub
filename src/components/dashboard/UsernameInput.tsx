@@ -53,15 +53,15 @@ export function UsernameInput({
   return (
     <div className="space-y-2">
       <Label htmlFor="username">{label}</Label>
-      <div className="relative">
-        <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
+      <div className="relative flex h-9 items-center rounded-md border border-input bg-transparent px-3 focus-within:ring-1 focus-within:ring-ring">
+        <span className="pointer-events-none shrink-0 select-none text-sm text-muted-foreground">
           {PUBLIC_SITE_HOST}/
         </span>
         <Input
           id="username"
           value={value}
           onChange={(e) => onChange(normalizeUsername(e.target.value))}
-          className="pl-[10.5rem] pr-9"
+          className="h-full border-0 bg-transparent pl-2 pr-9 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
           autoCapitalize="none"
           autoCorrect="off"
           spellCheck={false}
