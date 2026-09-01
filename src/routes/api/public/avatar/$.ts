@@ -17,7 +17,7 @@ export const Route = createFileRoute("/api/public/avatar/$")({
           .select("avatar_url, is_published")
           .eq("user_id", ownerId)
           .maybeSingle();
-        if (!profile || !profile.is_published || !profile.avatar_url?.includes(path)) {
+        if (!profile || !profile.is_published || profile.avatar_url !== path) {
           return new Response("Not found", { status: 404 });
         }
         const { data, error } = await supabaseAdmin.storage.from("avatars").download(path);
