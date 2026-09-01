@@ -61,7 +61,7 @@ export function UsernameInput({
           id="username"
           value={value}
           onChange={(e) => onChange(normalizeUsername(e.target.value))}
-          className="h-full border-0 bg-transparent pl-2 pr-9 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="h-full border-0 bg-transparent pl-1 pr-9 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
           autoCapitalize="none"
           autoCorrect="off"
           spellCheck={false}
