@@ -200,11 +200,19 @@ function Landing() {
               Share one link. Let people find the rest.
             </p>
             <Button asChild size="lg" className="mt-7">
-              <Link to="/auth" search={{ mode: "signup" }}>
-                Create your LinkOrbit
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
+              {isAuthenticated ? (
+                <Link to="/dashboard">
+                  Go to dashboard
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              ) : (
+                <Link to="/auth" search={{ mode: "signup" }}>
+                  Create your LinkOrbit
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              )}
             </Button>
+
           </div>
         </section>
       </main>
