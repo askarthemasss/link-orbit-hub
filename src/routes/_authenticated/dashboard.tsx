@@ -114,6 +114,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
     website_url: profile.website_url ?? "",
     email: profile.email ?? "",
     phone: profile.phone ?? "",
+    show_email: profile.show_email ?? false,
+    show_phone: profile.show_phone ?? false,
     avatar_url: profile.avatar_url,
   });
 
