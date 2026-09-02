@@ -69,8 +69,8 @@ export const getPublicProfile = createServerFn({ method: "GET" })
       avatar_url: profile.avatar_url,
       location: profile.location,
       website_url: profile.website_url,
-      email: profile.email,
-      phone: profile.phone,
+      email: profile.show_email ? profile.email : null,
+      phone: profile.show_phone ? profile.phone : null,
       links: links ?? [],
     };
   });
