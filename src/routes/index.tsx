@@ -54,6 +54,8 @@ const BENEFITS = [
 ];
 
 function Landing() {
+  const { isAuthenticated } = useSession();
+
   return (
     <div className="min-h-screen">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-6">
@@ -65,16 +67,25 @@ function Landing() {
         </Link>
         <nav className="flex items-center gap-2">
           <ThemeToggle />
-          <Button asChild variant="ghost" size="sm">
-            <Link to="/auth">Log in</Link>
-          </Button>
-          <Button asChild size="sm">
-            <Link to="/auth" search={{ mode: "signup" }}>
-              Create your LinkOrbit
-            </Link>
-          </Button>
+          {isAuthenticated ? (
+            <Button asChild size="sm">
+              <Link to="/dashboard">Go to dashboard</Link>
+            </Button>
+          ) : (
+            <>
+              <Button asChild variant="ghost" size="sm">
+                <Link to="/auth">Log in</Link>
+              </Button>
+              <Button asChild size="sm">
+                <Link to="/auth" search={{ mode: "signup" }}>
+                  Create your LinkOrbit
+                </Link>
+              </Button>
+            </>
+          )}
         </nav>
       </header>
+
 
       <main>
         <section className="mx-auto grid w-full max-w-6xl gap-12 px-5 pb-16 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:pt-20">
