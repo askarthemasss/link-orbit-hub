@@ -112,6 +112,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
     bio: profile.bio ?? "",
     location: profile.location ?? "",
     website_url: profile.website_url ?? "",
+    email: profile.email ?? "",
+    phone: profile.phone ?? "",
     avatar_url: profile.avatar_url,
   });
 
