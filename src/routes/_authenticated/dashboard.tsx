@@ -114,6 +114,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
     website_url: profile.website_url ?? "",
     email: profile.email ?? "",
     phone: profile.phone ?? "",
+    show_email: profile.show_email ?? false,
+    show_phone: profile.show_phone ?? false,
     avatar_url: profile.avatar_url,
   });
 
@@ -154,6 +156,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
         website_url: website,
         email: email || null,
         phone: phone || null,
+        show_email: next.show_email,
+        show_phone: next.show_phone,
         avatar_url: next.avatar_url,
       });
       setSaveState("saved");
@@ -249,8 +253,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
             avatar_url: draft.avatar_url,
             location: draft.location,
             website_url: draft.website_url,
-            email: draft.email,
-            phone: draft.phone,
+            email: draft.show_email ? draft.email : "",
+            phone: draft.show_phone ? draft.phone : "",
           }}
           links={activeLinks}
         />

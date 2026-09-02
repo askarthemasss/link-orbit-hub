@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
 import { AvatarUploader } from "./AvatarUploader";
 import { SaveState } from "./SaveState";
 import type { Profile } from "@/hooks/useLinkOrbit";
@@ -13,6 +14,8 @@ export type ProfileDraft = {
   website_url: string;
   email: string;
   phone: string;
+  show_email: boolean;
+  show_phone: boolean;
   avatar_url: string | null;
 };
 
@@ -143,9 +146,33 @@ export function ProfileEditor({
             />
           </div>
         </div>
-        <p className="text-xs text-muted-foreground">
-          Email and mobile are shown on your public page when set.
-        </p>
+        <div className="space-y-3 rounded-xl border border-border/60 p-4">
+          <p className="text-xs text-muted-foreground">
+            Contact details stay private unless you turn them on here.
+          </p>
+          <div className="flex items-center justify-between gap-3">
+            <Label htmlFor="show_email" className="text-sm font-normal">
+              Show email on my public page
+            </Label>
+            <Switch
+              id="show_email"
+              checked={draft.show_email}
+              disabled={!draft.email.trim()}
+              onCheckedChange={(v) => set("show_email", v, true)}
+            />
+          </div>
+          <div className="flex items-center justify-between gap-3">
+            <Label htmlFor="show_phone" className="text-sm font-normal">
+              Show mobile on my public page
+            </Label>
+            <Switch
+              id="show_phone"
+              checked={draft.show_phone}
+              disabled={!draft.phone.trim()}
+              onCheckedChange={(v) => set("show_phone", v, true)}
+            />
+          </div>
+        </div>
 
         <p className="text-xs text-muted-foreground">
           Your public address: <span className="text-foreground">/{profile.username}</span> — change it in Settings.
