@@ -105,11 +105,19 @@ function Landing() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
-                <Link to="/auth" search={{ mode: "signup" }}>
-                  Create your LinkOrbit
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </Link>
+                {isAuthenticated ? (
+                  <Link to="/dashboard">
+                    Go to dashboard
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                ) : (
+                  <Link to="/auth" search={{ mode: "signup" }}>
+                    Create your LinkOrbit
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                )}
               </Button>
+
               <Button asChild size="lg" variant="secondary">
                 <a href="#example">Explore an example</a>
               </Button>
