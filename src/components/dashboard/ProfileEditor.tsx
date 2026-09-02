@@ -13,6 +13,8 @@ export type ProfileDraft = {
   website_url: string;
   email: string;
   phone: string;
+  show_email: boolean;
+  show_phone: boolean;
   avatar_url: string | null;
 };
 
