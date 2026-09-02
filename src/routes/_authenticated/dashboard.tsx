@@ -112,6 +112,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
     bio: profile.bio ?? "",
     location: profile.location ?? "",
     website_url: profile.website_url ?? "",
+    email: profile.email ?? "",
+    phone: profile.phone ?? "",
     avatar_url: profile.avatar_url,
   });
 
@@ -131,6 +133,18 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
       toast.error("Enter a valid website address starting with http:// or https://");
       return;
     }
+    const email = next.email.trim();
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setSaveState("idle");
+      toast.error("Enter a valid email address, or leave it empty.");
+      return;
+    }
+    const phone = next.phone.trim();
+    if (phone && !/^\+?[0-9 ()-]{5,20}$/.test(phone)) {
+      setSaveState("idle");
+      toast.error("Enter a valid mobile number, or leave it empty.");
+      return;
+    }
     try {
       await updateProfile.mutateAsync({
         id: profile.id,
@@ -138,6 +152,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
         bio: next.bio,
         location: next.location || null,
         website_url: website,
+        email: email || null,
+        phone: phone || null,
         avatar_url: next.avatar_url,
       });
       setSaveState("saved");
@@ -233,6 +249,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
             avatar_url: draft.avatar_url,
             location: draft.location,
             website_url: draft.website_url,
+            email: draft.email,
+            phone: draft.phone,
           }}
           links={activeLinks}
         />

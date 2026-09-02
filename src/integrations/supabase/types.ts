@@ -64,9 +64,11 @@ export type Database = {
           bio: string
           created_at: string
           display_name: string
+          email: string | null
           id: string
           is_published: boolean
           location: string | null
+          phone: string | null
           updated_at: string
           user_id: string
           username: string
@@ -77,9 +79,11 @@ export type Database = {
           bio?: string
           created_at?: string
           display_name?: string
+          email?: string | null
           id?: string
           is_published?: boolean
           location?: string | null
+          phone?: string | null
           updated_at?: string
           user_id: string
           username: string
@@ -90,9 +94,11 @@ export type Database = {
           bio?: string
           created_at?: string
           display_name?: string
+          email?: string | null
           id?: string
           is_published?: boolean
           location?: string | null
+          phone?: string | null
           updated_at?: string
           user_id?: string
           username?: string

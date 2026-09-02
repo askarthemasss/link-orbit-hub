@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Check, Copy, MapPin } from "lucide-react";
+import { ArrowUpRight, Check, Copy, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { avatarSrc } from "@/lib/avatar";
 import { platformIcon } from "@/lib/platforms";
@@ -19,6 +19,8 @@ export type ProfileViewData = {
   avatar_url: string | null;
   location?: string | null;
   website_url?: string | null;
+  email?: string | null;
+  phone?: string | null;
 };
 
 export type LinkViewData = {
@@ -148,6 +150,35 @@ export function PublicProfileView({
               </a>
               <CopyLinkButton url={profile.website_url} />
             </span>
+          ) : null}
+
+          {profile.email || profile.phone ? (
+            <div className={`mt-4 flex flex-wrap items-center justify-center gap-2 ${compact ? "text-xs" : "text-sm"}`}>
+              {profile.email ? (
+                <span className="group inline-flex items-center gap-1.5 rounded-full glass px-3 py-1.5 text-muted-foreground">
+                  <Mail className="size-3.5 text-primary" aria-hidden="true" />
+                  <a
+                    href={`mailto:${profile.email}`}
+                    className="font-medium underline-offset-4 hover:text-primary hover:underline"
+                  >
+                    {profile.email}
+                  </a>
+                  <CopyLinkButton url={profile.email} />
+                </span>
+              ) : null}
+              {profile.phone ? (
+                <span className="group inline-flex items-center gap-1.5 rounded-full glass px-3 py-1.5 text-muted-foreground">
+                  <Phone className="size-3.5 text-primary" aria-hidden="true" />
+                  <a
+                    href={`tel:${profile.phone.replace(/[^0-9+]/g, "")}`}
+                    className="font-medium underline-offset-4 hover:text-primary hover:underline"
+                  >
+                    {profile.phone}
+                  </a>
+                  <CopyLinkButton url={profile.phone} />
+                </span>
+              ) : null}
+            </div>
           ) : null}
         </header>
 
