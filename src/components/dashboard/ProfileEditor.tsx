@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
 import { AvatarUploader } from "./AvatarUploader";
 import { SaveState } from "./SaveState";
 import type { Profile } from "@/hooks/useLinkOrbit";
