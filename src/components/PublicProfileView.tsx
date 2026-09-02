@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Check, Copy, MapPin } from "lucide-react";
+import { ArrowUpRight, Check, Copy, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { avatarSrc } from "@/lib/avatar";
 import { platformIcon } from "@/lib/platforms";
@@ -19,6 +19,8 @@ export type ProfileViewData = {
   avatar_url: string | null;
   location?: string | null;
   website_url?: string | null;
+  email?: string | null;
+  phone?: string | null;
 };
 
 export type LinkViewData = {
