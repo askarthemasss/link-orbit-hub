@@ -253,8 +253,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
             avatar_url: draft.avatar_url,
             location: draft.location,
             website_url: draft.website_url,
-            email: draft.email,
-            phone: draft.phone,
+            email: draft.show_email ? draft.email : "",
+            phone: draft.show_phone ? draft.phone : "",
           }}
           links={activeLinks}
         />
