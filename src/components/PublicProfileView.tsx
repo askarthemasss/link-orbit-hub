@@ -137,14 +137,17 @@ export function PublicProfileView({
           ) : null}
 
           {profile.website_url && isSafeHttpUrl(profile.website_url) ? (
-            <a
-              href={profile.website_url}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              className="mt-3 text-xs font-medium text-primary underline-offset-4 hover:underline"
-            >
-              {prettyUrl(profile.website_url)}
-            </a>
+            <span className="group mt-3 inline-flex items-center gap-0.5">
+              <a
+                href={profile.website_url}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="text-xs font-medium text-primary underline-offset-4 hover:underline"
+              >
+                {prettyUrl(profile.website_url)}
+              </a>
+              <CopyLinkButton url={profile.website_url} />
+            </span>
           ) : null}
         </header>
 
