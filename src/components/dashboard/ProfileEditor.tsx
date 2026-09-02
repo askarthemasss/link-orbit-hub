@@ -11,6 +11,8 @@ export type ProfileDraft = {
   bio: string;
   location: string;
   website_url: string;
+  email: string;
+  phone: string;
   avatar_url: string | null;
 };
 

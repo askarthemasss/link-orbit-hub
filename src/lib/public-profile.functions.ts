@@ -19,6 +19,8 @@ export type PublicProfile = {
   avatar_url: string | null;
   location: string | null;
   website_url: string | null;
+  email: string | null;
+  phone: string | null;
   links: PublicLink[];
 };
 
