@@ -44,7 +44,7 @@ export const getPublicProfile = createServerFn({ method: "GET" })
 
     const { data: profile } = await supabase
       .from("profiles")
-      .select("id, user_id, username, display_name, bio, avatar_url, location, website_url")
+      .select("id, user_id, username, display_name, bio, avatar_url, location, website_url, email, phone")
       .eq("username", data.username)
       .eq("is_published", true)
       .maybeSingle();
