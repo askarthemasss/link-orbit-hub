@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { PublicProfileView } from "@/components/PublicProfileView";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useSession } from "@/hooks/useSession";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
