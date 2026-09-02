@@ -115,6 +115,38 @@ export function ProfileEditor({
           </div>
         </div>
 
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="contact_email">Email (optional)</Label>
+            <Input
+              id="contact_email"
+              type="email"
+              value={draft.email}
+              maxLength={120}
+              placeholder="you@example.com"
+              inputMode="email"
+              autoComplete="off"
+              onChange={(e) => set("email", e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="contact_phone">Mobile (optional)</Label>
+            <Input
+              id="contact_phone"
+              type="tel"
+              value={draft.phone}
+              maxLength={20}
+              placeholder="+91 98765 43210"
+              inputMode="tel"
+              autoComplete="off"
+              onChange={(e) => set("phone", e.target.value)}
+            />
+          </div>
+        </div>
+        <p className="text-xs text-muted-foreground">
+          Email and mobile are shown on your public page when set.
+        </p>
+
         <p className="text-xs text-muted-foreground">
           Your public address: <span className="text-foreground">/{profile.username}</span> — change it in Settings.
         </p>
