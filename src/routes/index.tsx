@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { PublicProfileView } from "@/components/PublicProfileView";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useSession } from "@/hooks/useSession";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -54,6 +56,8 @@ const BENEFITS = [
 ];
 
 function Landing() {
+  const { isAuthenticated } = useSession();
+
   return (
     <div className="min-h-screen">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-6">
@@ -65,16 +69,25 @@ function Landing() {
         </Link>
         <nav className="flex items-center gap-2">
           <ThemeToggle />
-          <Button asChild variant="ghost" size="sm">
-            <Link to="/auth">Log in</Link>
-          </Button>
-          <Button asChild size="sm">
-            <Link to="/auth" search={{ mode: "signup" }}>
-              Create your LinkOrbit
-            </Link>
-          </Button>
+          {isAuthenticated ? (
+            <Button asChild size="sm">
+              <Link to="/dashboard">Go to dashboard</Link>
+            </Button>
+          ) : (
+            <>
+              <Button asChild variant="ghost" size="sm">
+                <Link to="/auth">Log in</Link>
+              </Button>
+              <Button asChild size="sm">
+                <Link to="/auth" search={{ mode: "signup" }}>
+                  Create your LinkOrbit
+                </Link>
+              </Button>
+            </>
+          )}
         </nav>
       </header>
+
 
       <main>
         <section className="mx-auto grid w-full max-w-6xl gap-12 px-5 pb-16 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:pt-20">
@@ -92,11 +105,19 @@ function Landing() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
-                <Link to="/auth" search={{ mode: "signup" }}>
-                  Create your LinkOrbit
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </Link>
+                {isAuthenticated ? (
+                  <Link to="/dashboard">
+                    Go to dashboard
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                ) : (
+                  <Link to="/auth" search={{ mode: "signup" }}>
+                    Create your LinkOrbit
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                )}
               </Button>
+
               <Button asChild size="lg" variant="secondary">
                 <a href="#example">Explore an example</a>
               </Button>
@@ -179,11 +200,19 @@ function Landing() {
               Share one link. Let people find the rest.
             </p>
             <Button asChild size="lg" className="mt-7">
-              <Link to="/auth" search={{ mode: "signup" }}>
-                Create your LinkOrbit
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
+              {isAuthenticated ? (
+                <Link to="/dashboard">
+                  Go to dashboard
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              ) : (
+                <Link to="/auth" search={{ mode: "signup" }}>
+                  Create your LinkOrbit
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              )}
             </Button>
+
           </div>
         </section>
       </main>
