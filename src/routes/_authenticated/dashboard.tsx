@@ -156,6 +156,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
         website_url: website,
         email: email || null,
         phone: phone || null,
+        show_email: next.show_email,
+        show_phone: next.show_phone,
         avatar_url: next.avatar_url,
       });
       setSaveState("saved");
