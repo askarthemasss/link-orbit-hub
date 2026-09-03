@@ -7,24 +7,59 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { useSession } from "@/hooks/useSession";
 
 
+const TITLE = "LTReee — Free Link in Bio Page for All Your Links";
+const DESCRIPTION =
+  "Create a free link in bio page in two minutes. Put your portfolio, socials, projects and contact links on one simple, fast profile you can share anywhere.";
+const URL = "https://ltreee.app/";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LTReee — One link. Your whole universe." },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
       {
-        name: "description",
+        name: "keywords",
         content:
-          "Bring your portfolio, socials, projects and everything you want to share into one simple profile. Free and ready in two minutes.",
+          "link in bio, link in bio page, bio link, linktree alternative, free link in bio, one link for all socials, personal link page, micro website, links page, link hub, social media bio link, portfolio link page",
       },
-      { property: "og:title", content: "LTReee — One link. Your whole universe." },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:url", content: URL },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+    ],
+    links: [{ rel: "canonical", href: URL }],
+    scripts: [
       {
-        property: "og:description",
-        content: "One simple link for your portfolio, socials and projects.",
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://ltreee.app/#website",
+              url: "https://ltreee.app/",
+              name: "LTReee",
+              description: DESCRIPTION,
+            },
+            {
+              "@type": "SoftwareApplication",
+              name: "LTReee",
+              applicationCategory: "WebApplication",
+              operatingSystem: "Any",
+              url: "https://ltreee.app/",
+              description: DESCRIPTION,
+              offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+            },
+          ],
+        }),
       },
     ],
   }),
   component: Landing,
 });
+
 
 const EXAMPLE_PROFILE = {
   username: "askar",
