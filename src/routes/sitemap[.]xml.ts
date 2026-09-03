@@ -18,6 +18,41 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/examples", changefreq: "monthly", priority: "0.8" },
         ];
 
+        const { createClient } = await import("@supabase/supabase-js");
+        const key = process.env["SUPABASE_PUBLISHABLE_KEY"]!;
+        const supabase = createClient(process.env["SUPABASE_URL"]!, key, {
+          auth: { persistSession: false, autoRefreshToken: false },
+          global: {
+            fetch: (input, init) => {
+              const headers = new Headers(init?.headers);
+              if (key.startsWith("sb_") && headers.get("Authorization") === "Bearer " + key)
+                headers.delete("Authorization");
+              headers.set("apikey", key);
+              return fetch(input, { ...init, headers });
+            },
+          },
+        });
+
+        const pageSize = 1000;
+        for (let offset = 0; ; offset += pageSize) {
+          const { data, error } = await supabase
+            .from("public_profiles")
+            .select("username")
+            .eq("is_published", true)
+            .order("username")
+            .range(offset, offset + pageSize - 1);
+          if (error) break;
+          entries.push(
+            ...(data ?? []).map((p: { username: string }) => ({
+              path: `/${encodeURIComponent(p.username)}`,
+              changefreq: "weekly" as const,
+              priority: "0.7",
+            })),
+          );
+          if (!data || data.length < pageSize) break;
+        }
+
+
         const urls = entries.map((e) =>
           [
             `  <url>`,
