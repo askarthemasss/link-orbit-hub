@@ -8,20 +8,28 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 const TITLE = "Link in Bio Example — LTReee";
 const DESCRIPTION =
   "See a real link in bio layout for a developer, and copy the structure for your own LTReee profile in two minutes.";
-const URL = "https://ltreee-app.lovable.app/examples";
+const URL = "https://ltreee.app/examples";
 
 export const Route = createFileRoute("/examples")({
   head: () => ({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
+      {
+        name: "keywords",
+        content:
+          "link in bio examples, linktree example, bio link page example, developer link in bio, portfolio links page, best link in bio layout",
+      },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: URL },
       { property: "og:type", content: "website" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
     ],
     links: [{ rel: "canonical", href: URL }],
   }),
+
   component: ExamplesPage,
 });
 
