@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://linkorbit-app.lovable.app/sitemap.xml
+Sitemap: https://novanodes-app.lovable.app/sitemap.xml

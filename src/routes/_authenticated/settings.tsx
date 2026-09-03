@@ -6,15 +6,15 @@ import { Button } from "@/components/ui/button";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { UsernameInput, type UsernameStatus } from "@/components/dashboard/UsernameInput";
 import { EmptyOrbitIcon } from "@/components/EmptyOrbitIcon";
-import { useProfile, useSession, useUpdateProfile } from "@/hooks/useLinkOrbit";
+import { useProfile, useSession, useUpdateProfile } from "@/hooks/useNovanodes";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
     meta: [
-      { title: "Settings — LinkOrbit" },
-      { name: "description", content: "Manage your LinkOrbit username and account." },
-      { property: "og:title", content: "Settings — LinkOrbit" },
-      { property: "og:description", content: "Manage your LinkOrbit username and account." },
+      { title: "Settings — Novanodes" },
+      { name: "description", content: "Manage your Novanodes username and account." },
+      { property: "og:title", content: "Settings — Novanodes" },
+      { property: "og:description", content: "Manage your Novanodes username and account." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -81,7 +81,7 @@ function SettingsPage() {
           ) : (
             <div className="rounded-xl border border-dashed border-border px-5 py-8 text-center">
               <EmptyOrbitIcon className="mx-auto size-12" />
-              <p className="mt-4 font-display text-lg font-semibold">Finish setting up your LinkOrbit</p>
+              <p className="mt-4 font-display text-lg font-semibold">Finish setting up your Novanodes</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Create your profile first, then you can customize your username and share your link.
               </p>

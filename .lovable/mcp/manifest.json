@@ -18,8 +18,8 @@
     "tools": [
       {
         "name": "get_profile",
-        "title": "Get my LinkOrbit profile",
-        "description": "Return the signed-in user's LinkOrbit profile: username, display name, bio, location, website and publish state.",
+        "title": "Get my Novanodes profile",
+        "description": "Return the signed-in user's Novanodes profile: username, display name, bio, location, website and publish state.",
         "annotations": {
           "readOnlyHint": true,
           "idempotentHint": true,
@@ -34,7 +34,7 @@
       },
       {
         "name": "update_profile",
-        "title": "Update my LinkOrbit profile",
+        "title": "Update my Novanodes profile",
         "description": "Update the signed-in user's display name, bio, location, website URL or published state. Only provided fields change.",
         "annotations": {
           "readOnlyHint": false,
@@ -92,7 +92,7 @@
       {
         "name": "list_links",
         "title": "List my links",
-        "description": "List all links on the signed-in user's LinkOrbit page, in display order.",
+        "description": "List all links on the signed-in user's Novanodes page, in display order.",
         "annotations": {
           "readOnlyHint": true,
           "idempotentHint": true,
@@ -108,7 +108,7 @@
       {
         "name": "create_link",
         "title": "Add a link",
-        "description": "Add a new link to the signed-in user's LinkOrbit page. The platform icon is detected from the URL.",
+        "description": "Add a new link to the signed-in user's Novanodes page. The platform icon is detected from the URL.",
         "annotations": {
           "readOnlyHint": false,
           "destructiveHint": false,
@@ -187,7 +187,7 @@
       {
         "name": "delete_link",
         "title": "Delete a link",
-        "description": "Permanently remove one of the signed-in user's links from their LinkOrbit page.",
+        "description": "Permanently remove one of the signed-in user's links from their Novanodes page.",
         "annotations": {
           "readOnlyHint": false,
           "destructiveHint": true,

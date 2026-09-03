@@ -201,39 +201,54 @@ export function PublicProfileView({
             ) : null}
           </div>
         ) : (
-            links
-              .filter((link) => isSafeHttpUrl(link.url))
-              .map((link) => {
-              const Icon = platformIcon(link.platform);
-              return (
-                <a
-                  key={link.id}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  className={`group flex items-center gap-3 rounded-2xl glass transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:glow-ring active:translate-y-0 ${
-                    compact ? "px-3.5 py-3" : "px-4 py-4"
-                  }`}
-                >
-                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-secondary/70 text-primary">
-                    <Icon className="size-4" aria-hidden="true" />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className={`block truncate font-medium ${compact ? "text-sm" : "text-[0.95rem]"}`}>
-                      {link.title}
-                    </span>
-                    <span className="block truncate text-xs text-muted-foreground">{prettyUrl(link.url)}</span>
-                  </span>
-                  <span className="flex shrink-0 items-center gap-0.5">
-                    <CopyLinkButton url={link.url} />
-                    <ArrowUpRight
-                      className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary"
+          <div className="relative">
+            <span
+              aria-hidden="true"
+              className="absolute bottom-5 left-[7px] top-5 w-px bg-border"
+            />
+            <div className={compact ? "space-y-2.5" : "space-y-3"}>
+              {links
+                .filter((link) => isSafeHttpUrl(link.url))
+                .map((link) => {
+                const Icon = platformIcon(link.platform);
+                return (
+                  <div key={link.id} className="relative pl-6">
+                    <span
                       aria-hidden="true"
-                    />
-                  </span>
-                </a>
-              );
-            })
+                      className="absolute left-0 top-1/2 grid size-[15px] -translate-y-1/2 place-items-center rounded-full border border-primary/50 bg-background"
+                    >
+                      <span className="size-[5px] rounded-full bg-primary" />
+                    </span>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className={`group flex items-center gap-3 rounded-2xl glass transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:glow-ring active:translate-y-0 ${
+                        compact ? "px-3.5 py-3" : "px-4 py-4"
+                      }`}
+                    >
+                      <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-secondary/70 text-primary">
+                        <Icon className="size-4" aria-hidden="true" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className={`block truncate font-medium ${compact ? "text-sm" : "text-[0.95rem]"}`}>
+                          {link.title}
+                        </span>
+                        <span className="block truncate text-xs text-muted-foreground">{prettyUrl(link.url)}</span>
+                      </span>
+                      <span className="flex shrink-0 items-center gap-0.5">
+                        <CopyLinkButton url={link.url} />
+                        <ArrowUpRight
+                          className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary"
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </a>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
           )}
         </nav>
 
@@ -243,7 +258,7 @@ export function PublicProfileView({
               href="/"
               className="text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
             >
-              Create your LinkOrbit
+              Create your Novanodes
             </a>
           </footer>
         ) : null}

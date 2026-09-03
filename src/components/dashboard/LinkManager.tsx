@@ -17,7 +17,7 @@ import {
 import { LinkFormDialog, type LinkFormValue } from "./LinkFormDialog";
 import { platformIcon } from "@/lib/platforms";
 import { prettyUrl } from "@/lib/validation";
-import type { LinkRow } from "@/hooks/useLinkOrbit";
+import type { LinkRow } from "@/hooks/useNovanodes";
 
 
 export function LinkManager({

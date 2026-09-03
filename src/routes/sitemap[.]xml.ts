@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "https://linkorbit-app.lovable.app";
+const BASE_URL = "https://novanodes-app.lovable.app";
 
 interface SitemapEntry {
   path: string;
@@ -16,7 +16,6 @@ export const Route = createFileRoute("/sitemap.xml")({
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/examples", changefreq: "monthly", priority: "0.8" },
-          { path: "/connect", changefreq: "monthly", priority: "0.6" },
         ];
 
         const urls = entries.map((e) =>

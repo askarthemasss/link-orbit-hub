@@ -10,13 +10,13 @@ import { useSession } from "@/hooks/useSession";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LinkOrbit — One link. Everything around you." },
+      { title: "Novanodes — One link. Your whole universe." },
       {
         name: "description",
         content:
           "Bring your portfolio, socials, projects and everything you want to share into one simple profile. Free and ready in two minutes.",
       },
-      { property: "og:title", content: "LinkOrbit — One link. Everything around you." },
+      { property: "og:title", content: "Novanodes — One link. Your whole universe." },
       {
         property: "og:description",
         content: "One simple link for your portfolio, socials and projects.",
@@ -65,7 +65,7 @@ function Landing() {
           <span className="grid size-8 place-items-center rounded-full border border-primary/40 text-primary">
             <span className="size-2 rounded-full bg-primary" />
           </span>
-          LinkOrbit
+          Novanodes
         </Link>
         <nav className="flex items-center gap-2">
           <ThemeToggle />
@@ -80,7 +80,7 @@ function Landing() {
               </Button>
               <Button asChild size="sm">
                 <Link to="/auth" search={{ mode: "signup" }}>
-                  Create your LinkOrbit
+                  Create your Novanodes
                 </Link>
               </Button>
             </>
@@ -94,10 +94,10 @@ function Landing() {
           <div>
             <p className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs text-muted-foreground">
               <Sparkles className="size-3.5 text-primary" aria-hidden="true" />
-              Your corner of the internet
+              Your corner of the universe
             </p>
             <h1 className="mt-5 text-balance font-display text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-              <span className="text-gradient">One link.</span> Everything around you.
+              <span className="text-gradient">One link.</span> Your whole universe.
             </h1>
             <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
               Bring your portfolio, socials, projects, and everything you want to share into one simple
@@ -112,7 +112,7 @@ function Landing() {
                   </Link>
                 ) : (
                   <Link to="/auth" search={{ mode: "signup" }}>
-                    Create your LinkOrbit
+                    Create your Novanodes
                     <ArrowRight className="size-4" aria-hidden="true" />
                   </Link>
                 )}
@@ -178,7 +178,7 @@ function Landing() {
 
         <section className="mx-auto w-full max-w-6xl px-5 py-16" aria-labelledby="why">
           <h2 id="why" className="font-display text-2xl font-semibold sm:text-3xl">
-            Why LinkOrbit
+            Why Novanodes
           </h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {BENEFITS.map((b) => (
@@ -194,7 +194,7 @@ function Landing() {
           <div className="rounded-3xl glass-strong px-6 py-12 text-center sm:px-12">
             <Pencil className="mx-auto size-6 text-primary" aria-hidden="true" />
             <h2 className="mt-4 text-balance font-display text-2xl font-semibold sm:text-3xl">
-              Build your corner of the internet
+              Build your corner of the universe
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-sm text-muted-foreground sm:text-base">
               Share one link. Let people find the rest.
@@ -207,7 +207,7 @@ function Landing() {
                 </Link>
               ) : (
                 <Link to="/auth" search={{ mode: "signup" }}>
-                  Create your LinkOrbit
+                  Create your Novanodes
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>
               )}
@@ -218,15 +218,12 @@ function Landing() {
       </main>
 
       <footer className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-8 text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} LinkOrbit</p>
+        <p>© {new Date().getFullYear()} Novanodes</p>
         <div className="flex items-center gap-4">
           <Link to="/examples" className="hover:text-foreground">
             Link in bio examples
           </Link>
-          <Link to="/connect" className="hover:text-foreground">
-            Connect an AI assistant
-          </Link>
-          <span className="hidden sm:inline">One link. Everything around you.</span>
+          <span className="hidden sm:inline">One link. Your whole universe.</span>
         </div>
       </footer>
     </div>

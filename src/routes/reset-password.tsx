@@ -10,10 +10,10 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
-      { title: "Choose a new password — LinkOrbit" },
-      { name: "description", content: "Set a new password for your LinkOrbit account." },
-      { property: "og:title", content: "Choose a new password — LinkOrbit" },
-      { property: "og:description", content: "Set a new password for your LinkOrbit account." },
+      { title: "Choose a new password — Novanodes" },
+      { name: "description", content: "Set a new password for your Novanodes account." },
+      { property: "og:title", content: "Choose a new password — Novanodes" },
+      { property: "og:description", content: "Set a new password for your Novanodes account." },
       { name: "robots", content: "noindex" },
     ],
   }),

@@ -8,7 +8,6 @@ import { supabase } from "@/integrations/supabase/client";
 const NAV = [
   { to: "/dashboard", label: "Editor" },
   { to: "/settings", label: "Settings" },
-  { to: "/connect", label: "AI assistant" },
 ] as const;
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -28,7 +27,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-5 py-3">
           <Link to="/" className="font-display text-base font-semibold">
-            LinkOrbit
+            Novanodes
           </Link>
           <nav aria-label="Dashboard" className="flex items-center gap-1">
             {NAV.map((item) => (
