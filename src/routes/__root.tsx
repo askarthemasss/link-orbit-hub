@@ -79,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "google-site-verification", content: "z4JQxzPx3RZMM0hifRbLhsPASFGACKT8hwOEF0GBNm0" },
-      { property: "og:site_name", content: "Novanodes" },
+      { property: "og:site_name", content: "LTReee" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#0b1020" },
@@ -109,7 +109,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "try{var t=localStorage.getItem('novanodes-theme');if(t==='light'){document.documentElement.classList.remove('dark');document.documentElement.style.colorScheme='light';}}catch(e){}",
+              "try{var t=localStorage.getItem('ltreee-theme');if(t==='light'){document.documentElement.classList.remove('dark');document.documentElement.style.colorScheme='light';}}catch(e){}",
           }}
         />
       </head>
@@ -132,14 +132,14 @@ function RootComponent() {
     async function redirectAfterOAuth() {
       if (cancelled || redirecting || window.location.pathname !== "/") return;
 
-      const destination = sessionStorage.getItem("novanodes-auth-redirect");
+      const destination = sessionStorage.getItem("ltreee-auth-redirect");
       if (!destination || !/^\/(?!\/)/.test(destination)) return;
 
       const { data } = await supabase.auth.getUser();
       if (cancelled || redirecting || !data.user) return;
 
       redirecting = true;
-      sessionStorage.removeItem("novanodes-auth-redirect");
+      sessionStorage.removeItem("ltreee-auth-redirect");
       void router.navigate({ href: destination, replace: true });
     }
 

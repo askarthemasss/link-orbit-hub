@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { AvatarUploader } from "./AvatarUploader";
 import { SaveState } from "./SaveState";
-import type { Profile } from "@/hooks/useNovanodes";
+import type { Profile } from "@/hooks/useLTReee";
 
 export type ProfileDraft = {
   display_name: string;

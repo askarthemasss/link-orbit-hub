@@ -13,7 +13,7 @@ export default defineMcp({
   title: "Link Orbit Hub",
   version: "0.1.0",
   instructions:
-    "Tools for Novanodes, a link-in-bio page builder. Read and edit the signed-in user's profile (username, display name, bio, location, website, published state) and the links on their page. Use `get_profile` and `list_links` first; link ids come from `list_links`.",
+    "Tools for LTReee, a link-in-bio page builder. Read and edit the signed-in user's profile (username, display name, bio, location, website, published state) and the links on their page. Use `get_profile` and `list_links` first; link ids come from `list_links`.",
   auth: auth.oauth.issuer({
     issuer: `https://${projectRef}.supabase.co/auth/v1`,
     acceptedAudiences: "authenticated",

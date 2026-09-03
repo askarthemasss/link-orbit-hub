@@ -20,15 +20,15 @@ import {
   useProfile,
   useUpdateProfile,
   type LinkRow,
-} from "@/hooks/useNovanodes";
+} from "@/hooks/useLTReee";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Your editor — Novanodes" },
-      { name: "description", content: "Edit your Novanodes profile, links and publish state." },
-      { property: "og:title", content: "Your editor — Novanodes" },
-      { property: "og:description", content: "Edit your Novanodes profile, links and publish state." },
+      { title: "Your editor — LTReee" },
+      { name: "description", content: "Edit your LTReee profile, links and publish state." },
+      { property: "og:title", content: "Your editor — LTReee" },
+      { property: "og:description", content: "Edit your LTReee profile, links and publish state." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -93,7 +93,7 @@ function Onboarding() {
         </div>
         <Button type="submit" className="w-full" disabled={status !== "available" || createProfile.isPending}>
           {createProfile.isPending ? <Loader2 className="size-4 animate-spin" aria-hidden="true" /> : null}
-          Create my Novanodes
+          Create my LTReee
         </Button>
       </form>
     </div>

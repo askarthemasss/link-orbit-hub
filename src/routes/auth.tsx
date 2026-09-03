@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 
-const AUTH_REDIRECT_KEY = "novanodes-auth-redirect";
+const AUTH_REDIRECT_KEY = "ltreee-auth-redirect";
 
 const searchSchema = z.object({
   mode: z.enum(["login", "signup", "reset"]).optional(),
@@ -21,10 +21,10 @@ export const Route = createFileRoute("/auth")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
-      { title: "Sign in — Novanodes" },
-      { name: "description", content: "Sign in or create your free Novanodes profile." },
-      { property: "og:title", content: "Sign in — Novanodes" },
-      { property: "og:description", content: "Sign in or create your free Novanodes profile." },
+      { title: "Sign in — LTReee" },
+      { name: "description", content: "Sign in or create your free LTReee profile." },
+      { property: "og:title", content: "Sign in — LTReee" },
+      { property: "og:description", content: "Sign in or create your free LTReee profile." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -134,13 +134,13 @@ function AuthPage() {
   }
 
   const title =
-    mode === "signup" ? "Create your Novanodes" : mode === "reset" ? "Reset your password" : "Welcome back";
+    mode === "signup" ? "Create your LTReee" : mode === "reset" ? "Reset your password" : "Welcome back";
 
   return (
     <div className="flex min-h-screen flex-col">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-6">
         <Link to="/" className="font-display text-lg font-semibold">
-          Novanodes
+          LTReee
         </Link>
         <ThemeToggle />
       </header>
@@ -217,7 +217,7 @@ function AuthPage() {
                 <p>
                   New here?{" "}
                   <button type="button" className="text-primary hover:underline" onClick={() => setMode("signup")}>
-                    Create your Novanodes
+                    Create your LTReee
                   </button>
                 </p>
                 <p>
