@@ -5,8 +5,8 @@
 - [x] Minimal stars + node/edge constellation background
 - [x] Node-and-edge styling for public profile links
 - [x] Remove AI assistant nav + footer links
-- [ ] Disable /connect page (redirect home), remove from sitemap
-- [ ] Trim /examples to a single example
-- [ ] Update site URL/robots to novanodes-app.lovable.app, publish new slug
-- [ ] Landing headline copy to match universe/nodes theme
+- [x] Disable /connect page (redirect home), removed from sitemap
+- [x] Trim /examples to a single example
+- [x] Update site URL/robots; publish pending
+- [x] Landing headline copy updated
 - Note: "LTreee" message appears accidental — no action

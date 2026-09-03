@@ -90,7 +90,7 @@ export function StarBackground({ density = 45 }: { density?: number }) {
             x2={nodes[b]!.x}
             y2={nodes[b]!.y}
             stroke="currentColor"
-            strokeWidth="0.08"
+            strokeWidth="0.06"
             opacity="0.12"
           />
         ))}
@@ -99,9 +99,9 @@ export function StarBackground({ density = 45 }: { density?: number }) {
             key={`n${i}`}
             cx={node.x}
             cy={node.y}
-            r={node.r / 4}
+            r={node.r / 7}
             fill="currentColor"
-            opacity="0.35"
+            opacity="0.28"
             style={{ animation: `twinkle 9s ease-in-out ${node.delay}s infinite` }}
           />
         ))}
