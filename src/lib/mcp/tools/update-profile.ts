@@ -1,5 +1,6 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
+import { normalizeUrl } from "@/lib/validation";
 import { currentProfile, errorResult, jsonResult, notAuthed } from "./shared";
 
 export default defineTool({
