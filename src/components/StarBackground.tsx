@@ -47,7 +47,7 @@ export function StarBackground({ density = 45 }: { density?: number }) {
       for (let j = 0; j < nodes.length; j++) {
         if (i === j || edges.some(([a, b]) => (a === i && b === j) || (a === j && b === i)))
           continue;
-        const d = (nodes[i].x - nodes[j].x) ** 2 + (nodes[i].y - nodes[j].y) ** 2;
+        const d = (nodes[i]!.x - nodes[j]!.x) ** 2 + (nodes[i]!.y - nodes[j]!.y) ** 2;
         if (d < bestDist) {
           bestDist = d;
           best = j;
