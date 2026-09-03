@@ -8,7 +8,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 const TITLE = "Link in Bio Example — LTReee";
 const DESCRIPTION =
   "See a real link in bio layout for a developer, and copy the structure for your own LTReee profile in two minutes.";
-const URL = "https://ltreee-app.lovable.app/examples";
+const URL = "https://ltreee.app/examples";
 
 export const Route = createFileRoute("/examples")({
   head: () => ({
