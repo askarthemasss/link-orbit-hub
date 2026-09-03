@@ -258,7 +258,7 @@ export function PublicProfileView({
               href="/"
               className="text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
             >
-              Create your Novanodes
+              Create your LTReee
             </a>
           </footer>
         ) : null}

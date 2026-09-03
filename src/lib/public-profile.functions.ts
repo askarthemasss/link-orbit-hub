@@ -42,35 +42,48 @@ export const getPublicProfile = createServerFn({ method: "GET" })
       },
     });
 
+    // Reads go through the public_profiles view, which only exposes published
+    // rows and nulls email/phone unless the owner enabled the matching toggle.
     const { data: profile } = await supabase
-      .from("profiles")
+      .from("public_profiles" as never)
       .select(
-        "id, user_id, username, display_name, bio, avatar_url, location, website_url, email, phone, show_email, show_phone",
+        "id, user_id, username, display_name, bio, avatar_url, location, website_url, email, phone",
       )
       .eq("username", data.username)
-      .eq("is_published", true)
       .maybeSingle();
 
     if (!profile) return null;
+    const row = profile as unknown as {
+      id: string;
+      user_id: string;
+      username: string;
+      display_name: string;
+      bio: string;
+      avatar_url: string | null;
+      location: string | null;
+      website_url: string | null;
+      email: string | null;
+      phone: string | null;
+    };
 
     const { data: links } = await supabase
       .from("links")
       .select("id, title, url, platform, display_order")
-      .eq("profile_id", profile.id)
+      .eq("profile_id", row.id)
       .eq("is_active", true)
       .order("display_order", { ascending: true });
 
     return {
-      id: profile.id,
-      user_id: profile.user_id,
-      username: profile.username,
-      display_name: profile.display_name,
-      bio: profile.bio,
-      avatar_url: profile.avatar_url,
-      location: profile.location,
-      website_url: profile.website_url,
-      email: profile.show_email ? profile.email : null,
-      phone: profile.show_phone ? profile.phone : null,
+      id: row.id,
+      user_id: row.user_id,
+      username: row.username,
+      display_name: row.display_name,
+      bio: row.bio,
+      avatar_url: row.avatar_url,
+      location: row.location,
+      website_url: row.website_url,
+      email: row.email,
+      phone: row.phone,
       links: links ?? [],
     };
   });

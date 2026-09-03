@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://novanodes-app.lovable.app/sitemap.xml
+Sitemap: https://ltreee-app.lovable.app/sitemap.xml

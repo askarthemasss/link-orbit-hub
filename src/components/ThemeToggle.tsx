@@ -3,7 +3,7 @@ import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export type Theme = "dark" | "light";
-export const THEME_STORAGE_KEY = "novanodes-theme";
+export const THEME_STORAGE_KEY = "ltreee-theme";
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;

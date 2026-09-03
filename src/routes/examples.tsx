@@ -5,10 +5,10 @@ import { PhoneFrame } from "@/components/PhoneFrame";
 import { PublicProfileView } from "@/components/PublicProfileView";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-const TITLE = "Link in Bio Example — Novanodes";
+const TITLE = "Link in Bio Example — LTReee";
 const DESCRIPTION =
-  "See a real link in bio layout for a developer, and copy the structure for your own Novanodes profile in two minutes.";
-const URL = "https://novanodes-app.lovable.app/examples";
+  "See a real link in bio layout for a developer, and copy the structure for your own LTReee profile in two minutes.";
+const URL = "https://ltreee-app.lovable.app/examples";
 
 export const Route = createFileRoute("/examples")({
   head: () => ({
@@ -55,7 +55,7 @@ function ExamplesPage() {
           <span className="grid size-8 place-items-center rounded-full border border-primary/40 text-primary">
             <span className="size-2 rounded-full bg-primary" />
           </span>
-          Novanodes
+          LTReee
         </Link>
         <div className="flex items-center gap-2">
           <ThemeToggle />
@@ -85,7 +85,7 @@ function ExamplesPage() {
             </ul>
             <Button asChild className="mt-7">
               <Link to="/auth" search={{ mode: "signup" }}>
-                Create your Novanodes
+                Create your LTReee
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
             </Button>
@@ -99,7 +99,7 @@ function ExamplesPage() {
       </main>
 
       <footer className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-8 text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} Novanodes</p>
+        <p>© {new Date().getFullYear()} LTReee</p>
         <span className="hidden sm:inline">One link. Your whole universe.</span>
       </footer>
     </div>

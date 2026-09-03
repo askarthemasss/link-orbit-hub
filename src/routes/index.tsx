@@ -10,13 +10,13 @@ import { useSession } from "@/hooks/useSession";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Novanodes — One link. Your whole universe." },
+      { title: "LTReee — One link. Your whole universe." },
       {
         name: "description",
         content:
           "Bring your portfolio, socials, projects and everything you want to share into one simple profile. Free and ready in two minutes.",
       },
-      { property: "og:title", content: "Novanodes — One link. Your whole universe." },
+      { property: "og:title", content: "LTReee — One link. Your whole universe." },
       {
         property: "og:description",
         content: "One simple link for your portfolio, socials and projects.",
@@ -65,7 +65,7 @@ function Landing() {
           <span className="grid size-8 place-items-center rounded-full border border-primary/40 text-primary">
             <span className="size-2 rounded-full bg-primary" />
           </span>
-          Novanodes
+          LTReee
         </Link>
         <nav className="flex items-center gap-2">
           <ThemeToggle />
@@ -80,7 +80,7 @@ function Landing() {
               </Button>
               <Button asChild size="sm">
                 <Link to="/auth" search={{ mode: "signup" }}>
-                  Create your Novanodes
+                  Create your LTReee
                 </Link>
               </Button>
             </>
@@ -112,7 +112,7 @@ function Landing() {
                   </Link>
                 ) : (
                   <Link to="/auth" search={{ mode: "signup" }}>
-                    Create your Novanodes
+                    Create your LTReee
                     <ArrowRight className="size-4" aria-hidden="true" />
                   </Link>
                 )}
@@ -178,7 +178,7 @@ function Landing() {
 
         <section className="mx-auto w-full max-w-6xl px-5 py-16" aria-labelledby="why">
           <h2 id="why" className="font-display text-2xl font-semibold sm:text-3xl">
-            Why Novanodes
+            Why LTReee
           </h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {BENEFITS.map((b) => (
@@ -207,7 +207,7 @@ function Landing() {
                 </Link>
               ) : (
                 <Link to="/auth" search={{ mode: "signup" }}>
-                  Create your Novanodes
+                  Create your LTReee
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>
               )}
@@ -218,7 +218,7 @@ function Landing() {
       </main>
 
       <footer className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-8 text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} Novanodes</p>
+        <p>© {new Date().getFullYear()} LTReee</p>
         <div className="flex items-center gap-4">
           <Link to="/examples" className="hover:text-foreground">
             Link in bio examples

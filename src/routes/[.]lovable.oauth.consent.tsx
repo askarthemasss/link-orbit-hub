@@ -38,7 +38,7 @@ export const Route = createFileRoute("/.lovable/oauth/consent")({
     if (immediate && !data?.client) throw redirect({ href: immediate });
     return data;
   },
-  head: () => ({ meta: [{ title: "Authorize app — Novanodes" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Authorize app — LTReee" }, { name: "robots", content: "noindex" }] }),
   component: Consent,
   errorComponent: ({ error }) => (
     <main className="flex min-h-screen items-center justify-center px-5 text-center">
@@ -79,9 +79,9 @@ function Consent() {
   return (
     <main className="flex min-h-screen items-center justify-center px-5 py-16">
       <div className="w-full max-w-sm rounded-2xl glass p-6 sm:p-8">
-        <h1 className="font-display text-xl font-semibold">Connect {clientName} to Novanodes</h1>
+        <h1 className="font-display text-xl font-semibold">Connect {clientName} to LTReee</h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          {clientName} will be able to read and edit your Novanodes profile and links, acting as you. You can
+          {clientName} will be able to read and edit your LTReee profile and links, acting as you. You can
           disconnect it at any time from the app you're connecting.
         </p>
         {error ? (

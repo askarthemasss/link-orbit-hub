@@ -4,7 +4,7 @@ import { currentProfile, errorResult, jsonResult, notAuthed } from "./shared";
 
 export default defineTool({
   name: "update_profile",
-  title: "Update my Novanodes profile",
+  title: "Update my LTReee profile",
   description: "Update the signed-in user's display name, bio, location, website URL or published state. Only provided fields change.",
   inputSchema: {
     display_name: z.string().trim().max(60).optional().describe("Public display name."),
@@ -17,7 +17,7 @@ export default defineTool({
   handler: async (input, ctx) => {
     if (!ctx.isAuthenticated()) return notAuthed;
     const { supabase, profile } = await currentProfile(ctx);
-    if (!profile) return errorResult("No profile yet — claim a username in the Novanodes dashboard first.");
+    if (!profile) return errorResult("No profile yet — claim a username in the LTReee dashboard first.");
     const patch: {
       display_name?: string;
       bio?: string;

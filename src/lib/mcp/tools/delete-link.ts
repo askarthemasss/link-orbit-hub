@@ -5,13 +5,13 @@ import { currentProfile, errorResult, jsonResult, notAuthed } from "./shared";
 export default defineTool({
   name: "delete_link",
   title: "Delete a link",
-  description: "Permanently remove one of the signed-in user's links from their Novanodes page.",
+  description: "Permanently remove one of the signed-in user's links from their LTReee page.",
   inputSchema: { id: z.string().uuid().describe("Link id from list_links.") },
   annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false },
   handler: async ({ id }, ctx) => {
     if (!ctx.isAuthenticated()) return notAuthed;
     const { supabase, profile } = await currentProfile(ctx);
-    if (!profile) return errorResult("No profile yet — claim a username in the Novanodes dashboard first.");
+    if (!profile) return errorResult("No profile yet — claim a username in the LTReee dashboard first.");
     const { data, error } = await supabase
       .from("links")
       .delete()
