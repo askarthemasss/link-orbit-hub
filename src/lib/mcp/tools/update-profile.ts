@@ -1,5 +1,6 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
+import { normalizeUrl } from "@/lib/validation";
 import { currentProfile, errorResult, jsonResult, notAuthed } from "./shared";
 
 export default defineTool({
@@ -28,7 +29,15 @@ export default defineTool({
     if (input.display_name !== undefined) patch.display_name = input.display_name;
     if (input.bio !== undefined) patch.bio = input.bio;
     if (input.location !== undefined) patch.location = input.location;
-    if (input.website_url !== undefined) patch.website_url = input.website_url;
+    if (input.website_url !== undefined) {
+      if (input.website_url === null) {
+        patch.website_url = null;
+      } else {
+        const normalized = normalizeUrl(input.website_url);
+        if (!normalized) return errorResult("Website URL must be a valid http(s) address.");
+        patch.website_url = normalized;
+      }
+    }
     if (input.is_published !== undefined) patch.is_published = input.is_published;
     if (Object.keys(patch).length === 0) return errorResult("Provide at least one field to update.");
     const { data, error } = await supabase.from("profiles").update(patch).eq("id", profile.id).select().single();

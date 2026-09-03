@@ -119,6 +119,42 @@ export type Database = {
         }
         Relationships: []
       }
+      public_contacts: {
+        Row: {
+          email: string | null
+          phone: string | null
+          profile_id: string
+          updated_at: string
+        }
+        Insert: {
+          email?: string | null
+          phone?: string | null
+          profile_id: string
+          updated_at?: string
+        }
+        Update: {
+          email?: string | null
+          phone?: string | null
+          profile_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_contacts_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_contacts_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       public_profiles: {
@@ -134,32 +170,6 @@ export type Database = {
           user_id: string | null
           username: string | null
           website_url: string | null
-        }
-        Insert: {
-          avatar_url?: string | null
-          bio?: string | null
-          display_name?: string | null
-          email?: never
-          id?: string | null
-          is_published?: boolean | null
-          location?: string | null
-          phone?: never
-          user_id?: string | null
-          username?: string | null
-          website_url?: string | null
-        }
-        Update: {
-          avatar_url?: string | null
-          bio?: string | null
-          display_name?: string | null
-          email?: never
-          id?: string | null
-          is_published?: boolean | null
-          location?: string | null
-          phone?: never
-          user_id?: string | null
-          username?: string | null
-          website_url?: string | null
         }
         Relationships: []
       }
