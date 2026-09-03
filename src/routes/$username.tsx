@@ -13,21 +13,21 @@ export const Route = createFileRoute("/$username")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Page not found — LinkOrbit" },
+          { title: "Page not found — Novanodes" },
           { name: "robots", content: "noindex" },
         ],
       };
     }
     const { profile } = loaderData;
     const name = profile.display_name || `@${profile.username}`;
-    const description = profile.bio || `All of ${name}'s links in one place, on LinkOrbit.`;
+    const description = profile.bio || `All of ${name}'s links in one place, on Novanodes.`;
     const url = profileUrl(profile.username);
     const sameAs = (profile.links ?? []).map((link) => link.url).filter(Boolean);
     return {
       meta: [
-        { title: `${name} — LinkOrbit` },
+        { title: `${name} — Novanodes` },
         { name: "description", content: description },
-        { property: "og:title", content: `${name} — LinkOrbit` },
+        { property: "og:title", content: `${name} — Novanodes` },
         { property: "og:description", content: description },
         { property: "og:type", content: "profile" },
         { property: "og:url", content: url },
@@ -83,7 +83,7 @@ function ProfileMissing() {
             to="/"
             className="inline-flex items-center justify-center rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary"
           >
-            Create your LinkOrbit
+            Create your Novanodes
           </Link>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Check, Copy, Bot, Terminal, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,22 +28,15 @@ function normalizeAppSlug(name: string): string {
 
 export const Route = createFileRoute("/connect")({
   head: () => ({
-    meta: [
-      { title: "Connect an AI assistant — LinkOrbit" },
-      {
-        name: "description",
-        content: "Connect ChatGPT, Claude, or another AI assistant to your LinkOrbit account via MCP.",
-      },
-      { property: "og:title", content: "Connect an AI assistant — LinkOrbit" },
-      {
-        property: "og:description",
-        content: "Connect ChatGPT, Claude, or another AI assistant to your LinkOrbit account via MCP.",
-      },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ name: "robots", content: "noindex" }],
   }),
-  component: ConnectPage,
+  component: DisabledRedirect,
 });
+
+// AI assistant connections are temporarily disabled — send visitors home.
+function DisabledRedirect() {
+  return <Navigate to="/" replace />;
+}
 
 function ConnectPage() {
   const [mcpUrl, setMcpUrl] = useState("");
@@ -54,7 +47,7 @@ function ConnectPage() {
     setMcpUrl(new URL("/mcp", window.location.origin).toString());
   }, []);
 
-  const appSlug = useMemo(() => normalizeAppSlug("LinkOrbit"), []);
+  const appSlug = useMemo(() => normalizeAppSlug("Novanodes"), []);
 
   async function copyUrl() {
     if (!mcpUrl) return;
@@ -72,7 +65,7 @@ function ConnectPage() {
   const claudePrefilledUrl = useMemo(() => {
     const url = new URL("https://claude.ai/customize/connectors");
     url.searchParams.set("modal", "add-custom-connector");
-    url.searchParams.set("connectorName", "LinkOrbit");
+    url.searchParams.set("connectorName", "Novanodes");
     url.searchParams.set("connectorUrl", mcpUrl || "");
     return url.toString();
   }, [mcpUrl]);
@@ -89,7 +82,7 @@ function ConnectPage() {
           <span className="grid size-8 place-items-center rounded-full border border-primary/40 text-primary">
             <span className="size-2 rounded-full bg-primary" />
           </span>
-          LinkOrbit
+          Novanodes
         </Link>
         <nav className="flex items-center gap-2">
           <ThemeToggle />
@@ -106,7 +99,7 @@ function ConnectPage() {
         <div className="text-center">
           <h1 className="font-display text-3xl font-bold sm:text-4xl">Connect an AI assistant</h1>
           <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
-            Use ChatGPT, Claude, or Claude Code to read and update your LinkOrbit profile and links through
+            Use ChatGPT, Claude, or Claude Code to read and update your Novanodes profile and links through
             a secure connection.
           </p>
         </div>
@@ -205,13 +198,13 @@ function ConnectPage() {
                   .
                 </li>
                 <li>
-                  Name the connector <strong>LinkOrbit</strong> and paste the MCP URL above into the URL field.
+                  Name the connector <strong>Novanodes</strong> and paste the MCP URL above into the URL field.
                 </li>
                 <li>
                   Review the details, check "I understand and want to continue", then click{" "}
                   <strong>Create</strong>.
                 </li>
-                <li>Enable the app from the chat composer, then ask ChatGPT to use LinkOrbit.</li>
+                <li>Enable the app from the chat composer, then ask ChatGPT to use Novanodes.</li>
               </ol>
             )}
 
@@ -227,23 +220,23 @@ function ConnectPage() {
                   >
                     Claude's custom connector dialog
                   </a>{" "}
-                  with LinkOrbit and the MCP URL prefilled.
+                  with Novanodes and the MCP URL prefilled.
                 </li>
                 <li>
                   Review the details and click <strong>Add</strong>.
                 </li>
                 <li>
                   If the prefilled form doesn't open, go to Claude's Connectors page, choose{" "}
-                  <strong>Add custom connector</strong>, name it <strong>LinkOrbit</strong>, and paste the
+                  <strong>Add custom connector</strong>, name it <strong>Novanodes</strong>, and paste the
                   MCP URL above.
                 </li>
-                <li>Enable the connector from the chat composer, then ask Claude to use LinkOrbit.</li>
+                <li>Enable the connector from the chat composer, then ask Claude to use Novanodes.</li>
               </ol>
             )}
 
             {activeClient === "claude-code" && (
               <div className="space-y-4 text-sm leading-relaxed text-foreground">
-                <p>Run this one-line command in your terminal. It connects Claude Code to LinkOrbit from any directory.</p>
+                <p>Run this one-line command in your terminal. It connects Claude Code to Novanodes from any directory.</p>
                 <div className="relative">
                   <pre className="overflow-x-auto rounded-lg border border-input bg-background p-4 font-mono text-xs sm:text-sm">
                     <code>{claudeCodeCommand}</code>
@@ -258,9 +251,9 @@ function ConnectPage() {
                 </div>
                 <ol className="list-decimal space-y-3 pl-5">
                   <li>Paste the command into a terminal and press Enter.</li>
-                  <li>Start Claude Code and run <code>/mcp</code> to confirm LinkOrbit is connected.</li>
-                  <li>If the app asks you to sign in, approve it with your LinkOrbit account.</li>
-                  <li>Ask Claude Code to use LinkOrbit.</li>
+                  <li>Start Claude Code and run <code>/mcp</code> to confirm Novanodes is connected.</li>
+                  <li>If the app asks you to sign in, approve it with your Novanodes account.</li>
+                  <li>Ask Claude Code to use Novanodes.</li>
                 </ol>
               </div>
             )}
@@ -269,9 +262,9 @@ function ConnectPage() {
               <ol className="list-decimal space-y-3 pl-5 text-sm leading-relaxed text-foreground">
                 <li>Open your AI client's MCP server or custom connector settings.</li>
                 <li>Create a new remote MCP server connection.</li>
-                <li>Name it <strong>LinkOrbit</strong> and paste the MCP URL above.</li>
+                <li>Name it <strong>Novanodes</strong> and paste the MCP URL above.</li>
                 <li>Complete any sign-in or authorization prompts.</li>
-                <li>Enable the connection, then ask the assistant to use LinkOrbit.</li>
+                <li>Enable the connection, then ask the assistant to use Novanodes.</li>
               </ol>
             )}
           </div>
@@ -282,20 +275,20 @@ function ConnectPage() {
             Refresh after the app changes
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Connected assistants cache the tool list. After LinkOrbit ships an update, refresh the connection so the assistant sees the latest tools.
+            Connected assistants cache the tool list. After Novanodes ships an update, refresh the connection so the assistant sees the latest tools.
           </p>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl glass p-5">
               <h3 className="font-display text-base font-semibold">ChatGPT</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Open the Plugins page, select LinkOrbit, and click <strong>Refresh</strong> under Information.
+                Open the Plugins page, select Novanodes, and click <strong>Refresh</strong> under Information.
                 If the URL changed, delete the connector and reconnect with the latest URL above.
               </p>
             </div>
             <div className="rounded-2xl glass p-5">
               <h3 className="font-display text-base font-semibold">Claude</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Open the Connectors page, select LinkOrbit, and refresh or update its tools. If the URL changed,
+                Open the Connectors page, select Novanodes, and refresh or update its tools. If the URL changed,
                 remove the connector and reconnect with the latest URL above.
               </p>
             </div>
@@ -310,7 +303,7 @@ function ConnectPage() {
             <div className="rounded-2xl glass p-5">
               <h3 className="font-display text-base font-semibold">Other clients</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Open the MCP server or connector settings, select LinkOrbit, and refresh, reload, or reconnect. If the URL changed,
+                Open the MCP server or connector settings, select Novanodes, and refresh, reload, or reconnect. If the URL changed,
                 paste the latest URL above and start a new chat.
               </p>
             </div>
@@ -319,7 +312,7 @@ function ConnectPage() {
       </main>
 
       <footer className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-8 text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} LinkOrbit</p>
+        <p>© {new Date().getFullYear()} Novanodes</p>
         <Link to="/" className="hover:text-foreground">
           Back to home
         </Link>

@@ -2,7 +2,7 @@ import type { ToolContext } from "@lovable.dev/mcp-js";
 import { supabaseForUser } from "../supabase";
 
 export const notAuthed = {
-  content: [{ type: "text" as const, text: "Not authenticated. Connect your LinkOrbit account first." }],
+  content: [{ type: "text" as const, text: "Not authenticated. Connect your Novanodes account first." }],
   isError: true,
 };
 

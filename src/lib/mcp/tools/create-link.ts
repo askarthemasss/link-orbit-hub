@@ -7,7 +7,7 @@ import { currentProfile, errorResult, jsonResult, notAuthed } from "./shared";
 export default defineTool({
   name: "create_link",
   title: "Add a link",
-  description: "Add a new link to the signed-in user's LinkOrbit page. The platform icon is detected from the URL.",
+  description: "Add a new link to the signed-in user's Novanodes page. The platform icon is detected from the URL.",
   inputSchema: {
     title: z.string().trim().min(1).max(60).describe("Label shown on the button."),
     url: z.string().trim().min(1).describe("Destination URL (http/https)."),
@@ -18,7 +18,7 @@ export default defineTool({
     const normalized = normalizeUrl(url);
     if (!normalized) return errorResult("Enter a valid http:// or https:// URL.");
     const { supabase, profile } = await currentProfile(ctx);
-    if (!profile) return errorResult("No profile yet — claim a username in the LinkOrbit dashboard first.");
+    if (!profile) return errorResult("No profile yet — claim a username in the Novanodes dashboard first.");
     const { count } = await supabase
       .from("links")
       .select("id", { count: "exact", head: true })

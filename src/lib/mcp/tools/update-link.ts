@@ -19,7 +19,7 @@ export default defineTool({
   handler: async ({ id, url, ...rest }, ctx) => {
     if (!ctx.isAuthenticated()) return notAuthed;
     const { supabase, profile } = await currentProfile(ctx);
-    if (!profile) return errorResult("No profile yet — claim a username in the LinkOrbit dashboard first.");
+    if (!profile) return errorResult("No profile yet — claim a username in the Novanodes dashboard first.");
     const patch: {
       title?: string;
       is_active?: boolean;
