@@ -119,19 +119,22 @@ export function LinkManager({
                   setDragIndex(null);
                 }}
                 onDragEnd={() => setDragIndex(null)}
-                className={`flex items-center gap-3 rounded-xl border border-border bg-card/60 px-3 py-3 transition-colors ${
+                className={`flex flex-wrap items-center gap-x-3 gap-y-2 rounded-xl border border-border bg-card/60 px-3 py-3 transition-colors ${
                   dragIndex === index ? "opacity-60" : ""
                 } ${link.is_active ? "" : "opacity-60"}`}
               >
-                <GripVertical className="hidden size-4 shrink-0 cursor-grab text-muted-foreground sm:block" aria-hidden="true" />
-                <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-secondary/70 text-primary">
-                  <Icon className="size-4" aria-hidden="true" />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium">{link.title}</p>
-                  <p className="truncate text-xs text-muted-foreground">{prettyUrl(link.url)}</p>
+                <div className="flex w-full min-w-0 items-center gap-3 sm:w-auto sm:flex-1">
+                  <GripVertical className="hidden size-4 shrink-0 cursor-grab text-muted-foreground sm:block" aria-hidden="true" />
+                  <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-secondary/70 text-primary">
+                    <Icon className="size-4" aria-hidden="true" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-medium">{link.title}</p>
+                    <p className="truncate text-xs text-muted-foreground">{prettyUrl(link.url)}</p>
+                  </div>
                 </div>
-                <div className="flex shrink-0 items-center gap-0.5">
+                <div className="flex w-full shrink-0 items-center justify-end gap-0.5 sm:w-auto">
+
                   <Button
                     size="icon"
                     variant="ghost"
