@@ -204,6 +204,10 @@
   opacity: 0.18;
 }
 
+.embed-frame .star-field {
+  display: none !important;
+}
+
 .dark .star-field {
   opacity: 1;
 }
