@@ -3,7 +3,7 @@ const BLOCKED_PROTOCOLS = ["javascript:", "data:", "file:", "vbscript:", "blob:"
 export const RESERVED_USERNAMES = [
   "login","signup","dashboard","settings","api","admin","auth","about","pricing",
   "terms","privacy","help","support","explore","new","me","root","static","assets",
-  "public","robots","sitemap",
+  "public","robots","sitemap","embed",
 ];
 
 export function normalizeUsername(value: string): string {
