@@ -8,7 +8,7 @@ import {
 } from "@/components/EmbedLinks";
 import { normalizeUrl } from "@/lib/validation";
 
-type EmbedSearch = { layout: EmbedLayout; theme: EmbedTheme; links: string };
+type EmbedSearch = { layout: EmbedLayout; theme: EmbedTheme; links?: string };
 
 const LAYOUTS: EmbedLayout[] = ["vertical", "horizontal", "grid", "icons"];
 const THEMES: EmbedTheme[] = ["dark", "light", "transparent"];
@@ -21,7 +21,9 @@ export const Route = createFileRoute("/embed/$username")({
     theme: THEMES.includes(search["theme"] as EmbedTheme)
       ? (search["theme"] as EmbedTheme)
       : "dark",
-    links: typeof search["links"] === "string" ? (search["links"] as string) : "",
+    ...(typeof search["links"] === "string" && search["links"]
+      ? { links: search["links"] as string }
+      : {}),
   }),
   loaderDeps: ({ search }) => ({ links: search.links }),
   loader: async ({ params }) => {
@@ -47,7 +49,7 @@ function EmbedPage() {
   const { profile } = Route.useLoaderData();
   const { layout, theme, links: selected } = Route.useSearch();
 
-  const chosen = selected.split(",").map((s) => s.trim()).filter(Boolean);
+  const chosen = (selected ?? "").split(",").map((s) => s.trim()).filter(Boolean);
   const links = (profile.links ?? [])
     .filter((link) => (chosen.length ? chosen.includes(link.id) : true))
     .filter((link) => Boolean(normalizeUrl(link.url)));
