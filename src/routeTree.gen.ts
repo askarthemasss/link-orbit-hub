@@ -21,6 +21,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedEmbedRouteImport } from './routes/_authenticated/embed'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as EmbedUsernameRouteImport } from './routes/embed/$username'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -88,6 +89,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEmbedRoute = AuthenticatedEmbedRouteImport.update({
+  id: '/embed',
+  path: '/embed',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -127,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/embed': typeof AuthenticatedEmbedRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/embed/$username': typeof EmbedUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/embed': typeof AuthenticatedEmbedRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/embed/$username': typeof EmbedUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -165,6 +173,7 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/embed': typeof AuthenticatedEmbedRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/embed/$username': typeof EmbedUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -185,6 +194,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/dashboard'
+    | '/embed'
     | '/settings'
     | '/embed/$username'
     | '/.lovable/oauth/consent'
@@ -203,6 +213,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/dashboard'
+    | '/embed'
     | '/settings'
     | '/embed/$username'
     | '/.lovable/oauth/consent'
@@ -222,6 +233,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/_authenticated/dashboard'
+    | '/_authenticated/embed'
     | '/_authenticated/settings'
     | '/embed/$username'
     | '/.lovable/oauth/consent'
@@ -333,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/embed': {
+      id: '/_authenticated/embed'
+      path: '/embed'
+      fullPath: '/embed'
+      preLoaderRoute: typeof AuthenticatedEmbedRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings': {
       id: '/_authenticated/settings'
       path: '/settings'
@@ -373,11 +392,13 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEmbedRoute: typeof AuthenticatedEmbedRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEmbedRoute: AuthenticatedEmbedRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
 }
 
