@@ -50,9 +50,12 @@ function EmbedPage() {
   const { layout, theme, links: selected } = Route.useSearch();
 
   const chosen = (selected ?? "").split(",").map((s) => s.trim()).filter(Boolean);
-  const links = (profile.links ?? [])
-    .filter((link) => (chosen.length ? chosen.includes(link.id) : true))
-    .filter((link) => Boolean(normalizeUrl(link.url)));
+  const available = (profile.links ?? []).filter((link) => Boolean(normalizeUrl(link.url)));
+  const links = chosen.length
+    ? (chosen
+        .map((id) => available.find((link) => link.id === id))
+        .filter(Boolean) as typeof available)
+    : available;
 
   useEffect(() => {
     const html = document.documentElement;
