@@ -99,7 +99,7 @@ export function EmbedLinks({
       )}
 
       {layout === "grid" && (
-        <ul className="grid grid-cols-3 gap-2">
+        <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {links.map((link) => {
             const Icon = platformIcon(link.platform);
             return (
