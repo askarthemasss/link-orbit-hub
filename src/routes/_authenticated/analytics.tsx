@@ -57,9 +57,10 @@ function AnalyticsContent() {
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {[
           { label: "Total views", value: stats.total },
+          { label: "Link clicks", value: stats.totalClicks },
           { label: "Last 30 days", value: stats.last30Days },
           { label: "Last 7 days", value: stats.last7Days },
         ].map((s) => (
@@ -97,6 +98,31 @@ function AnalyticsContent() {
             <Bar key={t.theme} label={t.theme} count={t.count} max={maxTheme} />
           ))}
         </div>
+      </div>
+
+      <div className="rounded-xl border border-border p-4">
+        <h2 className="mb-3 text-sm font-medium">Top links by clicks</h2>
+        {stats.topLinks.length === 0 ? (
+          <p className="text-sm text-muted-foreground">
+            No clicks yet — clicks show up here once visitors tap links inside your embed.
+          </p>
+        ) : (
+          <ul className="divide-y divide-border">
+            {stats.topLinks.map((link) => (
+              <li key={link.linkId} className="flex items-center justify-between gap-4 py-2.5">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-medium">{link.title}</p>
+                  {link.url && (
+                    <p className="truncate text-xs text-muted-foreground">{link.url}</p>
+                  )}
+                </div>
+                <span className="shrink-0 rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium">
+                  {link.clicks} {link.clicks === 1 ? "click" : "clicks"}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
