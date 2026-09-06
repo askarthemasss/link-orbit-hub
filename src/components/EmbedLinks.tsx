@@ -65,6 +65,7 @@ export function EmbedLinks({
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
+                  onClick={() => onLinkClick?.(link)}
                   className={`${base} w-full px-3 py-3`}
                 >
                   <Icon className="size-4 shrink-0 text-primary" aria-hidden="true" />
@@ -89,6 +90,7 @@ export function EmbedLinks({
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
+                  onClick={() => onLinkClick?.(link)}
                   className={`${base} px-3 py-2`}
                 >
                   <Icon className="size-4 text-primary" aria-hidden="true" />
@@ -110,6 +112,7 @@ export function EmbedLinks({
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
+                  onClick={() => onLinkClick?.(link)}
                   className={`${base} aspect-square w-full flex-col justify-center gap-1.5 p-2 text-center`}
                 >
                   <Icon className="size-5 text-primary" aria-hidden="true" />
@@ -131,6 +134,7 @@ export function EmbedLinks({
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
+                  onClick={() => onLinkClick?.(link)}
                   aria-label={link.title}
                   title={link.title}
                   className={`${base} size-11 justify-center p-0`}
