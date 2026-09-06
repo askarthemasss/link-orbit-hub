@@ -61,12 +61,41 @@ export const getEmbedStats = createServerFn({ method: "GET" })
       if (dailyMap.has(d)) dailyMap.set(d, (dailyMap.get(d) ?? 0) + 1);
     }
 
+    // Click stats: join clicks to link titles/urls.
+    const { data: clickRows } = await context.supabase
+      .from("embed_clicks" as never)
+      .select("link_id")
+      .eq("profile_id", profile.id);
+    const clicks = (clickRows ?? []) as unknown as { link_id: string }[];
+
+    const { data: linkRows } = await context.supabase
+      .from("links")
+      .select("id, title, url")
+      .eq("profile_id", profile.id);
+    const linkMeta = new Map(
+      (linkRows ?? []).map((l) => [l.id, { title: l.title, url: l.url }]),
+    );
+
+    const clickMap = new Map<string, number>();
+    for (const c of clicks) clickMap.set(c.link_id, (clickMap.get(c.link_id) ?? 0) + 1);
+    const topLinks = [...clickMap.entries()]
+      .map(([linkId, clicks]) => ({
+        linkId,
+        title: linkMeta.get(linkId)?.title ?? "Deleted link",
+        url: linkMeta.get(linkId)?.url ?? "",
+        clicks,
+      }))
+      .sort((a, b) => b.clicks - a.clicks)
+      .slice(0, 10);
+
     return {
       total: views.length,
       last30Days: count((v) => now - new Date(v.created_at).getTime() < 30 * day),
       last7Days: count((v) => now - new Date(v.created_at).getTime() < 7 * day),
+      totalClicks: clicks.length,
       byLayout: group("layout"),
       byTheme: group("theme"),
       daily: [...dailyMap.entries()].map(([date, count]) => ({ date, count })),
+      topLinks,
     };
   });
