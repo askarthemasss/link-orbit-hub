@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
   { to: "/dashboard", label: "Editor" },
+  { to: "/private", label: "Private" },
   { to: "/embed", label: "Embed" },
   { to: "/settings", label: "Settings" },
 ] as const;

@@ -22,6 +22,7 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedEmbedRouteImport } from './routes/_authenticated/embed'
+import { Route as AuthenticatedPrivateRouteImport } from './routes/_authenticated/private'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as EmbedUsernameRouteImport } from './routes/embed/$username'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -94,6 +95,11 @@ const AuthenticatedEmbedRoute = AuthenticatedEmbedRouteImport.update({
   path: '/embed',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPrivateRoute = AuthenticatedPrivateRouteImport.update({
+  id: '/private',
+  path: '/private',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -134,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/embed': typeof AuthenticatedEmbedRoute
+  '/private': typeof AuthenticatedPrivateRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/embed/$username': typeof EmbedUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -153,6 +160,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/embed': typeof AuthenticatedEmbedRoute
+  '/private': typeof AuthenticatedPrivateRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/embed/$username': typeof EmbedUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -174,6 +182,7 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/embed': typeof AuthenticatedEmbedRoute
+  '/_authenticated/private': typeof AuthenticatedPrivateRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/embed/$username': typeof EmbedUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -195,6 +204,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/dashboard'
     | '/embed'
+    | '/private'
     | '/settings'
     | '/embed/$username'
     | '/.lovable/oauth/consent'
@@ -214,6 +224,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/dashboard'
     | '/embed'
+    | '/private'
     | '/settings'
     | '/embed/$username'
     | '/.lovable/oauth/consent'
@@ -234,6 +245,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/_authenticated/dashboard'
     | '/_authenticated/embed'
+    | '/_authenticated/private'
     | '/_authenticated/settings'
     | '/embed/$username'
     | '/.lovable/oauth/consent'
@@ -352,6 +364,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedEmbedRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/private': {
+      id: '/_authenticated/private'
+      path: '/private'
+      fullPath: '/private'
+      preLoaderRoute: typeof AuthenticatedPrivateRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings': {
       id: '/_authenticated/settings'
       path: '/settings'
@@ -393,12 +412,14 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedEmbedRoute: typeof AuthenticatedEmbedRoute
+  AuthenticatedPrivateRoute: typeof AuthenticatedPrivateRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedEmbedRoute: AuthenticatedEmbedRoute,
+  AuthenticatedPrivateRoute: AuthenticatedPrivateRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
 }
 

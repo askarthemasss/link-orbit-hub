@@ -176,7 +176,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
     }
   }
 
-  const activeLinks = (linksQuery.data ?? []).filter((l) => l.is_active);
+  const publicLinks = (linksQuery.data ?? []).filter((l) => !l.is_private);
+  const activeLinks = publicLinks.filter((l) => l.is_active);
 
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
@@ -226,7 +227,7 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
         />
 
         <LinkManager
-          links={linksQuery.data ?? []}
+          links={publicLinks}
           loading={linksQuery.isLoading}
           onCreate={async (value) => {
             await links.create.mutateAsync({

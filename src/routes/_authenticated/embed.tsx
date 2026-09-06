@@ -42,7 +42,7 @@ function EmbedBuilderPage() {
   const profile = profileQuery.data;
   const linksQuery = useLinks(profile?.id);
   const activeLinks = useMemo(
-    () => (linksQuery.data ?? []).filter((l) => l.is_active),
+    () => (linksQuery.data ?? []).filter((l) => l.is_active && !l.is_private),
     [linksQuery.data],
   );
 

@@ -20,6 +20,7 @@ export type Database = {
           display_order: number
           id: string
           is_active: boolean
+          is_private: boolean
           platform: string
           profile_id: string
           title: string
@@ -31,6 +32,7 @@ export type Database = {
           display_order?: number
           id?: string
           is_active?: boolean
+          is_private?: boolean
           platform?: string
           profile_id: string
           title: string
@@ -42,6 +44,7 @@ export type Database = {
           display_order?: number
           id?: string
           is_active?: boolean
+          is_private?: boolean
           platform?: string
           profile_id?: string
           title?: string

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowDown, ArrowUp, Check, Copy, GripVertical, Pencil, Plus, Trash2 } from "lucide-react";
+import { ArrowDown, ArrowUp, Check, Copy, GripVertical, Lock, Pencil, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -169,6 +169,17 @@ export function LinkManager({
                     ) : (
                       <Copy className="size-4" aria-hidden="true" />
                     )}
+                  </Button>
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    aria-label={`Make ${link.title} private`}
+                    onClick={async () => {
+                      await onUpdate(link.id, { is_private: true });
+                      toast.success("Moved to your private links");
+                    }}
+                  >
+                    <Lock className="size-4" aria-hidden="true" />
                   </Button>
                   <Button
                     size="icon"

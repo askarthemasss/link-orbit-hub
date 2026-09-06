@@ -86,7 +86,7 @@ export function useLinkMutations(profileId: string | undefined) {
   const invalidate = () => qc.invalidateQueries({ queryKey: ["links", profileId] });
 
   const create = useMutation({
-    mutationFn: async (input: { title: string; url: string; platform: string; display_order: number }) => {
+    mutationFn: async (input: { title: string; url: string; platform: string; display_order: number; is_private?: boolean }) => {
       const { error } = await supabase.from("links").insert({ ...input, profile_id: profileId! });
       if (error) throw error;
     },
