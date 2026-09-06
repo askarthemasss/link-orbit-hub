@@ -32,10 +32,12 @@ export function EmbedLinks({
   links,
   layout,
   theme,
+  onLinkClick,
 }: {
   links: EmbedLink[];
   layout: EmbedLayout;
   theme: EmbedTheme;
+  onLinkClick?: (link: EmbedLink) => void;
 }) {
   const surface =
     theme === "transparent" ? "bg-transparent" : "bg-background";
