@@ -57,9 +57,10 @@ function AnalyticsContent() {
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {[
           { label: "Total views", value: stats.total },
+          { label: "Link clicks", value: stats.totalClicks },
           { label: "Last 30 days", value: stats.last30Days },
           { label: "Last 7 days", value: stats.last7Days },
         ].map((s) => (
