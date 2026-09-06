@@ -57,6 +57,17 @@ function EmbedPage() {
         .filter(Boolean) as typeof available)
     : available;
 
+  // Report this embed view (fire-and-forget).
+  useEffect(() => {
+    void fetch("/api/public/embed-track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: profile.username, layout, theme }),
+      keepalive: true,
+    }).catch(() => undefined);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     const html = document.documentElement;
     html.classList.add("embed-frame");
