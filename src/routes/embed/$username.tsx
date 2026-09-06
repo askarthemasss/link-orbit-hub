@@ -86,7 +86,24 @@ function EmbedPage() {
     <div className={theme === "light" ? "light" : "dark"}>
       <main className={`min-h-screen w-full ${theme === "transparent" ? "" : "bg-background"}`}>
         <h1 className="sr-only">{profile.display_name || profile.username} links</h1>
-        <EmbedLinks links={links} layout={layout} theme={theme} />
+        <EmbedLinks
+          links={links}
+          layout={layout}
+          theme={theme}
+          onLinkClick={(link) => {
+            void fetch("/api/public/embed-click", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                username: profile.username,
+                linkId: link.id,
+                layout,
+                theme,
+              }),
+              keepalive: true,
+            }).catch(() => undefined);
+          }}
+        />
       </main>
     </div>
   );

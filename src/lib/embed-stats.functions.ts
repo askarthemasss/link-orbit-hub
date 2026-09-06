@@ -5,9 +5,11 @@ export type EmbedStats = {
   total: number;
   last30Days: number;
   last7Days: number;
+  totalClicks: number;
   byLayout: { layout: string; count: number }[];
   byTheme: { theme: string; count: number }[];
   daily: { date: string; count: number }[];
+  topLinks: { linkId: string; title: string; url: string; clicks: number }[];
 };
 
 export const getEmbedStats = createServerFn({ method: "GET" })
@@ -19,7 +21,10 @@ export const getEmbedStats = createServerFn({ method: "GET" })
       .eq("user_id", context.userId)
       .maybeSingle();
     if (!profile) {
-      return { total: 0, last30Days: 0, last7Days: 0, byLayout: [], byTheme: [], daily: [] };
+      return {
+        total: 0, last30Days: 0, last7Days: 0, totalClicks: 0,
+        byLayout: [], byTheme: [], daily: [], topLinks: [],
+      };
     }
 
     const { data: rows } = await context.supabase
