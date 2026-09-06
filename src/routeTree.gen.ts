@@ -27,6 +27,7 @@ import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticat
 import { Route as EmbedUsernameRouteImport } from './routes/embed/$username'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as ApiPublicEmbedTrackRouteImport } from './routes/api/public/embed-track'
 import { Route as ApiPublicAvatarSplatRouteImport } from './routes/api/public/avatar/$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -121,6 +122,11 @@ const Char91DotmcpChar93InvokeToolToolRoute =
     path: '/.mcp/invoke-tool/$tool',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicEmbedTrackRoute = ApiPublicEmbedTrackRouteImport.update({
+  id: '/api/public/embed-track',
+  path: '/api/public/embed-track',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicAvatarSplatRoute = ApiPublicAvatarSplatRouteImport.update({
   id: '/api/public/avatar/$',
   path: '/api/public/avatar/$',
@@ -145,6 +151,7 @@ export interface FileRoutesByFullPath {
   '/embed/$username': typeof EmbedUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/public/embed-track': typeof ApiPublicEmbedTrackRoute
   '/api/public/avatar/$': typeof ApiPublicAvatarSplatRoute
 }
 export interface FileRoutesByTo {
@@ -165,6 +172,7 @@ export interface FileRoutesByTo {
   '/embed/$username': typeof EmbedUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/public/embed-track': typeof ApiPublicEmbedTrackRoute
   '/api/public/avatar/$': typeof ApiPublicAvatarSplatRoute
 }
 export interface FileRoutesById {
@@ -187,6 +195,7 @@ export interface FileRoutesById {
   '/embed/$username': typeof EmbedUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/public/embed-track': typeof ApiPublicEmbedTrackRoute
   '/api/public/avatar/$': typeof ApiPublicAvatarSplatRoute
 }
 export interface FileRouteTypes {
@@ -209,6 +218,7 @@ export interface FileRouteTypes {
     | '/embed/$username'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/public/embed-track'
     | '/api/public/avatar/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -229,6 +239,7 @@ export interface FileRouteTypes {
     | '/embed/$username'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/public/embed-track'
     | '/api/public/avatar/$'
   id:
     | '__root__'
@@ -250,6 +261,7 @@ export interface FileRouteTypes {
     | '/embed/$username'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/public/embed-track'
     | '/api/public/avatar/$'
   fileRoutesById: FileRoutesById
 }
@@ -268,6 +280,7 @@ export interface RootRouteChildren {
   EmbedUsernameRoute: typeof EmbedUsernameRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
+  ApiPublicEmbedTrackRoute: typeof ApiPublicEmbedTrackRoute
   ApiPublicAvatarSplatRoute: typeof ApiPublicAvatarSplatRoute
 }
 
@@ -399,6 +412,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/embed-track': {
+      id: '/api/public/embed-track'
+      path: '/api/public/embed-track'
+      fullPath: '/api/public/embed-track'
+      preLoaderRoute: typeof ApiPublicEmbedTrackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/avatar/$': {
       id: '/api/public/avatar/$'
       path: '/api/public/avatar/$'
@@ -442,6 +462,7 @@ const rootRouteChildren: RootRouteChildren = {
   EmbedUsernameRoute: EmbedUsernameRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
+  ApiPublicEmbedTrackRoute: ApiPublicEmbedTrackRoute,
   ApiPublicAvatarSplatRoute: ApiPublicAvatarSplatRoute,
 }
 export const routeTree = rootRouteImport
