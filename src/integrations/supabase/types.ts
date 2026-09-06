@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      embed_views: {
+        Row: {
+          created_at: string
+          id: string
+          layout: string
+          profile_id: string
+          theme: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          layout: string
+          profile_id: string
+          theme: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          layout?: string
+          profile_id?: string
+          theme?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "embed_views_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "embed_views_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       links: {
         Row: {
           created_at: string
