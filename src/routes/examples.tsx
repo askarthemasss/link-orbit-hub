@@ -99,9 +99,22 @@ function ExamplesPage() {
             </Button>
           </div>
           <div className="flex justify-center">
-            <PhoneFrame>
-              <PublicProfileView profile={EXAMPLE_PROFILE} links={EXAMPLE_LINKS} compact />
-            </PhoneFrame>
+            {/* Demo links point at placeholder URLs — intercept anchor clicks so
+                visitors aren't redirected away from the example page. Copy
+                buttons stopPropagation themselves, so they still work. */}
+            <div
+              onClickCapture={(e) => {
+                const anchor = (e.target as HTMLElement).closest("a");
+                if (anchor) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }
+              }}
+            >
+              <PhoneFrame>
+                <PublicProfileView profile={EXAMPLE_PROFILE} links={EXAMPLE_LINKS} compact />
+              </PhoneFrame>
+            </div>
           </div>
         </section>
       </main>
