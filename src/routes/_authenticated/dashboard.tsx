@@ -18,8 +18,10 @@ import {
   useLinkMutations,
   useLinks,
   useProfile,
+  useSession,
   useUpdateProfile,
   type LinkRow,
+  type Profile,
 } from "@/hooks/useLTReee";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
