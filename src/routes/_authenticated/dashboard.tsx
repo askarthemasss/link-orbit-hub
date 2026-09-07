@@ -18,8 +18,10 @@ import {
   useLinkMutations,
   useLinks,
   useProfile,
+  useSession,
   useUpdateProfile,
   type LinkRow,
+  type Profile,
 } from "@/hooks/useLTReee";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -246,6 +248,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
           }}
           onReorder={(ordered: LinkRow[]) => links.reorder.mutate(ordered)}
         />
+
+        <AccountSettings profile={profile} />
       </div>
 
       <aside className="lg:sticky lg:top-24 lg:self-start">
@@ -264,5 +268,58 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
         />
       </aside>
     </div>
+  );
+}
+
+function AccountSettings({ profile }: { profile: Profile }) {
+  const session = useSession();
+  const updateProfile = useUpdateProfile();
+  const [username, setUsername] = useState<string | null>(null);
+  const [status, setStatus] = useState<UsernameStatus>("idle");
+
+  const value = username ?? profile.username;
+  const changed = value !== profile.username;
+
+  async function saveUsername() {
+    try {
+      await updateProfile.mutateAsync({ id: profile.id, username: value });
+      setUsername(null);
+      toast.success("Username updated");
+    } catch {
+      toast.error("That username isn't available.");
+    }
+  }
+
+  return (
+    <section
+      className="space-y-5 rounded-2xl glass p-5 sm:p-6"
+      aria-labelledby="account-heading"
+    >
+      <div className="border-b border-border pb-4">
+        <h2 id="account-heading" className="font-display text-lg font-semibold">
+          Account & settings
+        </h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Signed in as <span className="text-foreground">{session.data?.email ?? "—"}</span>
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <div>
+          <h3 className="text-sm font-semibold">Your link</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Changing your username changes your public address immediately.
+          </p>
+        </div>
+        <UsernameInput value={value} onChange={setUsername} onStatusChange={setStatus} />
+        <Button
+          onClick={() => void saveUsername()}
+          disabled={!changed || status !== "available" || updateProfile.isPending}
+        >
+          {updateProfile.isPending ? <Loader2 className="size-4 animate-spin" aria-hidden="true" /> : null}
+          Save username
+        </Button>
+      </div>
+    </section>
   );
 }
