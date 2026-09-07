@@ -230,6 +230,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
         <LinkManager
           links={publicLinks}
           loading={linksQuery.isLoading}
+          publicUrl={publicUrl}
+          publicUrlDisplay={publicUrlDisplay}
           onCreate={async (value) => {
             await links.create.mutateAsync({
               ...value,
