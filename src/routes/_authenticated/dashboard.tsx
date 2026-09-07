@@ -126,6 +126,7 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
   }, [copied]);
 
   const publicUrl = profileUrl(profile.username);
+  const publicUrlDisplay = profileUrlDisplay(profile.username);
 
   async function save(next: ProfileDraft) {
     setSaveState("saving");
