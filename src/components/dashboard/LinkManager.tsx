@@ -23,6 +23,8 @@ import type { LinkRow } from "@/hooks/useLTReee";
 export function LinkManager({
   links,
   loading,
+  publicUrl,
+  publicUrlDisplay,
   onCreate,
   onUpdate,
   onDelete,
@@ -30,6 +32,8 @@ export function LinkManager({
 }: {
   links: LinkRow[];
   loading: boolean;
+  publicUrl: string;
+  publicUrlDisplay: string;
   onCreate: (value: LinkFormValue) => Promise<void>;
   onUpdate: (id: string, value: Partial<LinkRow>) => Promise<void>;
   onDelete: (id: string) => Promise<void>;
@@ -40,6 +44,7 @@ export function LinkManager({
   const [deleting, setDeleting] = useState<LinkRow | null>(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [copiedProfile, setCopiedProfile] = useState(false);
 
   function move(from: number, to: number) {
     if (to < 0 || to >= links.length) return;
