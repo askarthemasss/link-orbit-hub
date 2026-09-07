@@ -6,11 +6,10 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
-  { to: "/dashboard", label: "Editor" },
+  { to: "/dashboard", label: "Dashboard" },
   { to: "/private", label: "Private" },
   { to: "/embed", label: "Embed" },
   { to: "/analytics", label: "Stats" },
-  { to: "/settings", label: "Settings" },
 ] as const;
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
