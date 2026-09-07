@@ -248,6 +248,8 @@ function Editor({ profile }: { profile: NonNullable<ReturnType<typeof useProfile
           }}
           onReorder={(ordered: LinkRow[]) => links.reorder.mutate(ordered)}
         />
+
+        <AccountSettings profile={profile} />
       </div>
 
       <aside className="lg:sticky lg:top-24 lg:self-start">
