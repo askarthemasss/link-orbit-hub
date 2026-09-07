@@ -23,6 +23,8 @@ import type { LinkRow } from "@/hooks/useLTReee";
 export function LinkManager({
   links,
   loading,
+  publicUrl,
+  publicUrlDisplay,
   onCreate,
   onUpdate,
   onDelete,
@@ -30,6 +32,8 @@ export function LinkManager({
 }: {
   links: LinkRow[];
   loading: boolean;
+  publicUrl: string;
+  publicUrlDisplay: string;
   onCreate: (value: LinkFormValue) => Promise<void>;
   onUpdate: (id: string, value: Partial<LinkRow>) => Promise<void>;
   onDelete: (id: string) => Promise<void>;
@@ -40,6 +44,7 @@ export function LinkManager({
   const [deleting, setDeleting] = useState<LinkRow | null>(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [copiedProfile, setCopiedProfile] = useState(false);
 
   function move(from: number, to: number) {
     if (to < 0 || to >= links.length) return;
@@ -61,6 +66,17 @@ export function LinkManager({
     }
   }
 
+  async function copyProfileLink() {
+    try {
+      await navigator.clipboard.writeText(publicUrl);
+      setCopiedProfile(true);
+      toast.success("LTReee link copied");
+      setTimeout(() => setCopiedProfile(false), 2000);
+    } catch {
+      toast.error("Could not copy link");
+    }
+  }
+
   return (
     <section className="rounded-2xl glass p-5 sm:p-6" aria-labelledby="links-heading">
       <div className="mb-5 flex items-center justify-between gap-3">
@@ -76,6 +92,26 @@ export function LinkManager({
         >
           <Plus className="size-4" aria-hidden="true" />
           Add link
+        </Button>
+      </div>
+
+      <div className="mb-5 flex flex-col gap-2 rounded-xl border border-border bg-card/60 p-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+        <div className="min-w-0">
+          <p className="text-xs text-muted-foreground">Your LTReee link</p>
+          <p className="truncate text-sm font-medium">{publicUrlDisplay}</p>
+        </div>
+        <Button
+          variant="secondary"
+          size="sm"
+          className="shrink-0"
+          onClick={() => void copyProfileLink()}
+        >
+          {copiedProfile ? (
+            <Check className="size-4" aria-hidden="true" />
+          ) : (
+            <Copy className="size-4" aria-hidden="true" />
+          )}
+          {copiedProfile ? "Copied" : "Copy link"}
         </Button>
       </div>
 
