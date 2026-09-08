@@ -34,6 +34,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         });
 
         const pageSize = 1000;
+        const usernames: string[] = [];
         for (let offset = 0; ; offset += pageSize) {
           const { data, error } = await supabase
             .from("public_profiles")
@@ -42,15 +43,46 @@ export const Route = createFileRoute("/sitemap.xml")({
             .order("username")
             .range(offset, offset + pageSize - 1);
           if (error) break;
-          entries.push(
-            ...(data ?? []).map((p: { username: string }) => ({
+          for (const p of (data ?? []) as { username: string }[]) {
+            usernames.push(p.username);
+            entries.push({
               path: `/${encodeURIComponent(p.username)}`,
               changefreq: "weekly" as const,
               priority: "0.7",
-            })),
-          );
+            });
+          }
           if (!data || data.length < pageSize) break;
         }
+
+        // Arena pages are separate, self-canonical URLs — include them for profiles
+        // that actually have visible projects.
+        if (usernames.length > 0) {
+          const { data: arenaProfiles } = await supabase
+            .from("public_profiles")
+            .select("id, username")
+            .eq("is_published", true);
+          const idByUsername = new Map(
+            ((arenaProfiles ?? []) as { id: string; username: string }[]).map((p) => [p.id, p.username]),
+          );
+          const { data: projects } = await supabase
+            .from("projects")
+            .select("profile_id")
+            .eq("is_visible", true);
+          const withProjects = new Set(
+            ((projects ?? []) as { profile_id: string }[])
+              .map((p) => idByUsername.get(p.profile_id))
+              .filter(Boolean) as string[],
+          );
+          for (const username of usernames) {
+            if (!withProjects.has(username)) continue;
+            entries.push({
+              path: `/${encodeURIComponent(username)}?view=arena`,
+              changefreq: "weekly" as const,
+              priority: "0.8",
+            });
+          }
+        }
+
 
 
         const urls = entries.map((e) =>

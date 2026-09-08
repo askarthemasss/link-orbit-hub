@@ -9,10 +9,11 @@ type ProfileSearch = { view?: "arena" };
 export const Route = createFileRoute("/$username")({
   validateSearch: (search: Record<string, unknown>): ProfileSearch =>
     search["view"] === "arena" ? { view: "arena" } : {},
-  loader: async ({ params }) => {
+  loaderDeps: ({ search }: { search: ProfileSearch }) => ({ view: search.view }),
+  loader: async ({ params, deps }) => {
     const profile = await getPublicProfile({ data: { username: params.username } });
     if (!profile) throw notFound();
-    return { profile };
+    return { profile, view: deps.view };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -26,23 +27,30 @@ export const Route = createFileRoute("/$username")({
     const { profile } = loaderData;
     const name = profile.display_name || `@${profile.username}`;
     const description = profile.bio || `All of ${name}'s links in one place, on LTReee.`;
-    const url = profileUrl(profile.username);
     const sameAs = (profile.links ?? []).map((link) => link.url).filter(Boolean);
     const projects = profile.projects ?? [];
-    const fullDescription = projects.length
-      ? `${description} Explore ${projects.length} project${projects.length === 1 ? "" : "s"} in their Developer's Arena.`
-      : description;
+    const isArena = loaderData.view === "arena" && projects.length > 0;
+    const url = isArena
+      ? `${profileUrl(profile.username)}?view=arena`
+      : profileUrl(profile.username);
+    const fullDescription = isArena
+      ? `${name}'s Developer's Arena on LTReee — ${projects.length} project${projects.length === 1 ? "" : "s"} with live demos and source code.`
+      : projects.length
+        ? `${description} Explore ${projects.length} project${projects.length === 1 ? "" : "s"} in their Developer's Arena.`
+        : description;
+    const title = isArena ? `${name} — Developer's Arena — LTReee` : `${name} — LTReee`;
     return {
       meta: [
-        { title: `${name} — LTReee` },
+        { title },
         { name: "description", content: fullDescription },
-        { property: "og:title", content: `${name} — LTReee` },
+        { property: "og:title", content: title },
         { property: "og:description", content: fullDescription },
         { property: "og:type", content: "profile" },
         { property: "og:url", content: url },
         { name: "twitter:card", content: "summary" },
       ],
       links: [{ rel: "canonical", href: url }],
+
       scripts: [
         {
           type: "application/ld+json",
