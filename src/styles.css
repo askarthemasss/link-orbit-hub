@@ -45,6 +45,14 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-arena-void: var(--arena-void);
+  --color-arena-panel: var(--arena-panel);
+  --color-arena-bright: var(--arena-bright);
+  --color-arena-signal: var(--arena-signal);
+  --color-arena-muted: var(--arena-muted);
+  --color-arena-dim: var(--arena-dim);
+  --color-arena-line: var(--arena-line);
+  --font-arena: "Space Mono", ui-monospace, monospace;
 }
 
 :root {
@@ -85,6 +93,13 @@
     radial-gradient(60rem 40rem at 12% -10%, oklch(0.7 0 0 / 14%), transparent 65%),
     radial-gradient(50rem 35rem at 92% 8%, oklch(0.75 0 0 / 12%), transparent 62%),
     radial-gradient(45rem 40rem at 50% 110%, oklch(0.72 0 0 / 10%), transparent 65%);
+  --arena-void: oklch(0.075 0.012 260);
+  --arena-panel: oklch(0.14 0.018 260);
+  --arena-bright: oklch(0.92 0.025 255);
+  --arena-signal: oklch(0.79 0.13 220);
+  --arena-muted: oklch(0.7 0.035 255);
+  --arena-dim: oklch(0.52 0.025 255);
+  --arena-line: oklch(0.8 0.06 235 / 18%);
 }
 
 .dark {
@@ -238,17 +253,17 @@
 
 @utility space-deep {
   background:
-    radial-gradient(120% 90% at 50% 0%, oklch(0.22 0 0 / 55%), transparent 60%),
-    radial-gradient(100% 80% at 80% 100%, oklch(0.18 0 0 / 60%), transparent 65%),
-    var(--background);
+    radial-gradient(100% 70% at 72% 34%, oklch(0.2 0.055 245 / 48%), transparent 58%),
+    radial-gradient(80% 55% at 6% 84%, oklch(0.16 0.035 250 / 30%), transparent 68%),
+    var(--arena-void);
 }
 
 @utility space-nebula {
   background-image:
-    radial-gradient(45rem 32rem at 15% 12%, oklch(0.7 0 0 / 10%), transparent 65%),
-    radial-gradient(38rem 30rem at 85% 22%, oklch(0.75 0 0 / 8%), transparent 62%),
-    radial-gradient(50rem 36rem at 45% 95%, oklch(0.6 0 0 / 9%), transparent 68%);
-  filter: blur(2px);
+    radial-gradient(38rem 25rem at 14% 22%, oklch(0.64 0.11 225 / 10%), transparent 68%),
+    radial-gradient(48rem 28rem at 82% 34%, oklch(0.72 0.12 230 / 11%), transparent 66%),
+    radial-gradient(55rem 32rem at 48% 110%, oklch(0.55 0.08 250 / 8%), transparent 70%);
+  filter: blur(5px);
 }
 
 @utility space-stars {
@@ -266,7 +281,7 @@
     radial-gradient(1px 1px at 58% 78%, oklch(1 0 0 / 42%), transparent 100%),
     radial-gradient(1px 1px at 8% 88%, oklch(1 0 0 / 48%), transparent 100%),
     radial-gradient(1px 1px at 78% 92%, oklch(1 0 0 / 38%), transparent 100%);
-  background-size: 100% 100%;
+  background-size: 42rem 38rem;
   animation: space-drift-slow 140s linear infinite;
   opacity: 0.7;
 }
@@ -278,7 +293,7 @@
     radial-gradient(1.4px 1.4px at 74% 16%, oklch(1 0 0 / 70%), transparent 100%),
     radial-gradient(1.4px 1.4px at 34% 84%, oklch(1 0 0 / 60%), transparent 100%),
     radial-gradient(1.4px 1.4px at 92% 58%, oklch(1 0 0 / 68%), transparent 100%);
-  background-size: 100% 100%;
+  background-size: 34rem 31rem;
   animation: space-drift 90s linear infinite, space-shimmer 7s ease-in-out infinite;
 }
 
@@ -287,15 +302,15 @@
     radial-gradient(2px 2px at 18% 42%, oklch(1 0 0 / 90%), transparent 100%),
     radial-gradient(2px 2px at 64% 66%, oklch(1 0 0 / 85%), transparent 100%),
     radial-gradient(2px 2px at 86% 34%, oklch(1 0 0 / 80%), transparent 100%);
-  background-size: 100% 100%;
+  background-size: 56rem 44rem;
   animation: space-drift-fast 55s linear infinite, space-shimmer 5s ease-in-out infinite;
 }
 
 @utility space-lensing {
   background:
-    radial-gradient(circle, transparent 44%, oklch(0.98 0 0 / 12%) 47%, transparent 58%),
-    radial-gradient(circle, transparent 60%, oklch(0.8 0 0 / 7%) 74%, transparent 88%);
-  filter: blur(6px);
+    radial-gradient(circle, transparent 42%, oklch(0.86 0.1 225 / 22%) 46%, transparent 52%),
+    radial-gradient(circle, transparent 58%, oklch(0.75 0.12 230 / 10%) 70%, transparent 84%);
+  filter: blur(8px);
   animation: space-pulse 12s ease-in-out infinite;
 }
 
@@ -303,10 +318,10 @@
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    oklch(0.98 0 0 / 55%) 40deg,
-    oklch(0.85 0 0 / 22%) 110deg,
+    oklch(0.9 0.11 220 / 80%) 40deg,
+    oklch(0.72 0.14 225 / 30%) 110deg,
     transparent 190deg,
-    oklch(0.9 0 0 / 30%) 290deg,
+    oklch(0.82 0.12 235 / 42%) 290deg,
     transparent 360deg
   );
   mask: radial-gradient(circle, transparent 56%, #000 60%, #000 82%, transparent 90%);
@@ -315,10 +330,46 @@
   animation: space-spin 26s linear infinite;
 }
 
-@utility space-horizon {
-  background: radial-gradient(circle, oklch(0 0 0) 58%, oklch(0 0 0 / 85%) 72%, transparent 84%);
-  box-shadow: 0 0 60px 12px oklch(0 0 0 / 70%);
+@utility space-accretion-wide {
+  background: conic-gradient(from 70deg, transparent 12%, oklch(0.68 0.14 225 / 12%), transparent 34%, oklch(0.78 0.1 215 / 18%), transparent 67%);
+  mask: radial-gradient(ellipse, transparent 46%, #000 49%, #000 64%, transparent 70%);
+  -webkit-mask: radial-gradient(ellipse, transparent 46%, #000 49%, #000 64%, transparent 70%);
+  filter: blur(10px);
+  transform: scaleY(0.35) rotate(-8deg);
+  animation: space-ring-breathe 10s ease-in-out infinite;
 }
+
+@utility space-photon-ring {
+  border: 1px solid color-mix(in oklab, var(--arena-signal) 60%, transparent);
+  box-shadow: 0 0 22px color-mix(in oklab, var(--arena-signal) 20%, transparent), inset 0 0 16px color-mix(in oklab, var(--arena-signal) 12%, transparent);
+  animation: space-pulse 8s ease-in-out infinite;
+}
+
+@utility space-jet {
+  background: linear-gradient(90deg, transparent 48%, oklch(0.68 0.12 225 / 8%) 50%, transparent 52%);
+  filter: blur(8px);
+  transform: rotate(16deg) scaleY(1.5);
+}
+
+@utility space-horizon {
+  background: radial-gradient(circle at 42% 38%, oklch(0.055 0.01 260), oklch(0 0 0) 62%, oklch(0 0 0 / 92%) 73%, transparent 84%);
+  box-shadow: 0 0 80px 18px oklch(0 0 0 / 82%);
+}
+
+.arena-shell { font-family: "Rubik", ui-sans-serif, system-ui, sans-serif; }
+.arena-project { backdrop-filter: blur(18px); box-shadow: 0 18px 60px oklch(0 0 0 / 35%); }
+.arena-project-scan { background: linear-gradient(115deg, transparent 20%, color-mix(in oklab, var(--arena-signal) 8%, transparent) 50%, transparent 80%); }
+.arena-node-mark { box-shadow: 0 0 24px color-mix(in oklab, var(--arena-signal) 10%, transparent); }
+.arena-project:hover .arena-node-mark { box-shadow: 0 0 30px color-mix(in oklab, var(--arena-signal) 24%, transparent); }
+.arena-constellation > article { z-index: 1; }
+.arena-constellation > article:nth-of-type(3n + 2) { margin-top: 3rem; }
+.arena-path { fill: none; stroke: var(--arena-line); stroke-width: 1; stroke-dasharray: 8 12; vector-effect: non-scaling-stroke; animation: arena-signal-flow 18s linear infinite; }
+.arena-path-delayed { animation-delay: -8s; opacity: 0.65; }
+.space-grid { background-image: linear-gradient(var(--arena-line) 1px, transparent 1px), linear-gradient(90deg, var(--arena-line) 1px, transparent 1px); background-size: 5rem 5rem; mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 70%, transparent); opacity: 0.13; transform: perspective(500px) rotateX(62deg) scale(1.8) translateY(28%); transform-origin: bottom; }
+.space-orbit { border: 1px solid var(--arena-line); border-radius: 50%; opacity: 0.35; }
+.space-orbit-one { width: 62rem; height: 18rem; left: 36%; top: 30%; transform: rotate(-9deg); }
+.space-orbit-two { width: 42rem; height: 12rem; left: 48%; top: 38%; transform: rotate(12deg); }
+.space-vignette { background: linear-gradient(to bottom, oklch(0.075 0.012 260 / 5%), transparent 45%, var(--arena-void) 92%), radial-gradient(ellipse at center, transparent 35%, oklch(0 0 0 / 52%) 100%); }
 
 @keyframes space-drift {
   from { background-position: 0 0; }
@@ -348,4 +399,18 @@
 @keyframes space-pulse {
   0%, 100% { opacity: 0.6; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.03); }
+}
+
+@keyframes space-ring-breathe {
+  0%, 100% { opacity: 0.65; transform: scaleY(0.35) rotate(-8deg) scale(0.98); }
+  50% { opacity: 1; transform: scaleY(0.38) rotate(-6deg) scale(1.03); }
+}
+
+@keyframes arena-signal-flow {
+  to { stroke-dashoffset: -200; }
+}
+
+@media (max-width: 767px) {
+  .arena-constellation > article:nth-of-type(3n + 2) { margin-top: 0; }
+  .space-orbit { display: none; }
 }

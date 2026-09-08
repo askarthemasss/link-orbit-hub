@@ -94,11 +94,13 @@ function PublicProfilePage() {
   const active = hasArena && view === "arena" ? "arena" : "links";
 
   return (
-    <div className="px-5 pt-8 sm:pt-10">
+    <div className={active === "arena" ? "relative" : "px-5 pt-8 sm:pt-10"}>
       {hasArena ? (
         <nav
           aria-label="Profile sections"
-          className="mx-auto flex w-fit items-center gap-1 rounded-full glass p-1"
+          className={`z-20 mx-auto flex w-fit items-center gap-1 rounded-full glass p-1 ${
+            active === "arena" ? "absolute left-1/2 top-5 -translate-x-1/2" : ""
+          }`}
         >
           <Link
             to="/$username"
@@ -126,7 +128,7 @@ function PublicProfilePage() {
       ) : null}
 
       {active === "arena" ? (
-        <div className="mx-auto mt-8 w-full max-w-4xl pb-16">
+        <div className="w-full">
           <ArenaView
             username={profile.username}
             displayName={profile.display_name}

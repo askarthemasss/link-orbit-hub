@@ -9,21 +9,25 @@ export function SpaceScene() {
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
       <div className="absolute inset-0 space-deep" />
       <div className="absolute inset-0 space-nebula" />
-
       <div className="absolute inset-0 space-stars space-stars-far" />
       <div className="absolute inset-0 space-stars space-stars-mid" />
       <div className="absolute inset-0 space-stars space-stars-near" />
 
-      {/* Black hole */}
-      <div className="absolute left-1/2 top-[62%] -translate-x-1/2 sm:left-[78%] sm:top-[70%]">
-        <div className="relative size-[22rem] sm:size-[30rem]">
-          <div className="absolute inset-0 rounded-full space-lensing" />
-          <div className="absolute inset-[18%] rounded-full space-accretion" />
-          <div className="absolute inset-[30%] rounded-full space-horizon" />
+      <div className="space-grid absolute inset-0" />
+      <div className="space-orbit space-orbit-one absolute" />
+      <div className="space-orbit space-orbit-two absolute" />
+
+      <div className="space-black-hole absolute left-1/2 top-[43%] -translate-x-1/2 sm:left-[72%] sm:top-[44%]">
+        <div className="relative size-[28rem] sm:size-[42rem] lg:size-[54rem]">
+          <div className="space-jet absolute inset-0" />
+          <div className="space-lensing absolute inset-0 rounded-full" />
+          <div className="space-accretion-wide absolute inset-[12%] rounded-full" />
+          <div className="space-accretion absolute inset-[22%] rounded-full" />
+          <div className="space-photon-ring absolute inset-[31%] rounded-full" />
+          <div className="space-horizon absolute inset-[35%] rounded-full" />
         </div>
       </div>
-
-      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/85" />
+      <div className="space-vignette absolute inset-0" />
     </div>
   );
 }

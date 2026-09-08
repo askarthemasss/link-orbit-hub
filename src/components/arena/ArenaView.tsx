@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Code2, Github, Rocket } from "lucide-react";
+import { ArrowUpRight, Github, Radio, Rocket } from "lucide-react";
 import { SpaceScene } from "@/components/SpaceScene";
 import { coverSrc } from "@/lib/project-cover";
 import { prettyUrl } from "@/lib/validation";
@@ -39,32 +39,47 @@ function ProjectCard({
 
   return (
     <article
-      className="group relative overflow-hidden rounded-2xl glass transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:glow-ring"
+      className="arena-project group relative min-h-72 overflow-hidden border border-arena-line bg-arena-panel/70 transition-all duration-500 hover:-translate-y-1 hover:border-arena-signal/60"
       style={{ animation: `fade-in 0.5s ease-out ${Math.min(index * 80, 480)}ms both` }}
     >
+      <div className="arena-project-scan absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="absolute left-0 top-0 size-2 border-l border-t border-arena-signal" />
+      <div className="absolute bottom-0 right-0 size-2 border-b border-r border-arena-signal" />
       {cover ? (
-        <div className="aspect-[16/9] w-full overflow-hidden bg-secondary/40">
+        <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-arena-line bg-arena-panel">
           <img
             src={cover}
             alt={`${project.title} cover`}
             loading="lazy"
-            className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            className="size-full object-cover opacity-70 grayscale transition-all duration-700 group-hover:scale-[1.04] group-hover:opacity-90 group-hover:grayscale-0"
           />
+          <div className="absolute inset-0 bg-linear-to-t from-arena-panel to-transparent" />
         </div>
       ) : null}
 
-      <div className="p-5">
-        <h3 className="font-display text-base font-semibold">{project.title}</h3>
+      <div className="relative flex h-full flex-col p-5 sm:p-6">
+        <div className="mb-7 flex items-start justify-between gap-4">
+          <div className="arena-node-mark grid size-11 shrink-0 place-items-center border border-arena-line bg-arena-void">
+            <span className="size-3 rotate-45 border border-arena-signal" />
+          </div>
+          <div className="text-right font-arena text-[0.625rem] uppercase text-arena-dim">
+            <p>Node {String(index + 1).padStart(2, "0")}</p>
+            <p className="mt-1 text-arena-signal">Online</p>
+          </div>
+        </div>
+        <h3 className="font-arena text-lg font-bold text-arena-bright transition-colors group-hover:text-arena-signal">
+          {project.title}
+        </h3>
         {project.description ? (
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+          <p className="mt-2 text-sm leading-relaxed text-arena-muted">{project.description}</p>
         ) : null}
 
         {project.tags.length > 0 ? (
-          <ul className="mt-3 flex flex-wrap gap-1.5">
+          <ul className="mt-4 flex flex-wrap gap-1.5">
             {project.tags.slice(0, 8).map((tag) => (
               <li
                 key={tag}
-                className="rounded-full border border-border px-2.5 py-0.5 text-[0.7rem] text-muted-foreground"
+                className="border border-arena-line px-2 py-1 font-arena text-[0.625rem] uppercase text-arena-dim"
               >
                 {tag}
               </li>
@@ -73,9 +88,9 @@ function ProjectCard({
         ) : null}
 
         {demo || repo ? (
-          <div className="mt-4 flex flex-wrap items-center gap-2">
+          <div className="mt-auto flex flex-wrap items-center gap-2 border-t border-arena-line pt-5">
             {demo ? (
-              <Button asChild size="sm">
+              <Button asChild size="sm" className="rounded-sm bg-arena-bright text-arena-void hover:bg-arena-signal">
                 <a
                   href={demo}
                   target="_blank"
@@ -89,7 +104,7 @@ function ProjectCard({
               </Button>
             ) : null}
             {repo ? (
-              <Button asChild size="sm" variant="secondary">
+              <Button asChild size="sm" variant="outline" className="rounded-sm border-arena-line bg-transparent text-arena-bright hover:border-arena-signal hover:bg-arena-signal/10">
                 <a
                   href={repo}
                   target="_blank"
@@ -105,7 +120,7 @@ function ProjectCard({
         ) : null}
 
         {demo ? (
-          <p className="mt-3 truncate text-xs text-muted-foreground">{prettyUrl(demo)}</p>
+          <p className="mt-3 truncate font-arena text-[0.625rem] uppercase text-arena-dim">{prettyUrl(demo)}</p>
         ) : null}
       </div>
     </article>
@@ -147,29 +162,54 @@ export function ArenaView({
   }, [username, projects, trackViews]);
 
   return (
-    <section className="relative isolate overflow-hidden rounded-3xl border border-border">
+    <section className="arena-shell relative isolate min-h-[calc(100svh-2rem)] overflow-hidden bg-arena-void text-arena-bright">
       {ready ? <SpaceScene /> : null}
 
-      <div className="relative px-5 py-12 sm:px-8 sm:py-16">
-        <header className="text-center">
-          <p className="inline-flex items-center gap-1.5 rounded-full glass px-3 py-1 text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground">
-            <Code2 className="size-3.5 text-primary" aria-hidden="true" />
-            Developer&apos;s Arena
-          </p>
-          <Heading className="mt-4 font-display text-2xl font-semibold sm:text-3xl">
-            {displayName || `@${username}`}&apos;s work
-          </Heading>
-          <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-            Projects shipped, demos you can open, and the code behind them.
-          </p>
+      <div className="relative mx-auto w-full max-w-7xl px-5 pb-20 pt-28 sm:px-8 sm:pt-36 lg:px-12">
+        <header className="grid min-h-[48svh] content-start gap-10 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start">
+          <div className="border-l-2 border-arena-signal/60 pl-5 sm:pl-7">
+            <p className="flex items-center gap-3 font-arena text-[0.625rem] uppercase text-arena-signal sm:text-xs">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-arena-signal opacity-60" />
+                <span className="relative inline-flex size-2 rounded-full bg-arena-signal" />
+              </span>
+              Live project circuit
+            </p>
+            <Heading className="mt-4 max-w-3xl font-arena text-4xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl">
+              {displayName || `@${username}`}&apos;s
+              <span className="block text-arena-muted">Developer&apos;s Arena</span>
+            </Heading>
+            <p className="mt-5 max-w-lg text-sm leading-relaxed text-arena-muted sm:text-base">
+              Deployed work mapped across a living project constellation.
+            </p>
+          </div>
+          <div className="hidden pt-3 text-right font-arena text-[0.625rem] uppercase text-arena-dim sm:block">
+            <p>Observer / @{username}</p>
+            <p className="mt-2">Sector / {String(projects.length).padStart(2, "0")}</p>
+            <div className="mt-4 flex justify-end gap-2">
+              <span className="h-px w-8 bg-arena-signal/30" />
+              <span className="h-px w-20 bg-arena-signal" />
+            </div>
+          </div>
         </header>
 
+        <div className="mb-8 flex items-center gap-3 font-arena text-[0.625rem] uppercase text-arena-dim">
+          <Radio className="size-3.5 text-arena-signal" aria-hidden="true" />
+          Project constellation
+          <span className="h-px flex-1 bg-arena-line" />
+          {String(projects.length).padStart(2, "0")} active
+        </div>
+
         {projects.length === 0 ? (
-          <p className="mt-10 text-center text-sm text-muted-foreground">
+          <p className="border border-arena-line bg-arena-panel/60 p-8 text-center text-sm text-arena-muted">
             No projects here yet.
           </p>
         ) : (
-          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          <div className="arena-constellation relative grid gap-8 pb-12 md:grid-cols-2 lg:grid-cols-3">
+            <svg aria-hidden="true" className="absolute inset-0 hidden size-full md:block" preserveAspectRatio="none">
+              <path className="arena-path" d="M 0 34 C 190 34, 210 76, 420 76 S 650 18, 880 48 S 1090 82, 1440 38" />
+              <path className="arena-path arena-path-delayed" d="M 80 100 C 280 65, 360 130, 560 96 S 900 74, 1180 115" />
+            </svg>
             {projects.map((project, i) => (
               <ProjectCard
                 key={project.id}
@@ -180,6 +220,13 @@ export function ArenaView({
             ))}
           </div>
         )}
+
+        <footer className="grid grid-cols-2 gap-6 border-t border-arena-line pt-7 font-arena text-[0.625rem] uppercase text-arena-dim sm:grid-cols-4">
+          <div><p>Projects</p><p className="mt-1 text-lg font-bold text-arena-bright">{String(projects.length).padStart(2, "0")}</p></div>
+          <div><p>Signal</p><p className="mt-1 text-lg font-bold text-arena-signal">Stable</p></div>
+          <div><p>Visibility</p><p className="mt-1 text-lg font-bold text-arena-bright">Public</p></div>
+          <div><p>System</p><p className="mt-1 text-lg font-bold text-arena-bright">LTReee</p></div>
+        </footer>
       </div>
     </section>
   );
