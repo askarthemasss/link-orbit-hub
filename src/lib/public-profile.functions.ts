@@ -33,6 +33,7 @@ export type PublicProfile = {
   email: string | null;
   phone: string | null;
   links: PublicLink[];
+  projects: PublicProject[];
 };
 
 export const getPublicProfile = createServerFn({ method: "GET" })
@@ -96,5 +97,6 @@ export const getPublicProfile = createServerFn({ method: "GET" })
       email: row.email,
       phone: row.phone,
       links: links ?? [],
+      projects: (projects ?? []) as PublicProject[],
     };
   });
