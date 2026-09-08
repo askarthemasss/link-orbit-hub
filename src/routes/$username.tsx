@@ -1,9 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PublicProfileView } from "@/components/PublicProfileView";
+import { ArenaView } from "@/components/arena/ArenaView";
 import { getPublicProfile } from "@/lib/public-profile.functions";
 import { profileUrl } from "@/lib/site-url";
 
+type ProfileSearch = { view?: "arena" };
+
 export const Route = createFileRoute("/$username")({
+  validateSearch: (search: Record<string, unknown>): ProfileSearch =>
+    search["view"] === "arena" ? { view: "arena" } : {},
   loader: async ({ params }) => {
     const profile = await getPublicProfile({ data: { username: params.username } });
     if (!profile) throw notFound();
