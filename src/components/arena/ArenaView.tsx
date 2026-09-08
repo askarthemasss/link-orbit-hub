@@ -117,12 +117,15 @@ export function ArenaView({
   displayName,
   projects,
   trackViews = true,
+  headingLevel = "h1",
 }: {
   username: string;
   displayName: string;
   projects: PublicProject[];
   trackViews?: boolean;
+  headingLevel?: "h1" | "h2";
 }) {
+  const Heading = headingLevel;
   const [ready, setReady] = useState(false);
 
   useEffect(() => setReady(true), []);
@@ -153,9 +156,9 @@ export function ArenaView({
             <Code2 className="size-3.5 text-primary" aria-hidden="true" />
             Developer&apos;s Arena
           </p>
-          <h2 className="mt-4 font-display text-2xl font-semibold sm:text-3xl">
+          <Heading className="mt-4 font-display text-2xl font-semibold sm:text-3xl">
             {displayName || `@${username}`}&apos;s work
-          </h2>
+          </Heading>
           <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
             Projects shipped, demos you can open, and the code behind them.
           </p>

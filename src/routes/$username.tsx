@@ -59,7 +59,6 @@ export const Route = createFileRoute("/$username")({
               ...(sameAs.length ? { sameAs } : {}),
               ...(projects.length
                 ? {
-                    makesOffer: undefined,
                     subjectOf: projects.map((p) => ({
                       "@type": "CreativeWork",
                       name: p.title,
