@@ -10,3 +10,9 @@
 - [x] Update site URL/robots; publish pending
 - [x] Landing headline copy updated
 - Note: "LTreee" message appears accidental — no action
+
+## Developer's Arena (done)
+- projects + project_events tables, owner RLS, public visible reads
+- public tabs at /username and /username?view=arena with deep-space scene
+- dashboard /arena editor: add/edit/hide/reorder/delete, cover uploads, live preview
+- per-project view/demo/code click analytics on /analytics

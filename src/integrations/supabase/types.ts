@@ -210,6 +210,115 @@ export type Database = {
         }
         Relationships: []
       }
+      project_events: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          profile_id: string
+          project_id: string | null
+          project_title: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind: string
+          profile_id: string
+          project_id?: string | null
+          project_title?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          profile_id?: string
+          project_id?: string | null
+          project_title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_events_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_events_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_events_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          cover_path: string | null
+          created_at: string
+          demo_url: string | null
+          description: string
+          display_order: number
+          id: string
+          is_visible: boolean
+          profile_id: string
+          repo_url: string | null
+          tags: string[]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          cover_path?: string | null
+          created_at?: string
+          demo_url?: string | null
+          description?: string
+          display_order?: number
+          id?: string
+          is_visible?: boolean
+          profile_id: string
+          repo_url?: string | null
+          tags?: string[]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          cover_path?: string | null
+          created_at?: string
+          demo_url?: string | null
+          description?: string
+          display_order?: number
+          id?: string
+          is_visible?: boolean
+          profile_id?: string
+          repo_url?: string | null
+          tags?: string[]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "projects_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       public_contacts: {
         Row: {
           email: string | null

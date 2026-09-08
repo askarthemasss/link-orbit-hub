@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 const NAV = [
   { to: "/dashboard", label: "Dashboard" },
+  { to: "/arena", label: "Arena" },
   { to: "/private", label: "Private" },
   { to: "/embed", label: "Embed" },
   { to: "/analytics", label: "Stats" },

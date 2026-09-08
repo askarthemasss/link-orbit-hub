@@ -21,6 +21,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
+import { Route as AuthenticatedArenaRouteImport } from './routes/_authenticated/arena'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedEmbedRouteImport } from './routes/_authenticated/embed'
 import { Route as AuthenticatedPrivateRouteImport } from './routes/_authenticated/private'
@@ -30,7 +31,9 @@ import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as ApiPublicEmbedClickRouteImport } from './routes/api/public/embed-click'
 import { Route as ApiPublicEmbedTrackRouteImport } from './routes/api/public/embed-track'
+import { Route as ApiPublicProjectEventRouteImport } from './routes/api/public/project-event'
 import { Route as ApiPublicAvatarSplatRouteImport } from './routes/api/public/avatar/$'
+import { Route as ApiPublicProjectCoverSplatRouteImport } from './routes/api/public/project-cover/$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -93,6 +96,11 @@ const AuthenticatedAnalyticsRoute = AuthenticatedAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedArenaRoute = AuthenticatedArenaRouteImport.update({
+  id: '/arena',
+  path: '/arena',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -139,11 +147,22 @@ const ApiPublicEmbedTrackRoute = ApiPublicEmbedTrackRouteImport.update({
   path: '/api/public/embed-track',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicProjectEventRoute = ApiPublicProjectEventRouteImport.update({
+  id: '/api/public/project-event',
+  path: '/api/public/project-event',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicAvatarSplatRoute = ApiPublicAvatarSplatRouteImport.update({
   id: '/api/public/avatar/$',
   path: '/api/public/avatar/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicProjectCoverSplatRoute =
+  ApiPublicProjectCoverSplatRouteImport.update({
+    id: '/api/public/project-cover/$',
+    path: '/api/public/project-cover/$',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -157,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/arena': typeof AuthenticatedArenaRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/embed': typeof AuthenticatedEmbedRoute
   '/private': typeof AuthenticatedPrivateRoute
@@ -166,7 +186,9 @@ export interface FileRoutesByFullPath {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/embed-click': typeof ApiPublicEmbedClickRoute
   '/api/public/embed-track': typeof ApiPublicEmbedTrackRoute
+  '/api/public/project-event': typeof ApiPublicProjectEventRoute
   '/api/public/avatar/$': typeof ApiPublicAvatarSplatRoute
+  '/api/public/project-cover/$': typeof ApiPublicProjectCoverSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -180,6 +202,7 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/arena': typeof AuthenticatedArenaRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/embed': typeof AuthenticatedEmbedRoute
   '/private': typeof AuthenticatedPrivateRoute
@@ -189,7 +212,9 @@ export interface FileRoutesByTo {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/embed-click': typeof ApiPublicEmbedClickRoute
   '/api/public/embed-track': typeof ApiPublicEmbedTrackRoute
+  '/api/public/project-event': typeof ApiPublicProjectEventRoute
   '/api/public/avatar/$': typeof ApiPublicAvatarSplatRoute
+  '/api/public/project-cover/$': typeof ApiPublicProjectCoverSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -205,6 +230,7 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
+  '/_authenticated/arena': typeof AuthenticatedArenaRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/embed': typeof AuthenticatedEmbedRoute
   '/_authenticated/private': typeof AuthenticatedPrivateRoute
@@ -214,7 +240,9 @@ export interface FileRoutesById {
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/embed-click': typeof ApiPublicEmbedClickRoute
   '/api/public/embed-track': typeof ApiPublicEmbedTrackRoute
+  '/api/public/project-event': typeof ApiPublicProjectEventRoute
   '/api/public/avatar/$': typeof ApiPublicAvatarSplatRoute
+  '/api/public/project-cover/$': typeof ApiPublicProjectCoverSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -230,6 +258,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/analytics'
+    | '/arena'
     | '/dashboard'
     | '/embed'
     | '/private'
@@ -239,7 +268,9 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/embed-click'
     | '/api/public/embed-track'
+    | '/api/public/project-event'
     | '/api/public/avatar/$'
+    | '/api/public/project-cover/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -253,6 +284,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/analytics'
+    | '/arena'
     | '/dashboard'
     | '/embed'
     | '/private'
@@ -262,7 +294,9 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/embed-click'
     | '/api/public/embed-track'
+    | '/api/public/project-event'
     | '/api/public/avatar/$'
+    | '/api/public/project-cover/$'
   id:
     | '__root__'
     | '/'
@@ -277,6 +311,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/_authenticated/analytics'
+    | '/_authenticated/arena'
     | '/_authenticated/dashboard'
     | '/_authenticated/embed'
     | '/_authenticated/private'
@@ -286,7 +321,9 @@ export interface FileRouteTypes {
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/embed-click'
     | '/api/public/embed-track'
+    | '/api/public/project-event'
     | '/api/public/avatar/$'
+    | '/api/public/project-cover/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -306,7 +343,9 @@ export interface RootRouteChildren {
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicEmbedClickRoute: typeof ApiPublicEmbedClickRoute
   ApiPublicEmbedTrackRoute: typeof ApiPublicEmbedTrackRoute
+  ApiPublicProjectEventRoute: typeof ApiPublicProjectEventRoute
   ApiPublicAvatarSplatRoute: typeof ApiPublicAvatarSplatRoute
+  ApiPublicProjectCoverSplatRoute: typeof ApiPublicProjectCoverSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -395,6 +434,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAnalyticsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/arena': {
+      id: '/_authenticated/arena'
+      path: '/arena'
+      fullPath: '/arena'
+      preLoaderRoute: typeof AuthenticatedArenaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -458,6 +504,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicEmbedTrackRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/project-event': {
+      id: '/api/public/project-event'
+      path: '/api/public/project-event'
+      fullPath: '/api/public/project-event'
+      preLoaderRoute: typeof ApiPublicProjectEventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/avatar/$': {
       id: '/api/public/avatar/$'
       path: '/api/public/avatar/$'
@@ -465,11 +518,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicAvatarSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/project-cover/$': {
+      id: '/api/public/project-cover/$'
+      path: '/api/public/project-cover/$'
+      fullPath: '/api/public/project-cover/$'
+      preLoaderRoute: typeof ApiPublicProjectCoverSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
+  AuthenticatedArenaRoute: typeof AuthenticatedArenaRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedEmbedRoute: typeof AuthenticatedEmbedRoute
   AuthenticatedPrivateRoute: typeof AuthenticatedPrivateRoute
@@ -478,6 +539,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
+  AuthenticatedArenaRoute: AuthenticatedArenaRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedEmbedRoute: AuthenticatedEmbedRoute,
   AuthenticatedPrivateRoute: AuthenticatedPrivateRoute,
@@ -505,7 +567,9 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicEmbedClickRoute: ApiPublicEmbedClickRoute,
   ApiPublicEmbedTrackRoute: ApiPublicEmbedTrackRoute,
+  ApiPublicProjectEventRoute: ApiPublicProjectEventRoute,
   ApiPublicAvatarSplatRoute: ApiPublicAvatarSplatRoute,
+  ApiPublicProjectCoverSplatRoute: ApiPublicProjectCoverSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
