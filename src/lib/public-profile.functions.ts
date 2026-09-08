@@ -85,6 +85,13 @@ export const getPublicProfile = createServerFn({ method: "GET" })
       .eq("is_active", true)
       .order("display_order", { ascending: true });
 
+    const { data: projects } = await supabase
+      .from("projects")
+      .select("id, title, description, demo_url, repo_url, cover_path, tags, display_order")
+      .eq("profile_id", row.id)
+      .eq("is_visible", true)
+      .order("display_order", { ascending: true });
+
     return {
       id: row.id,
       user_id: row.user_id,
