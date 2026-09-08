@@ -3,6 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { BarChart3 } from "lucide-react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { getEmbedStats, type EmbedStats } from "@/lib/embed-stats.functions";
+import { getArenaStats, type ArenaStats } from "@/lib/arena-stats.functions";
 
 export const Route = createFileRoute("/_authenticated/analytics")({
   head: () => ({
@@ -128,6 +129,71 @@ function AnalyticsContent() {
   );
 }
 
+function ArenaSection() {
+  const { data: stats } = useSuspenseQuery<ArenaStats>({
+    queryKey: ["arena-stats"],
+    queryFn: () => getArenaStats(),
+  });
+
+  return (
+    <section className="mt-10 space-y-4" aria-labelledby="arena-stats-heading">
+      <div>
+        <h2 id="arena-stats-heading" className="text-lg font-semibold">
+          Developer&apos;s Arena
+        </h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          How many people look at your projects, and which ones they open.
+        </p>
+      </div>
+
+      {stats.views === 0 && stats.clicks === 0 ? (
+        <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-12 text-center">
+          <p className="font-medium">No project activity yet</p>
+          <p className="max-w-sm text-sm text-muted-foreground">
+            Add projects to your Arena and share your page — views and clicks appear here.
+          </p>
+          <Link to="/arena" className="text-sm text-primary underline underline-offset-4">
+            Build your Arena
+          </Link>
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {[
+              { label: "Project views", value: stats.views },
+              { label: "Project clicks", value: stats.clicks },
+              {
+                label: "Click-through",
+                value: stats.views > 0 ? `${Math.round((stats.clicks / stats.views) * 100)}%` : "—",
+              },
+              { label: "Last 7 days", value: stats.last7Days },
+            ].map((s) => (
+              <div key={s.label} className="rounded-xl border border-border p-4">
+                <p className="text-sm text-muted-foreground">{s.label}</p>
+                <p className="mt-1 text-3xl font-semibold">{s.value}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-xl border border-border p-4">
+            <h3 className="mb-3 text-sm font-medium">Projects by attention</h3>
+            <ul className="divide-y divide-border">
+              {stats.topProjects.map((p) => (
+                <li key={p.projectId} className="flex items-center justify-between gap-4 py-2.5">
+                  <p className="min-w-0 truncate text-sm font-medium">{p.title}</p>
+                  <span className="shrink-0 text-xs text-muted-foreground">
+                    {p.views} views · {p.demoClicks} demo · {p.repoClicks} code
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
+    </section>
+  );
+}
+
 function AnalyticsPage() {
   return (
     <DashboardLayout>
@@ -138,6 +204,7 @@ function AnalyticsPage() {
         </p>
       </div>
       <AnalyticsContent />
+      <ArenaSection />
     </DashboardLayout>
   );
 }
