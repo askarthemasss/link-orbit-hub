@@ -28,6 +28,10 @@ export const Route = createFileRoute("/$username")({
     const description = profile.bio || `All of ${name}'s links in one place, on LTReee.`;
     const url = profileUrl(profile.username);
     const sameAs = (profile.links ?? []).map((link) => link.url).filter(Boolean);
+    const projects = profile.projects ?? [];
+    const fullDescription = projects.length
+      ? `${description} Explore ${projects.length} project${projects.length === 1 ? "" : "s"} in their Developer's Arena.`
+      : description;
     return {
       meta: [
         { title: `${name} — LTReee` },
