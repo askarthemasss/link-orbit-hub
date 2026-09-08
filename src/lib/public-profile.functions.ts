@@ -10,6 +10,17 @@ export type PublicLink = {
   display_order: number;
 };
 
+export type PublicProject = {
+  id: string;
+  title: string;
+  description: string;
+  demo_url: string | null;
+  repo_url: string | null;
+  cover_path: string | null;
+  tags: string[];
+  display_order: number;
+};
+
 export type PublicProfile = {
   id: string;
   user_id: string;

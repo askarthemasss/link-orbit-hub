@@ -233,3 +233,119 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ---------- Developer's Arena: deep space scene ---------- */
+
+@utility space-deep {
+  background:
+    radial-gradient(120% 90% at 50% 0%, oklch(0.22 0 0 / 55%), transparent 60%),
+    radial-gradient(100% 80% at 80% 100%, oklch(0.18 0 0 / 60%), transparent 65%),
+    var(--background);
+}
+
+@utility space-nebula {
+  background-image:
+    radial-gradient(45rem 32rem at 15% 12%, oklch(0.7 0 0 / 10%), transparent 65%),
+    radial-gradient(38rem 30rem at 85% 22%, oklch(0.75 0 0 / 8%), transparent 62%),
+    radial-gradient(50rem 36rem at 45% 95%, oklch(0.6 0 0 / 9%), transparent 68%);
+  filter: blur(2px);
+}
+
+@utility space-stars {
+  background-repeat: repeat;
+  will-change: transform;
+}
+
+.space-stars-far {
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, oklch(1 0 0 / 60%), transparent 100%),
+    radial-gradient(1px 1px at 42% 8%, oklch(1 0 0 / 45%), transparent 100%),
+    radial-gradient(1px 1px at 68% 32%, oklch(1 0 0 / 55%), transparent 100%),
+    radial-gradient(1px 1px at 88% 12%, oklch(1 0 0 / 40%), transparent 100%),
+    radial-gradient(1px 1px at 26% 62%, oklch(1 0 0 / 50%), transparent 100%),
+    radial-gradient(1px 1px at 58% 78%, oklch(1 0 0 / 42%), transparent 100%),
+    radial-gradient(1px 1px at 8% 88%, oklch(1 0 0 / 48%), transparent 100%),
+    radial-gradient(1px 1px at 78% 92%, oklch(1 0 0 / 38%), transparent 100%);
+  background-size: 100% 100%;
+  animation: space-drift-slow 140s linear infinite;
+  opacity: 0.7;
+}
+
+.space-stars-mid {
+  background-image:
+    radial-gradient(1.4px 1.4px at 22% 28%, oklch(1 0 0 / 75%), transparent 100%),
+    radial-gradient(1.4px 1.4px at 52% 48%, oklch(1 0 0 / 65%), transparent 100%),
+    radial-gradient(1.4px 1.4px at 74% 16%, oklch(1 0 0 / 70%), transparent 100%),
+    radial-gradient(1.4px 1.4px at 34% 84%, oklch(1 0 0 / 60%), transparent 100%),
+    radial-gradient(1.4px 1.4px at 92% 58%, oklch(1 0 0 / 68%), transparent 100%);
+  background-size: 100% 100%;
+  animation: space-drift 90s linear infinite, space-shimmer 7s ease-in-out infinite;
+}
+
+.space-stars-near {
+  background-image:
+    radial-gradient(2px 2px at 18% 42%, oklch(1 0 0 / 90%), transparent 100%),
+    radial-gradient(2px 2px at 64% 66%, oklch(1 0 0 / 85%), transparent 100%),
+    radial-gradient(2px 2px at 86% 34%, oklch(1 0 0 / 80%), transparent 100%);
+  background-size: 100% 100%;
+  animation: space-drift-fast 55s linear infinite, space-shimmer 5s ease-in-out infinite;
+}
+
+@utility space-lensing {
+  background:
+    radial-gradient(circle, transparent 44%, oklch(0.98 0 0 / 12%) 47%, transparent 58%),
+    radial-gradient(circle, transparent 60%, oklch(0.8 0 0 / 7%) 74%, transparent 88%);
+  filter: blur(6px);
+  animation: space-pulse 12s ease-in-out infinite;
+}
+
+@utility space-accretion {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    oklch(0.98 0 0 / 55%) 40deg,
+    oklch(0.85 0 0 / 22%) 110deg,
+    transparent 190deg,
+    oklch(0.9 0 0 / 30%) 290deg,
+    transparent 360deg
+  );
+  mask: radial-gradient(circle, transparent 56%, #000 60%, #000 82%, transparent 90%);
+  -webkit-mask: radial-gradient(circle, transparent 56%, #000 60%, #000 82%, transparent 90%);
+  filter: blur(3px);
+  animation: space-spin 26s linear infinite;
+}
+
+@utility space-horizon {
+  background: radial-gradient(circle, oklch(0 0 0) 58%, oklch(0 0 0 / 85%) 72%, transparent 84%);
+  box-shadow: 0 0 60px 12px oklch(0 0 0 / 70%);
+}
+
+@keyframes space-drift {
+  from { background-position: 0 0; }
+  to { background-position: -600px 300px; }
+}
+
+@keyframes space-drift-slow {
+  from { background-position: 0 0; }
+  to { background-position: -300px 160px; }
+}
+
+@keyframes space-drift-fast {
+  from { background-position: 0 0; }
+  to { background-position: -1000px 500px; }
+}
+
+@keyframes space-shimmer {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@keyframes space-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes space-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
