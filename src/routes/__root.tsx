@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "LTReee" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#0b1020" },
+      { name: "theme-color", content: "#010204" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -92,7 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Rubik:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap",
       },
     ],
   }),

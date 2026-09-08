@@ -16,3 +16,4 @@
 - public tabs at /username and /username?view=arena with deep-space scene
 - dashboard /arena editor: add/edit/hide/reorder/delete, cover uploads, live preview
 - per-project view/demo/code click analytics on /analytics
+- [x] Public Arena redesigned as a full-width cosmic observatory with an animated event horizon and connected project circuit
