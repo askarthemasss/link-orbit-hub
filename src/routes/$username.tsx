@@ -35,9 +35,9 @@ export const Route = createFileRoute("/$username")({
     return {
       meta: [
         { title: `${name} — LTReee` },
-        { name: "description", content: description },
+        { name: "description", content: fullDescription },
         { property: "og:title", content: `${name} — LTReee` },
-        { property: "og:description", content: description },
+        { property: "og:description", content: fullDescription },
         { property: "og:type", content: "profile" },
         { property: "og:url", content: url },
         { name: "twitter:card", content: "summary" },
