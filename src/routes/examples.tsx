@@ -119,10 +119,7 @@ function ExamplesPage() {
         </section>
       </main>
 
-      <footer className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-8 text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} LTReee</p>
-        <span className="hidden sm:inline">One link. Your whole universe.</span>
-      </footer>
+      <MarketingFooter />
     </div>
   );
 }
