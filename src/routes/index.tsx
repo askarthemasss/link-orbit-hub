@@ -252,15 +252,7 @@ function Landing() {
         </section>
       </main>
 
-      <footer className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-8 text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} LTReee</p>
-        <div className="flex items-center gap-4">
-          <Link to="/examples" className="hover:text-foreground">
-            Link in bio examples
-          </Link>
-          <span className="hidden sm:inline">One link. Your whole universe.</span>
-        </div>
-      </footer>
+      <MarketingFooter />
     </div>
   );
 }
