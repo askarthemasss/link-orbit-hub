@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { PublicProfileView } from "@/components/PublicProfileView";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { MarketingFooter } from "@/components/MarketingLayout";
 
 const TITLE = "Link in Bio Example — LTReee";
 const DESCRIPTION =

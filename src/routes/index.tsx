@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { PublicProfileView } from "@/components/PublicProfileView";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { MarketingFooter } from "@/components/MarketingLayout";
 import { useSession } from "@/hooks/useSession";
 
 
