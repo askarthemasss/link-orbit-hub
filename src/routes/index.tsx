@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
       {
         name: "keywords",
         content:
-          "link in bio, link in bio page, bio link, linktree alternative, free link in bio, one link for all socials, personal link page, micro website, links page, link hub, social media bio link, portfolio link page",
+          "link in bio, link in bio page, bio link, link app, links app, linktree alternative, free link in bio, one link for all socials, personal link page, micro website, links page, link hub, social media bio link, portfolio link page, developer portfolio link, instagram bio link, tiktok link in bio, bio link generator, link tracking, embeddable links widget",
       },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
