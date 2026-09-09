@@ -15,6 +15,9 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async () => {
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
+          { path: "/link-in-bio", changefreq: "monthly", priority: "0.9" },
+          { path: "/linktree-alternative", changefreq: "monthly", priority: "0.9" },
+          { path: "/developers", changefreq: "monthly", priority: "0.9" },
           { path: "/examples", changefreq: "monthly", priority: "0.8" },
         ];
 
