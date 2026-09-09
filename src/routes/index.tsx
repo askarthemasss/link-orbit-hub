@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { PublicProfileView } from "@/components/PublicProfileView";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { MarketingFooter } from "@/components/MarketingLayout";
 import { useSession } from "@/hooks/useSession";
 
 
@@ -20,7 +21,7 @@ export const Route = createFileRoute("/")({
       {
         name: "keywords",
         content:
-          "link in bio, link in bio page, bio link, linktree alternative, free link in bio, one link for all socials, personal link page, micro website, links page, link hub, social media bio link, portfolio link page",
+          "link in bio, link in bio page, bio link, link app, links app, linktree alternative, free link in bio, one link for all socials, personal link page, micro website, links page, link hub, social media bio link, portfolio link page, developer portfolio link, instagram bio link, tiktok link in bio, bio link generator, link tracking, embeddable links widget",
       },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
@@ -252,15 +253,7 @@ function Landing() {
         </section>
       </main>
 
-      <footer className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-8 text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} LTReee</p>
-        <div className="flex items-center gap-4">
-          <Link to="/examples" className="hover:text-foreground">
-            Link in bio examples
-          </Link>
-          <span className="hidden sm:inline">One link. Your whole universe.</span>
-        </div>
-      </footer>
+      <MarketingFooter />
     </div>
   );
 }
