@@ -14,7 +14,10 @@ import { Route as UsernameRouteImport } from './routes/$username'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ConnectRouteImport } from './routes/connect'
+import { Route as DevelopersRouteImport } from './routes/developers'
 import { Route as ExamplesRouteImport } from './routes/examples'
+import { Route as LinkInBioRouteImport } from './routes/link-in-bio'
+import { Route as LinktreeAlternativeRouteImport } from './routes/linktree-alternative'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -59,9 +62,24 @@ const ConnectRoute = ConnectRouteImport.update({
   path: '/connect',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DevelopersRoute = DevelopersRouteImport.update({
+  id: '/developers',
+  path: '/developers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExamplesRoute = ExamplesRouteImport.update({
   id: '/examples',
   path: '/examples',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LinkInBioRoute = LinkInBioRouteImport.update({
+  id: '/link-in-bio',
+  path: '/link-in-bio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LinktreeAlternativeRoute = LinktreeAlternativeRouteImport.update({
+  id: '/linktree-alternative',
+  path: '/linktree-alternative',
   getParentRoute: () => rootRouteImport,
 } as any)
 const McpRoute = McpRouteImport.update({
@@ -169,7 +187,10 @@ export interface FileRoutesByFullPath {
   '/$username': typeof UsernameRoute
   '/auth': typeof AuthRoute
   '/connect': typeof ConnectRoute
+  '/developers': typeof DevelopersRoute
   '/examples': typeof ExamplesRoute
+  '/link-in-bio': typeof LinkInBioRoute
+  '/linktree-alternative': typeof LinktreeAlternativeRoute
   '/mcp': typeof McpRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -195,7 +216,10 @@ export interface FileRoutesByTo {
   '/$username': typeof UsernameRoute
   '/auth': typeof AuthRoute
   '/connect': typeof ConnectRoute
+  '/developers': typeof DevelopersRoute
   '/examples': typeof ExamplesRoute
+  '/link-in-bio': typeof LinkInBioRoute
+  '/linktree-alternative': typeof LinktreeAlternativeRoute
   '/mcp': typeof McpRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -223,7 +247,10 @@ export interface FileRoutesById {
   '/$username': typeof UsernameRoute
   '/auth': typeof AuthRoute
   '/connect': typeof ConnectRoute
+  '/developers': typeof DevelopersRoute
   '/examples': typeof ExamplesRoute
+  '/link-in-bio': typeof LinkInBioRoute
+  '/linktree-alternative': typeof LinktreeAlternativeRoute
   '/mcp': typeof McpRoute
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -251,7 +278,10 @@ export interface FileRouteTypes {
     | '/$username'
     | '/auth'
     | '/connect'
+    | '/developers'
     | '/examples'
+    | '/link-in-bio'
+    | '/linktree-alternative'
     | '/mcp'
     | '/reset-password'
     | '/sitemap.xml'
@@ -277,7 +307,10 @@ export interface FileRouteTypes {
     | '/$username'
     | '/auth'
     | '/connect'
+    | '/developers'
     | '/examples'
+    | '/link-in-bio'
+    | '/linktree-alternative'
     | '/mcp'
     | '/reset-password'
     | '/sitemap.xml'
@@ -304,7 +337,10 @@ export interface FileRouteTypes {
     | '/$username'
     | '/auth'
     | '/connect'
+    | '/developers'
     | '/examples'
+    | '/link-in-bio'
+    | '/linktree-alternative'
     | '/mcp'
     | '/reset-password'
     | '/sitemap.xml'
@@ -332,7 +368,10 @@ export interface RootRouteChildren {
   UsernameRoute: typeof UsernameRoute
   AuthRoute: typeof AuthRoute
   ConnectRoute: typeof ConnectRoute
+  DevelopersRoute: typeof DevelopersRoute
   ExamplesRoute: typeof ExamplesRoute
+  LinkInBioRoute: typeof LinkInBioRoute
+  LinktreeAlternativeRoute: typeof LinktreeAlternativeRoute
   McpRoute: typeof McpRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -385,11 +424,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConnectRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/developers': {
+      id: '/developers'
+      path: '/developers'
+      fullPath: '/developers'
+      preLoaderRoute: typeof DevelopersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/examples': {
       id: '/examples'
       path: '/examples'
       fullPath: '/examples'
       preLoaderRoute: typeof ExamplesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/link-in-bio': {
+      id: '/link-in-bio'
+      path: '/link-in-bio'
+      fullPath: '/link-in-bio'
+      preLoaderRoute: typeof LinkInBioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/linktree-alternative': {
+      id: '/linktree-alternative'
+      path: '/linktree-alternative'
+      fullPath: '/linktree-alternative'
+      preLoaderRoute: typeof LinktreeAlternativeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mcp': {
@@ -555,7 +615,10 @@ const rootRouteChildren: RootRouteChildren = {
   UsernameRoute: UsernameRoute,
   AuthRoute: AuthRoute,
   ConnectRoute: ConnectRoute,
+  DevelopersRoute: DevelopersRoute,
   ExamplesRoute: ExamplesRoute,
+  LinkInBioRoute: LinkInBioRoute,
+  LinktreeAlternativeRoute: LinktreeAlternativeRoute,
   McpRoute: McpRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
