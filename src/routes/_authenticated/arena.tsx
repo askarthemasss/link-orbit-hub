@@ -32,6 +32,13 @@ function ArenaEditorPage() {
   const mutations = useProjectMutations(profile?.id);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<ProjectRow | null>(null);
+  const statsQuery = useQuery<ArenaStats>({
+    queryKey: ["arena-stats"],
+    queryFn: () => getArenaStats(),
+  });
+  const viewsByProject = new Map(
+    (statsQuery.data?.topProjects ?? []).map((p) => [p.projectId, p.views]),
+  );
 
   const projects = projectsQuery.data ?? [];
 
