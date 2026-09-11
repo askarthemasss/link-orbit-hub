@@ -172,6 +172,11 @@ function ArenaEditorPage() {
                 <p className="mt-0.5 truncate text-xs text-muted-foreground">
                   {project.demo_url || project.repo_url || "No links yet"}
                 </p>
+                <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <Users className="size-3.5" aria-hidden="true" />
+                  {viewsByProject.get(project.id) ?? 0}{" "}
+                  {(viewsByProject.get(project.id) ?? 0) === 1 ? "visitor" : "visitors"}
+                </p>
               </div>
               <div className="flex shrink-0 flex-wrap items-center gap-1">
                 <Button
