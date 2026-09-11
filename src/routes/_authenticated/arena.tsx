@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDown, ArrowUp, Eye, EyeOff, ExternalLink, Loader2, Pencil, Plus, Rocket, Trash2 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { ArrowDown, ArrowUp, Eye, EyeOff, ExternalLink, Loader2, Pencil, Plus, Rocket, Trash2, Users } from "lucide-react";
 import { toast } from "sonner";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { ProjectFormDialog } from "@/components/dashboard/ProjectFormDialog";
 import { Button } from "@/components/ui/button";
 import { useProfile } from "@/hooks/useLTReee";
 import { useProjectMutations, useProjects, type ProjectRow } from "@/hooks/useProjects";
+import { getArenaStats, type ArenaStats } from "@/lib/arena-stats.functions";
 import { profileUrl } from "@/lib/site-url";
 
 export const Route = createFileRoute("/_authenticated/arena")({
@@ -30,6 +32,13 @@ function ArenaEditorPage() {
   const mutations = useProjectMutations(profile?.id);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<ProjectRow | null>(null);
+  const statsQuery = useQuery<ArenaStats>({
+    queryKey: ["arena-stats"],
+    queryFn: () => getArenaStats(),
+  });
+  const viewsByProject = new Map(
+    (statsQuery.data?.topProjects ?? []).map((p) => [p.projectId, p.views]),
+  );
 
   const projects = projectsQuery.data ?? [];
 
@@ -98,9 +107,28 @@ function ArenaEditorPage() {
         </div>
       </div>
 
-      <p className="mb-6 truncate text-xs text-muted-foreground">
+      <p className="mb-4 truncate text-xs text-muted-foreground">
         {profileUrl(profile.username)}?view=arena
       </p>
+
+      <div className="mb-6 grid gap-3 sm:grid-cols-3">
+        <div className="rounded-2xl glass p-4">
+          <p className="flex items-center gap-2 text-xs text-muted-foreground">
+            <Users className="size-3.5" aria-hidden="true" />
+            Arena visits
+          </p>
+          <p className="mt-1 text-2xl font-semibold">{statsQuery.data?.views ?? 0}</p>
+        </div>
+        <div className="rounded-2xl glass p-4">
+          <p className="text-xs text-muted-foreground">Visits (last 7 days)</p>
+          <p className="mt-1 text-2xl font-semibold">{statsQuery.data?.last7Days ?? 0}</p>
+        </div>
+        <div className="rounded-2xl glass p-4">
+          <p className="text-xs text-muted-foreground">Project link opens</p>
+          <p className="mt-1 text-2xl font-semibold">{statsQuery.data?.clicks ?? 0}</p>
+        </div>
+      </div>
+
 
       <section className="space-y-3" aria-label="Your projects">
         {projectsQuery.isLoading ? (
@@ -143,6 +171,11 @@ function ArenaEditorPage() {
                 </div>
                 <p className="mt-0.5 truncate text-xs text-muted-foreground">
                   {project.demo_url || project.repo_url || "No links yet"}
+                </p>
+                <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <Users className="size-3.5" aria-hidden="true" />
+                  {viewsByProject.get(project.id) ?? 0}{" "}
+                  {(viewsByProject.get(project.id) ?? 0) === 1 ? "visitor" : "visitors"}
                 </p>
               </div>
               <div className="flex shrink-0 flex-wrap items-center gap-1">
