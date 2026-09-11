@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDown, ArrowUp, Eye, EyeOff, ExternalLink, Loader2, Pencil, Plus, Rocket, Trash2 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { ArrowDown, ArrowUp, Eye, EyeOff, ExternalLink, Loader2, Pencil, Plus, Rocket, Trash2, Users } from "lucide-react";
 import { toast } from "sonner";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { ProjectFormDialog } from "@/components/dashboard/ProjectFormDialog";
 import { Button } from "@/components/ui/button";
 import { useProfile } from "@/hooks/useLTReee";
 import { useProjectMutations, useProjects, type ProjectRow } from "@/hooks/useProjects";
+import { getArenaStats, type ArenaStats } from "@/lib/arena-stats.functions";
 import { profileUrl } from "@/lib/site-url";
 
 export const Route = createFileRoute("/_authenticated/arena")({
