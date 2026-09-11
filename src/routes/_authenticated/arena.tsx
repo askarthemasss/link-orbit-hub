@@ -107,9 +107,28 @@ function ArenaEditorPage() {
         </div>
       </div>
 
-      <p className="mb-6 truncate text-xs text-muted-foreground">
+      <p className="mb-4 truncate text-xs text-muted-foreground">
         {profileUrl(profile.username)}?view=arena
       </p>
+
+      <div className="mb-6 grid gap-3 sm:grid-cols-3">
+        <div className="rounded-2xl glass p-4">
+          <p className="flex items-center gap-2 text-xs text-muted-foreground">
+            <Users className="size-3.5" aria-hidden="true" />
+            Arena visits
+          </p>
+          <p className="mt-1 text-2xl font-semibold">{statsQuery.data?.views ?? 0}</p>
+        </div>
+        <div className="rounded-2xl glass p-4">
+          <p className="text-xs text-muted-foreground">Visits (last 7 days)</p>
+          <p className="mt-1 text-2xl font-semibold">{statsQuery.data?.last7Days ?? 0}</p>
+        </div>
+        <div className="rounded-2xl glass p-4">
+          <p className="text-xs text-muted-foreground">Project link opens</p>
+          <p className="mt-1 text-2xl font-semibold">{statsQuery.data?.clicks ?? 0}</p>
+        </div>
+      </div>
+
 
       <section className="space-y-3" aria-label="Your projects">
         {projectsQuery.isLoading ? (
