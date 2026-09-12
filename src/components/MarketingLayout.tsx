@@ -70,6 +70,12 @@ export function MarketingFooter() {
           <Link to="/link-in-bio" className="hover:text-foreground">
             What is a link in bio
           </Link>
+          <Link to="/free-link-in-bio" className="hover:text-foreground">
+            Free link in bio
+          </Link>
+          <Link to="/instagram-bio-link" className="hover:text-foreground">
+            Instagram bio link
+          </Link>
           <Link to="/linktree-alternative" className="hover:text-foreground">
             Linktree alternative
           </Link>
