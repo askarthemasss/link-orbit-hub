@@ -82,8 +82,35 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "google-site-verification", content: "-fLg5Gm83-y6gIIaOSOBTmdeBMQDnR-TJQfWGsJTK3M" },
       { property: "og:site_name", content: "LTReee" },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#010204" },
+      { name: "application-name", content: "LTReee" },
+      { name: "apple-mobile-web-app-title", content: "LTReee" },
+      { name: "author", content: "LTReee" },
+      {
+        name: "robots",
+        content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      },
+      {
+        name: "googlebot",
+        content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://ltreee.app/#organization",
+          name: "LTReee",
+          url: "https://ltreee.app/",
+          logo: "https://ltreee.app/favicon.png",
+          description:
+            "LTReee is a free link in bio tool: one page for your links, projects, socials and contact details.",
+        }),
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
