@@ -16,6 +16,8 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ConnectRouteImport } from './routes/connect'
 import { Route as DevelopersRouteImport } from './routes/developers'
 import { Route as ExamplesRouteImport } from './routes/examples'
+import { Route as FreeLinkInBioRouteImport } from './routes/free-link-in-bio'
+import { Route as InstagramBioLinkRouteImport } from './routes/instagram-bio-link'
 import { Route as LinkInBioRouteImport } from './routes/link-in-bio'
 import { Route as LinktreeAlternativeRouteImport } from './routes/linktree-alternative'
 import { Route as McpRouteImport } from './routes/mcp'
@@ -70,6 +72,16 @@ const DevelopersRoute = DevelopersRouteImport.update({
 const ExamplesRoute = ExamplesRouteImport.update({
   id: '/examples',
   path: '/examples',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FreeLinkInBioRoute = FreeLinkInBioRouteImport.update({
+  id: '/free-link-in-bio',
+  path: '/free-link-in-bio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstagramBioLinkRoute = InstagramBioLinkRouteImport.update({
+  id: '/instagram-bio-link',
+  path: '/instagram-bio-link',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LinkInBioRoute = LinkInBioRouteImport.update({
@@ -189,6 +201,8 @@ export interface FileRoutesByFullPath {
   '/connect': typeof ConnectRoute
   '/developers': typeof DevelopersRoute
   '/examples': typeof ExamplesRoute
+  '/free-link-in-bio': typeof FreeLinkInBioRoute
+  '/instagram-bio-link': typeof InstagramBioLinkRoute
   '/link-in-bio': typeof LinkInBioRoute
   '/linktree-alternative': typeof LinktreeAlternativeRoute
   '/mcp': typeof McpRoute
@@ -218,6 +232,8 @@ export interface FileRoutesByTo {
   '/connect': typeof ConnectRoute
   '/developers': typeof DevelopersRoute
   '/examples': typeof ExamplesRoute
+  '/free-link-in-bio': typeof FreeLinkInBioRoute
+  '/instagram-bio-link': typeof InstagramBioLinkRoute
   '/link-in-bio': typeof LinkInBioRoute
   '/linktree-alternative': typeof LinktreeAlternativeRoute
   '/mcp': typeof McpRoute
@@ -249,6 +265,8 @@ export interface FileRoutesById {
   '/connect': typeof ConnectRoute
   '/developers': typeof DevelopersRoute
   '/examples': typeof ExamplesRoute
+  '/free-link-in-bio': typeof FreeLinkInBioRoute
+  '/instagram-bio-link': typeof InstagramBioLinkRoute
   '/link-in-bio': typeof LinkInBioRoute
   '/linktree-alternative': typeof LinktreeAlternativeRoute
   '/mcp': typeof McpRoute
@@ -280,6 +298,8 @@ export interface FileRouteTypes {
     | '/connect'
     | '/developers'
     | '/examples'
+    | '/free-link-in-bio'
+    | '/instagram-bio-link'
     | '/link-in-bio'
     | '/linktree-alternative'
     | '/mcp'
@@ -309,6 +329,8 @@ export interface FileRouteTypes {
     | '/connect'
     | '/developers'
     | '/examples'
+    | '/free-link-in-bio'
+    | '/instagram-bio-link'
     | '/link-in-bio'
     | '/linktree-alternative'
     | '/mcp'
@@ -339,6 +361,8 @@ export interface FileRouteTypes {
     | '/connect'
     | '/developers'
     | '/examples'
+    | '/free-link-in-bio'
+    | '/instagram-bio-link'
     | '/link-in-bio'
     | '/linktree-alternative'
     | '/mcp'
@@ -370,6 +394,8 @@ export interface RootRouteChildren {
   ConnectRoute: typeof ConnectRoute
   DevelopersRoute: typeof DevelopersRoute
   ExamplesRoute: typeof ExamplesRoute
+  FreeLinkInBioRoute: typeof FreeLinkInBioRoute
+  InstagramBioLinkRoute: typeof InstagramBioLinkRoute
   LinkInBioRoute: typeof LinkInBioRoute
   LinktreeAlternativeRoute: typeof LinktreeAlternativeRoute
   McpRoute: typeof McpRoute
@@ -436,6 +462,20 @@ declare module '@tanstack/react-router' {
       path: '/examples'
       fullPath: '/examples'
       preLoaderRoute: typeof ExamplesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/free-link-in-bio': {
+      id: '/free-link-in-bio'
+      path: '/free-link-in-bio'
+      fullPath: '/free-link-in-bio'
+      preLoaderRoute: typeof FreeLinkInBioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/instagram-bio-link': {
+      id: '/instagram-bio-link'
+      path: '/instagram-bio-link'
+      fullPath: '/instagram-bio-link'
+      preLoaderRoute: typeof InstagramBioLinkRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/link-in-bio': {
@@ -617,6 +657,8 @@ const rootRouteChildren: RootRouteChildren = {
   ConnectRoute: ConnectRoute,
   DevelopersRoute: DevelopersRoute,
   ExamplesRoute: ExamplesRoute,
+  FreeLinkInBioRoute: FreeLinkInBioRoute,
+  InstagramBioLinkRoute: InstagramBioLinkRoute,
   LinkInBioRoute: LinkInBioRoute,
   LinktreeAlternativeRoute: LinktreeAlternativeRoute,
   McpRoute: McpRoute,
