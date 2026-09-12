@@ -21,14 +21,20 @@ export const Route = createFileRoute("/")({
       {
         name: "keywords",
         content:
-          "link in bio, link in bio page, bio link, link app, links app, linktree alternative, free link in bio, one link for all socials, personal link page, micro website, links page, link hub, social media bio link, portfolio link page, developer portfolio link, instagram bio link, tiktok link in bio, bio link generator, link tracking, embeddable links widget",
+          "link in bio, link in bio page, bio link, linkinbio, link app, links app, linktree alternative, free link in bio, free bio link, one link for all socials, personal link page, micro website, links page, link hub, link list page, social media bio link, portfolio link page, developer portfolio link, instagram bio link, tiktok link in bio, youtube bio link, x bio link, bio link generator, bio link creator, make a link in bio, create link page, link tracking, link click analytics, embeddable links widget, links iframe, private links page, project showcase link, dark link in bio",
       },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: URL },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
+      { name: "application-name", content: "LTReee" },
+      {
+        name: "robots",
+        content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      },
     ],
     links: [{ rel: "canonical", href: URL }],
     scripts: [
