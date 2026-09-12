@@ -97,6 +97,39 @@ const BENEFITS = [
   { title: "Share anywhere", body: "Social bios, resumes, emails, business cards, messages." },
 ];
 
+const GUIDES = [
+  {
+    to: "/link-in-bio" as const,
+    title: "What is a link in bio page?",
+    body: "The idea behind one shareable URL, and how to build one in two minutes.",
+  },
+  {
+    to: "/free-link-in-bio" as const,
+    title: "Free link in bio",
+    body: "Everything included at no cost: unlimited links, analytics, embeds and more.",
+  },
+  {
+    to: "/instagram-bio-link" as const,
+    title: "Add a link to your Instagram bio",
+    body: "Step by step for Instagram, and the same link for TikTok, YouTube and X.",
+  },
+  {
+    to: "/linktree-alternative" as const,
+    title: "Linktree alternative",
+    body: "A side-by-side look at what LTReee does differently, and for free.",
+  },
+  {
+    to: "/developers" as const,
+    title: "For developers",
+    body: "Turn your page into a project showcase with demos, repos and tracking.",
+  },
+  {
+    to: "/examples" as const,
+    title: "Examples",
+    body: "See a real profile layout you can copy for your own page.",
+  },
+];
+
 function Landing() {
   const { isAuthenticated } = useSession();
 
@@ -255,6 +288,19 @@ function Landing() {
               )}
             </Button>
 
+          </div>
+        </section>
+        <section className="mx-auto w-full max-w-6xl px-5 pb-16" aria-labelledby="guides">
+          <h2 id="guides" className="font-display text-2xl font-semibold sm:text-3xl">
+            Guides
+          </h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {GUIDES.map((g) => (
+              <Link key={g.to} to={g.to} className="rounded-2xl glass p-5 transition-colors hover:bg-accent/10">
+                <h3 className="text-base font-semibold">{g.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{g.body}</p>
+              </Link>
+            ))}
           </div>
         </section>
       </main>
