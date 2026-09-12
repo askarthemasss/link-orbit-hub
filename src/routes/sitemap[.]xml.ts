@@ -5,6 +5,7 @@ const BASE_URL = "https://ltreee.app";
 
 interface SitemapEntry {
   path: string;
+  lastmod?: string;
   changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
   priority?: string;
 }
@@ -18,6 +19,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/link-in-bio", changefreq: "monthly", priority: "0.9" },
           { path: "/linktree-alternative", changefreq: "monthly", priority: "0.9" },
           { path: "/developers", changefreq: "monthly", priority: "0.9" },
+          { path: "/free-link-in-bio", changefreq: "monthly", priority: "0.9" },
+          { path: "/instagram-bio-link", changefreq: "monthly", priority: "0.9" },
           { path: "/examples", changefreq: "monthly", priority: "0.8" },
         ];
 
@@ -88,10 +91,12 @@ export const Route = createFileRoute("/sitemap.xml")({
 
 
 
+        const today = new Date().toISOString().slice(0, 10);
         const urls = entries.map((e) =>
           [
             `  <url>`,
             `    <loc>${BASE_URL}${e.path}</loc>`,
+            `    <lastmod>${e.lastmod ?? today}</lastmod>`,
             e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
             e.priority ? `    <priority>${e.priority}</priority>` : null,
             `  </url>`,
